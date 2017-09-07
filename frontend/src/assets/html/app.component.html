@@ -1,0 +1,10 @@
+<button (click)="switchLanguage('en')">en</button>
+<button (click)="switchLanguage('ru')">ru</button>
+<h1 translate>Title</h1>
+<nav>
+    <a routerLink='/home' translate>Home</a>
+    <a routerLink='/dashboard' translate>Dashboard</a>
+    <a routerLink='/students' translate>Students</a>
+    <a routerLink='/form' translate>Log_in</a>
+</nav>
+<router-outlet></router-outlet>

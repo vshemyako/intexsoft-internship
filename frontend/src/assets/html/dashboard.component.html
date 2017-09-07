@@ -1,0 +1,8 @@
+<h3 translate>Description</h3>
+<div class="grid grid-pad">
+    <a *ngFor="let student of students" class="col-1-4" [routerLink]='["/student", student.id]'>
+        <div class="module student">
+            <h4>{{student.name}}</h4>
+        </div>
+    </a>
+</div>
