@@ -1,0 +1,39 @@
+apply plugin: 'war'
+apply plugin: 'com.bmuschko.tomcat'
+version = '0.1.0'
+
+def tomcatVersion = '7.0.76'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.bmuschko:gradle-tomcat-plugin:2.3'
+    }
+}
+repositories {
+    mavenCentral()
+}
+
+compileJava{dependsOn 'frontend:buildFrontend'}
+
+war {
+    from 'frontend/dist'
+}
+
+dependencies {
+    compile 'javax.servlet:javax.servlet-api:3.1.0'
+    compile 'org.springframework:spring-webmvc:4.3.9.RELEASE'
+    compile 'org.springframework.data:spring-data-jpa:1.11.4.RELEASE'
+    compile 'org.springframework.security:spring-security-config:4.2.3.RELEASE'
+    compile 'org.springframework.security:spring-security-web:4.2.3.RELEASE'
+    compile 'org.hibernate:hibernate-core:5.2.10.Final'
+    compile 'org.postgresql:postgresql:42.1.3'
+    compile 'ch.qos.logback:logback-classic:1.2.3'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.7.9'
+    compile 'io.jsonwebtoken:jjwt:0.7.0'
+    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+            "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}",
+            "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
+}

@@ -1,0 +1,131 @@
+package by.intexsoft.application.service.implementations;
+
+import by.intexsoft.application.service.AuthenticationService;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
+
+import static io.jsonwebtoken.SignatureAlgorithm.HS256;
+
+/**
+ * Provides authentication methods for JSON Web Token
+ * creation and verification
+ */
+@Service
+@PropertySource("classpath:security.properties")
+public class AuthenticationServiceImpl implements AuthenticationService {
+
+    private static final SignatureAlgorithm SIGNATURE_ALGORITHM = HS256;
+    // @Value("${jwt.refresh_time}")
+    private static final long REFRESH_TIME = 3600000;
+    // @Value("${jwt.secret_word}")
+    private static final String SECRET_WORD = "hello";
+    // @Value("${jwt.prefix}")
+    private static final String JWT_PREFIX = "Bearer";
+    // @Value("${jwt.auth_header}")
+    private static final String AUTH_HEADER = "Authorization";
+
+    /**
+     * Attaches generated JSON Web Token to a {@link HttpServletResponse} object after successful
+     * authentication step
+     *
+     * @param response       - {@link HttpServletResponse} instance which is returned with
+     *                       embedded JSON Web Token
+     * @param authentication - represents a principal of an authenticated request
+     */
+    @Override
+    public void provideTokenAuthentication(HttpServletResponse response, Authentication authentication) {
+        String username = authentication.getName();
+        Claims claims = Jwts.claims().setSubject(username);
+
+        Set<String> authorities = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
+        claims.put("scopes", authorities);
+
+        String JWT = generateJWT(claims);
+        response.addHeader(AUTH_HEADER, JWT_PREFIX + " " + JWT);
+    }
+
+    /**
+     * Verifies whether {@link HttpServletRequest} object has a encapsulated JSON Web Token
+     *
+     * @param request - {@link HttpServletRequest} instance which encapsulates JSON
+     * @return verified {@link Authentication} object
+     */
+    @Override
+    public Authentication verifyTokenAuthentication(HttpServletRequest request) {
+        Authentication authentication = null;
+        String token = request.getHeader(AUTH_HEADER);
+
+        if (token != null) {
+            try {
+                authentication = new UsernamePasswordAuthenticationToken(getUsernameFromJWT(token), null,
+                        AuthorityUtils.commaSeparatedStringToAuthorityList(String.join(",", getAuthoritiesFromJWT(token))));
+            } catch (NullPointerException exc) {
+                System.out.print("A JSON Web Token verification error occurred.");
+            }
+        }
+        return authentication;
+    }
+
+    /**
+     * JSON Web Token generation method, which sequentially adds claims (in another
+     * words - the ROLES of the User and expiration date) and a signature, which,
+     * following to specification consists of encoded AUTH_HEADER, encoded payload
+     * and a SECRET_WORD
+     *
+     * @param claims - statements about an entity. In our case they represent the ROLES
+     *               of the USER
+     * @return generated JSON Web Token
+     */
+    private String generateJWT(Claims claims) {
+        return Jwts.builder()
+                .setClaims(claims)
+                .setExpiration(generateExpirationDate())
+                .signWith(SIGNATURE_ALGORITHM, SECRET_WORD)
+                .compact();
+    }
+
+    /**
+     * @param token - JSON Web Token which should be processed upon
+     *              authorities existence
+     * @return a list of authorities (i.e. the ROLES of the USER)
+     */
+    private List getAuthoritiesFromJWT(String token) {
+        return Jwts.parser().setSigningKey(SECRET_WORD)
+                .parseClaimsJws(token.replace(JWT_PREFIX, ""))
+                .getBody().get("scopes", List.class);
+    }
+
+    /**
+     * @param token - JSON Web Token which should be processed upon
+     *              subject existence. In our JSON Web Token implementation
+     *              this stands for name of the USER
+     * @return - name of the USER
+     */
+    private String getUsernameFromJWT(String token) {
+        return Jwts.parser().setSigningKey(SECRET_WORD)
+                .parseClaimsJws(token.replace(JWT_PREFIX, ""))
+                .getBody().getSubject();
+    }
+
+    /**
+     * Calculates an amount of time after which JSON Web Token should be refreshed
+     *
+     * @return generated expiration date, after which, JSON Web Token has to be
+     * refreshed
+     */
+    private Date generateExpirationDate() {
+        return new Date(System.currentTimeMillis() + REFRESH_TIME);
+    }
+}
