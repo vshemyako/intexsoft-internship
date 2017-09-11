@@ -1,11 +1,9 @@
 package by.intexsoft.application.config;
 
+import org.flywaydb.core.Flyway;
 import org.postgresql.ds.PGSimpleDataSource;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -38,7 +36,7 @@ import javax.sql.DataSource;
 @EnableTransactionManagement
 public class RootApplicationContextConfiguration {
 
-    @Value("${db.name}")
+    @Value("${db.hostname}")
     private String hostName;
     @Value("${db.dbname}")
     private String databaseName;
@@ -47,13 +45,13 @@ public class RootApplicationContextConfiguration {
     @Value("${db.password}")
     private String databasePassword;
 
-	/**
-	 * Configure a DataSource object
-	 *
-	 * @return configured DataSource object which is used for getting a
-	 *         connection to a database
-	 */
-	@Bean
+    /**
+     * Configure a DataSource object
+     *
+     * @return configured DataSource object which is used for getting a
+     * connection to a database
+     */
+    @Bean
     public DataSource dataSource() {
         PGSimpleDataSource dataSource = new PGSimpleDataSource();
         dataSource.setServerName(hostName);
@@ -61,55 +59,68 @@ public class RootApplicationContextConfiguration {
         dataSource.setUser(databaseUser);
         dataSource.setPassword(databasePassword);
         return dataSource;
-	}
+    }
 
-	/**
-	 * Configure a vendor-specific JpaVendorAdapter object. In particular case
-	 * Hibernate Jpa is used
-	 *
-	 * @return configured JpaVendorAdapter which is used for ORM operations
-	 */
-	@Bean
-	public JpaVendorAdapter jpaVendorAdapter() {
-		HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
-		adapter.setShowSql(false);
-		return adapter;
-	}
+    /**
+     * Configures {@link Flyway} object
+     *
+     * @return configured {@link Flyway} object for db migration processes
+     */
+    @Bean
+    public Flyway flyway() {
+        Flyway flyway = new Flyway();
+        flyway.setDataSource(dataSource());
+        flyway.setLocations("classpath:/db/migration/");
+        flyway.setBaselineOnMigrate(true);
+        flyway.migrate();
+        return flyway;
+    }
 
-	/**
-	 * Create configured @{link EntityManagerFactory} with provided DataSource
-	 * and JpaVendorAdapter objects. EntityManagerFactory creates an
-	 * EntityManager instance, which provides functionality for performing
-	 * operations on a database
-	 *
-	 * @param dataSource
-	 *            - configured {@link DataSource} object
-	 * @param jpaVendorAdapter
-	 *            - configured {@link JpaVendorAdapter} object
-	 * @return EntityManagerFactory instance
-	 */
-	@Bean
-	public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource,
-			JpaVendorAdapter jpaVendorAdapter) {
-		LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
-		entityManagerFactory.setDataSource(dataSource);
-		entityManagerFactory.setJpaVendorAdapter(jpaVendorAdapter);
-		entityManagerFactory.setPackagesToScan("by.intexsoft.application.model");
-		return entityManagerFactory;
-	}
+    /**
+     * Configure a vendor-specific JpaVendorAdapter object. In particular case
+     * Hibernate Jpa is used
+     *
+     * @return configured JpaVendorAdapter which is used for ORM operations
+     */
+    @Bean
+    public JpaVendorAdapter jpaVendorAdapter() {
+        HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
+        adapter.setShowSql(false);
+        return adapter;
+    }
 
-	/**
-	 * Create an instance of {@link PlatformTransactionManager}, which in our
-	 * case is appropriate for applications that use a single JPA
-	 * EntityManagerFactory
-	 *
-	 * @param entityManagerFactory
-	 *            - configured factory, which produces EntityManager objects
-	 * @return an instance of a {@link PlatformTransactionManager} for a single
-	 *         JPA {@link EntityManagerFactory}
-	 */
-	@Bean
-	public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
-		return new JpaTransactionManager(entityManagerFactory);
-	}
+    /**
+     * Create configured @{link EntityManagerFactory} with provided DataSource
+     * and JpaVendorAdapter objects. EntityManagerFactory creates an
+     * EntityManager instance, which provides functionality for performing
+     * operations on a database
+     *
+     * @param dataSource       - configured {@link DataSource} object
+     * @param jpaVendorAdapter - configured {@link JpaVendorAdapter} object
+     * @return EntityManagerFactory instance
+     */
+    @Bean
+    @DependsOn("flyway")
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource,
+                                                                       JpaVendorAdapter jpaVendorAdapter) {
+        LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
+        entityManagerFactory.setDataSource(dataSource);
+        entityManagerFactory.setJpaVendorAdapter(jpaVendorAdapter);
+        entityManagerFactory.setPackagesToScan("by.intexsoft.application.model");
+        return entityManagerFactory;
+    }
+
+    /**
+     * Create an instance of {@link PlatformTransactionManager}, which in our
+     * case is appropriate for applications that use a single JPA
+     * EntityManagerFactory
+     *
+     * @param entityManagerFactory - configured factory, which produces EntityManager objects
+     * @return an instance of a {@link PlatformTransactionManager} for a single
+     * JPA {@link EntityManagerFactory}
+     */
+    @Bean
+    public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
+        return new JpaTransactionManager(entityManagerFactory);
+    }
 }
