@@ -9,9 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import by.intexsoft.application.model.Student;
-import by.intexsoft.application.service.implementations.StudentServiceImpl;
-
 /**
  * A controller class which maps received requests to an appropriate handler
  * method to handle the request

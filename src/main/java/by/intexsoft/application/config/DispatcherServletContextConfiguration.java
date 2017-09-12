@@ -3,10 +3,7 @@ package by.intexsoft.application.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-
-import by.intexsoft.application.service.implementations.StudentServiceImpl;
 
 /**
  * Java-based configuration class for a dispatcher servlet context.
