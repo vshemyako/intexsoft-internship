@@ -1,5 +1,7 @@
 package by.intexsoft.application.config;
 
+import by.intexsoft.application.service.UserService;
+import by.intexsoft.application.service.implementations.UserServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -16,10 +18,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 public class DispatcherServletContextConfiguration {
 
 	/**
-	 * @return instance of a StudentServiceImpl class
+	 * @return instance of a UserServiceImpl class
 	 */
 	@Bean
-	public StudentServiceImpl studentServiceImpl() {
-		return new StudentServiceImpl();
+	public UserService userService() {
+		return new UserServiceImpl();
 	}
 }
