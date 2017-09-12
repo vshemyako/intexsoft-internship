@@ -1,19 +1,18 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {BrowserModule} from "@angular/platform-browser";
+import {NgModule} from "@angular/core";
 import {FormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
-
 import {AppComponent} from "../component/app.component";
-import {StudentComponent} from "../component/student.component";
-import {StudentDetailComponent} from "../component/student-detail.component";
-import {StudentService} from "../service/implementation/student.service";
-import {DashboardComponent} from '../component/dashboard.component';
-import {AppRoutingModule} from './app-routing.module';
-import {AdminFormComponent} from '../component/admin-form.component';
-import {HomeComponent} from '../component/home.component';
+import {UserComponent} from "../component/user.component";
+import {UserDetailComponent} from "../component/user-detail.component";
+import {UserService} from "../service/implementation/user.service";
+import {DashboardComponent} from "../component/dashboard.component";
+import {AppRoutingModule} from "./app-routing.module";
+import {AdminFormComponent} from "../component/admin-form.component";
+import {HomeComponent} from "../component/home.component";
 import {AuthenticationService} from "../service/implementation/authentication.service";
 
 const URL_I18N_FILES = 'assets/i18n/';
@@ -36,8 +35,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
 @NgModule({
     declarations: [
         AppComponent,
-        StudentComponent,
-        StudentDetailComponent,
+        UserComponent,
+        UserDetailComponent,
         DashboardComponent,
         AdminFormComponent,
         HomeComponent
@@ -56,7 +55,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
             }
         })
     ],
-    providers: [{provide: 'studentService', useClass: StudentService},
+    providers: [{provide: 'userService', useClass: UserService},
         {provide: 'authenticationService', useClass: AuthenticationService}],
     bootstrap: [AppComponent]
 })

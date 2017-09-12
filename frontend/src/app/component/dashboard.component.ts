@@ -1,22 +1,22 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {Student} from "../model/student";
-import {IStudentService} from "../service/istudent.service";
+import {User} from "../model/user";
+import {IUserService} from "../service/iuser.service";
 
-const NUMBER_OF_STUDENTS: number = 4;
+const NUMBER_OF_USERS: number = 4;
 
 /**
- * Controller which delegates the best students to rendering mechanism to be displayed on the main page of an application
+ * Controller which delegates the best users to rendering mechanism to be displayed on the main page of an application
  */
 @Component({
-    selector: 'students-dashboard',
+    selector: 'users-dashboard',
     templateUrl: '../../assets/html/dashboard.component.html',
     styleUrls: ['../../assets/style/dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
 
-    students: Student[];
+    users: User[];
 
-    constructor(@Inject('studentService') private studentService: IStudentService) {
+    constructor(@Inject('userService') private userService: IUserService) {
     }
 
     /**
@@ -28,11 +28,11 @@ export class DashboardComponent implements OnInit {
     }
 
     /**
-     * Assigns refreshed array of chosen students which will be later rendered on the main page
+     * Assigns refreshed array of chosen users which will be later rendered on the main page
      */
     refresh() {
-        this.studentService.findAll()
-            .then((students: Student[]) => this.students = students.slice(0, NUMBER_OF_STUDENTS))
+        this.userService.findAll()
+            .then((users: User[]) => this.users = users.slice(0, NUMBER_OF_USERS))
             .catch((e: Error) => alert(e.message));
     }
 }

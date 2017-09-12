@@ -1,4 +1,4 @@
-import {Student} from "../model/student";
+import {User} from "../model/user";
 import {Observable} from "rxjs";
 
 /**

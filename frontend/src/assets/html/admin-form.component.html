@@ -1,6 +1,6 @@
 <div>
     <h3 translate>Login_form</h3>
-    <form (ngSubmit)='login()' #studentForm='ngForm'>
+    <form (ngSubmit)='login()' #userForm='ngForm'>
         <div>
             <label for="name" translate>Login</label>
             <input type="text" id="name"
@@ -13,7 +13,7 @@
                    required [(ngModel)]='password' name='password' #spy>
         </div>
         <button type="submit"
-                [disabled]='!studentForm.form.valid' translate>Login_button
+                [disabled]='!userForm.form.valid' translate>Login_button
         </button>
     </form>
 </div>

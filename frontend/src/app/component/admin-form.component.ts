@@ -6,9 +6,9 @@ import {IAuthenticationService} from "../service/iauthentication.service";
  * Login page controller
  */
 @Component({
-    selector: 'student-form',
+    selector: 'admin-form',
     templateUrl: '../../assets/html/admin-form.component.html',
-    styleUrls: ['../../assets/style/student-form.component.css']
+    styleUrls: ['../../assets/style/user-form.component.css']
 })
 export class AdminFormComponent implements OnInit {
     username: string;
