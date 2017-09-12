@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from "@angular/router";
 import {DashboardComponent} from "../component/dashboard.component";
-import {StudentComponent} from "../component/student.component";
-import {StudentDetailComponent} from "../component/student-detail.component";
+import {UserComponent} from "../component/user.component";
+import {UserDetailComponent} from "../component/user-detail.component";
 import {AdminFormComponent} from "../component/admin-form.component";
 import {HomeComponent} from "../component/home.component";
 
@@ -11,8 +11,8 @@ import {HomeComponent} from "../component/home.component";
  */
 const routes: Routes = [
     {
-        path: 'students',
-        component: StudentComponent
+        path: 'users',
+        component: UserComponent
     },
     {
         path: '',
@@ -20,8 +20,8 @@ const routes: Routes = [
         pathMatch: 'full'
     },
     {
-        path: 'student/:id',
-        component: StudentDetailComponent
+        path: 'user/:id',
+        component: UserDetailComponent
     },
     {
         path: 'dashboard',

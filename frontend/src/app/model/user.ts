@@ -1,7 +1,7 @@
 /**
- * Blueprint for creating Student instances
+ * Blueprint for creating User instances
  */
-export class Student {
+export class User {
     id: number;
     name: string;
     familyName: string;

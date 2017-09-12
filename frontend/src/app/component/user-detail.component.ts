@@ -1,44 +1,44 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import 'rxjs/add/operator/switchMap';
 
-import {Student} from "../model/student";
+import {User} from "../model/user";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
-import {IStudentService} from "../service/istudent.service";
+import {IUserService} from "../service/iuser.service";
 
 /**
- * Component which controls student extra information which might be rendered
+ * Component which controls user extra information which might be rendered
  */
 @Component({
-    selector: 'student-detail',
-    templateUrl: '../../assets/html/student-detail.component.html',
-    styleUrls: ['../../assets/style/student-detail.component.css']
+    selector: 'user-detail',
+    templateUrl: '../../assets/html/user-detail.component.html',
+    styleUrls: ['../../assets/style/user-detail.component.css']
 })
-export class StudentDetailComponent implements OnInit {
+export class UserDetailComponent implements OnInit {
 
-    student: Student;
+    user: User;
 
-    constructor(@Inject("studentService") private studentService: IStudentService,
+    constructor(@Inject("userService") private userService: IUserService,
                 private route: ActivatedRoute,
                 private router: Router) {
     }
 
     /**
      * A method which is called right after the initialization of an object. Eventually it assigns a retrieved instance
-     * of a Student class to a private field, which will be later used for template rendering
+     * of a User class to a private field, which will be later used for template rendering
      */
     ngOnInit(): void {
         this.getOne();
     }
 
     /**
-     * Retrieves a requested instance of a Student class specifying its identifier. This is possible due to the
+     * Retrieves a requested instance of a User class specifying its identifier. This is possible due to the
      * underlying interface ActivatedRoute implementation of which contain information about a route associated with a
      * component loaded in an <router-outlet> html tag.
      */
     getOne(): void {
         this.route.paramMap
-            .switchMap((params: ParamMap) => this.studentService.getOne(+params.get('id')))
-            .subscribe((student: Student) => this.student = student);
+            .switchMap((params: ParamMap) => this.userService.getOne(+params.get('id')))
+            .subscribe((user: User) => this.user = user);
     }
 
     /**
@@ -50,10 +50,10 @@ export class StudentDetailComponent implements OnInit {
     }
 
     /**
-     * Persists an instance of a Student class into underlying data storage
+     * Persists an instance of a User class into underlying data storage
      */
     save(): void {
-        this.studentService.save(this.student)
+        this.userService.save(this.user)
             .then(() => this.goBack());
     }
 }
