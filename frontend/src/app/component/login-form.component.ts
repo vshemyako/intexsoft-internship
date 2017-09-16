@@ -6,11 +6,11 @@ import {IAuthenticationService} from "../service/iauthentication.service";
  * Login page controller
  */
 @Component({
-    selector: 'admin-form',
-    templateUrl: '../../assets/html/admin-form.component.html',
+    selector: 'login-form',
+    templateUrl: '../../assets/html/login-form.component.html',
     styleUrls: ['../../assets/style/user-form.component.css']
 })
-export class AdminFormComponent implements OnInit {
+export class LoginFormComponent implements OnInit {
     username: string;
     password: string;
 

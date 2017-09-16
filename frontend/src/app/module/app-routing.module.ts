@@ -3,7 +3,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {DashboardComponent} from "../component/dashboard.component";
 import {UserComponent} from "../component/user.component";
 import {UserDetailComponent} from "../component/user-detail.component";
-import {AdminFormComponent} from "../component/admin-form.component";
+import {LoginFormComponent} from "../component/login-form.component";
 import {HomeComponent} from "../component/home.component";
 
 /**
@@ -28,8 +28,8 @@ const routes: Routes = [
         component: DashboardComponent
     },
     {
-        path: 'form',
-        component: AdminFormComponent
+        path: 'login',
+        component: LoginFormComponent
     },
     {
         path: 'home',

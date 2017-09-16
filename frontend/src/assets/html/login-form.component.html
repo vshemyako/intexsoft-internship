@@ -1,5 +1,16 @@
 <div>
-    <h3 translate>Login_form</h3>
+    <md-card>
+        <md-card-subtitle>News Portal</md-card-subtitle>
+        <md-card-title>Login Form</md-card-title>
+        <form (ngSubmit)='login()' #loginForm='ngForm'>
+            <!--<md-input-container>
+                <input mdInput formControlName="username" required placeholder="user/admin">
+            </md-input-container>-->
+        </form>
+        <button type="submit" [disabled]='!loginForm.form.valid'>Log in</button>
+    </md-card>
+
+    <!--<h3 translate>Login_form</h3>
     <form (ngSubmit)='login()' #userForm='ngForm'>
         <div>
             <label for="name" translate>Login</label>
@@ -15,5 +26,5 @@
         <button type="submit"
                 [disabled]='!userForm.form.valid' translate>Login_button
         </button>
-    </form>
+    </form>-->
 </div>
