@@ -8,11 +8,13 @@ import {IAuthenticationService} from "../service/iauthentication.service";
 @Component({
     selector: 'login-form',
     templateUrl: '../../assets/html/login-form.component.html',
-    styleUrls: ['../../assets/style/user-form.component.css']
+    styleUrls: ['../../assets/style/login-form.component.css']
 })
 export class LoginFormComponent implements OnInit {
     username: string;
     password: string;
+
+    private loginFormName: string = 'News Portal Login Form';
 
     constructor(@Inject('authenticationService') private authenticationService: IAuthenticationService,
                 private router: Router) {
