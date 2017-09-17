@@ -45,7 +45,7 @@ table {
     border-spacing: 0;
 }
 
-/* Global background */
+/* Global flex settings */
 html, body {
     height: 100%;
 }

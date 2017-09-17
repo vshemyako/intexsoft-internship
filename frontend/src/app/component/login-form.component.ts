@@ -1,6 +1,7 @@
-import {Component, OnInit, Inject} from '@angular/core';
+import {Component, OnInit, Inject} from "@angular/core";
 import {Router} from "@angular/router";
 import {IAuthenticationService} from "../service/iauthentication.service";
+import {FormGroup, Validators, FormControl} from "@angular/forms";
 
 /**
  * Login page controller
@@ -13,8 +14,8 @@ import {IAuthenticationService} from "../service/iauthentication.service";
 export class LoginFormComponent implements OnInit {
     username: string;
     password: string;
-
-    private loginFormName: string = 'News Portal Login Form';
+    loginFormControl: FormGroup;
+    private submitted = false;
 
     constructor(@Inject('authenticationService') private authenticationService: IAuthenticationService,
                 private router: Router) {
@@ -22,21 +23,27 @@ export class LoginFormComponent implements OnInit {
 
 
     /**
-     * Deletes any information which somehow remained in the localStorage
+     * Deletes any information which somehow remained in the localStorage and
+     * applies validation to loginFormControl form
      */
     ngOnInit(): void {
         this.authenticationService.logout();
+        this.loginFormControl = new FormGroup({
+         'validName': new FormControl(this.username, [Validators.required, Validators.minLength(3), Validators.maxLength(16)]),
+         'validPassword': new FormControl(this.password, [Validators.required, Validators.minLength(3), Validators.maxLength(16)])
+         });
     }
 
     /**
      * Passes user-provided information to an authentication service
      */
-    login() {
+    login(): void {
         this.authenticationService.login(this.username, this.password)
             .subscribe(result => {
                 if (result) {
                     this.router.navigate(['/']);
                 } else {
+                    this.submitted = false;
                     alert('Username or password is incorrect');
                 }
             });

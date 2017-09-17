@@ -1,10 +1,10 @@
 import {BrowserModule} from "@angular/platform-browser";
 import {
     MdToolbarModule, MdTabsModule, MdButtonModule, MdMenuModule, MdIconModule,
-    MdCardModule, MdInputModule
+    MdCardModule, MdInputModule, MdProgressSpinnerModule
 } from '@angular/material';
 import {NgModule} from "@angular/core";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
@@ -57,8 +57,10 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
         MdIconModule,
         MdCardModule,
         MdInputModule,
+        MdProgressSpinnerModule,
 
         FormsModule,
+        ReactiveFormsModule,
         AppRoutingModule,
         HttpModule,
         HttpClientModule,
