@@ -1,7 +1,7 @@
 import {BrowserModule} from "@angular/platform-browser";
 import {
     MdToolbarModule, MdTabsModule, MdButtonModule, MdMenuModule, MdIconModule,
-    MdCardModule, MdInputModule, MdProgressSpinnerModule
+    MdCardModule, MdInputModule, MdProgressSpinnerModule, MdExpansionModule
 } from '@angular/material';
 import {NgModule} from "@angular/core";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -60,6 +60,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
         MdCardModule,
         MdInputModule,
         MdProgressSpinnerModule,
+        MdExpansionModule,
 
         FormsModule,
         ReactiveFormsModule,

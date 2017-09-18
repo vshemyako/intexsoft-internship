@@ -20,8 +20,7 @@
                 </md-form-field>
                 <md-form-field>
                     <input mdInput formControlName='validPassword' type='password' placeholder='Password' required
-                           [(ngModel)]='password'
-                           name='password'>
+                           [(ngModel)]='password' name='password'>
                     <md-error *ngIf='signupFormControl.controls["validPassword"].errors?.required'>
                         Password is required
                     </md-error>
@@ -29,12 +28,32 @@
                         Length must be at least 3 symbols
                     </md-error>
                 </md-form-field>
+                <md-form-field>
+                    <input mdInput formControlName='validFirstName' type='text' placeholder='First name' [(ngModel)]='firstName'
+                           name='firstName'>
+                    <md-error *ngIf='signupFormControl.controls["validFirstName"].errors?.minlength'>
+                        Length must be at least 3 symbols
+                    </md-error>
+                </md-form-field>
+                <md-form-field>
+                    <input mdInput formControlName='validLastName' type='text' placeholder='Last name' [(ngModel)]='lastName'
+                           name='lastName'>
+                    <md-error *ngIf='signupFormControl.controls["validLastName"].errors?.minlength'>
+                        Length must be at least 3 symbols
+                    </md-error>
+                </md-form-field>
+                <md-form-field>
+                    <input mdInput formControlName='validEmail' type='email' placeholder='Email' [(ngModel)]='email'
+                           name='email'>
+                    <md-error *ngIf='signupFormControl.controls["validEmail"].errors?.pattern'>
+                        Wrong email address
+                    </md-error>
+                </md-form-field>
                 <md-card-actions>
                     <button md-raised-button type='submit' [disabled]='!loginForm.form.valid'>Sign Up</button>
-                    <!--<button md-raised-button color='primary' routerLink='/signup'>Sign Up</button>-->
                 </md-card-actions>
             </form>
-            <md-spinner *ngIf='submitted' mode='indeterminate'></md-spinner>
+            <md-spinner *ngIf='submitted'    mode='indeterminate'></md-spinner>
         </md-card-content>
     </md-card>
 </div>
