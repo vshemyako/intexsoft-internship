@@ -31,7 +31,6 @@ export class AuthenticationService implements IAuthenticationService {
             {headers: HEADERS})
             .map((response: Response) => {
                 let token = response.headers.get('Authorization').slice(7);
-
                 if (token) {
                     localStorage.setItem('currentUser', JSON.stringify({
                         username: username, token: token

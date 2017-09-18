@@ -8,12 +8,6 @@ md-card {
     margin-bottom: 25px;
 }
 
-md-error {
-    align-self: center;
-    margin-bottom: 16px;
-    font-size: small;
-}
-
 md-card-title {
     display: flex;
     align-self: center;

@@ -5,6 +5,7 @@ import {UserComponent} from "../component/user.component";
 import {UserDetailComponent} from "../component/user-detail.component";
 import {LoginFormComponent} from "../component/login-form.component";
 import {HomeComponent} from "../component/home.component";
+import {SignupFormComponent} from "../component/signup-form.component";
 
 /**
  * An array of key/value pairs which in essence specify what urls correspond to particular views
@@ -16,7 +17,7 @@ const routes: Routes = [
     },
     {
         path: '',
-        redirectTo: '/home',
+        redirectTo: 'home',
         pathMatch: 'full'
     },
     {
@@ -34,6 +35,10 @@ const routes: Routes = [
     {
         path: 'home',
         component: HomeComponent
+    },
+    {
+        path: 'signup',
+        component: SignupFormComponent
     }
 ];
 

@@ -19,6 +19,7 @@ import {LoginFormComponent} from "../component/login-form.component";
 import {HomeComponent} from "../component/home.component";
 import {AuthenticationService} from "../service/implementation/authentication.service";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {SignupFormComponent} from '../component/signup-form.component';
 
 const URL_I18N_FILES = 'assets/i18n/';
 const FILE_FORMAT = '.json';
@@ -44,7 +45,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
         UserDetailComponent,
         DashboardComponent,
         LoginFormComponent,
-        HomeComponent
+        HomeComponent,
+        SignupFormComponent
     ],
     imports: [
         BrowserModule,
