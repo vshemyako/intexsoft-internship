@@ -7,4 +7,6 @@ Project will be build upon following technologies:
 -- JPA
 -- PostgreSQL
 -- jUnit
--- Angular 4
+-- Angular 4 
+
+At the moment basic Angular Material incorporation into application is being developed.
