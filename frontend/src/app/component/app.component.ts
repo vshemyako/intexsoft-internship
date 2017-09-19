@@ -8,7 +8,7 @@ import {Router} from "@angular/router";
  * rendered at the beginning of a bootstrap process
  */
 @Component({
-    selector: 'app-root',
+    selector: 'body',
     templateUrl: '../../assets/html/app.component.html',
     styleUrls: ['../../assets/style/app.component.css']
 })

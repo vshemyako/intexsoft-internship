@@ -46,6 +46,15 @@ public class User extends AbstractEntity {
     @Column(name = "enabled")
     public boolean enabled;
 
+    @Column(name = "first_name")
+    public String firstName;
+
+    @Column(name = "last_name")
+    public String lastName;
+
+    @Column(name = "email")
+    public String email;
+
     @ManyToMany(fetch = EAGER)
     @JsonManagedReference
     @JoinTable(

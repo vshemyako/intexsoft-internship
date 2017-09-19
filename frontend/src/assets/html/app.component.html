@@ -1,10 +1,20 @@
-<button (click)="switchLanguage('en')">en</button>
-<button (click)="switchLanguage('ru')">ru</button>
-<h1 translate>Title</h1>
-<nav>
-    <a routerLink='/home' translate>Home</a>
-    <a routerLink='/dashboard' translate>Dashboard</a>
-    <a routerLink='/users' translate>Users</a>
-    <a routerLink='/form' translate>Log_in</a>
-</nav>
-<router-outlet></router-outlet>
+<md-toolbar class="header">
+    <button md-raised-button routerLink='/home'>Home</button>
+    <button md-raised-button routerLink='/signup'>Sign Up</button>
+    <button md-raised-button routerLink='/login'>Log In</button>
+</md-toolbar>
+<main>
+    <router-outlet></router-outlet>
+</main>
+<md-toolbar class="footer">
+    <button md-raised-button md-icon-button>
+        <md-icon>arrow_upward</md-icon>
+    </button>
+    <button md-raised-button md-icon-button [mdMenuTriggerFor]="langMenu">
+        <md-icon>language</md-icon>
+    </button>
+    <md-menu #langMenu="mdMenu">
+        <button md-menu-item (click)="switchLanguage('en')">English</button>
+        <button md-menu-item (click)="switchLanguage('ru')">Russian</button>
+    </md-menu>
+</md-toolbar>

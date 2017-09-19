@@ -24,14 +24,13 @@ export class AuthenticationService implements IAuthenticationService {
      * @param username of a User which wants to authenticate
      * @param password corresponding User's password
      * @returns {Observable<boolean>} encapsulated boolean value which represents
-     *          login success
+     *          loginFormControl success
      */
     login(username: string, password: string): Observable<boolean> {
         return this.http.post(AUTH_URL, JSON.stringify({username: username, password: password}),
             {headers: HEADERS})
             .map((response: Response) => {
                 let token = response.headers.get('Authorization').slice(7);
-
                 if (token) {
                     localStorage.setItem('currentUser', JSON.stringify({
                         username: username, token: token

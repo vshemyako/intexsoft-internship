@@ -3,8 +3,9 @@ import {RouterModule, Routes} from "@angular/router";
 import {DashboardComponent} from "../component/dashboard.component";
 import {UserComponent} from "../component/user.component";
 import {UserDetailComponent} from "../component/user-detail.component";
-import {AdminFormComponent} from "../component/admin-form.component";
+import {LoginFormComponent} from "../component/login-form.component";
 import {HomeComponent} from "../component/home.component";
+import {SignupFormComponent} from "../component/signup-form.component";
 
 /**
  * An array of key/value pairs which in essence specify what urls correspond to particular views
@@ -16,7 +17,7 @@ const routes: Routes = [
     },
     {
         path: '',
-        redirectTo: '/home',
+        redirectTo: 'home',
         pathMatch: 'full'
     },
     {
@@ -28,12 +29,16 @@ const routes: Routes = [
         component: DashboardComponent
     },
     {
-        path: 'form',
-        component: AdminFormComponent
+        path: 'login',
+        component: LoginFormComponent
     },
     {
         path: 'home',
         component: HomeComponent
+    },
+    {
+        path: 'signup',
+        component: SignupFormComponent
     }
 ];
 

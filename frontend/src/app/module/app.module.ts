@@ -1,6 +1,10 @@
 import {BrowserModule} from "@angular/platform-browser";
+import {
+    MdToolbarModule, MdTabsModule, MdButtonModule, MdMenuModule, MdIconModule,
+    MdCardModule, MdInputModule, MdProgressSpinnerModule, MdExpansionModule
+} from '@angular/material';
 import {NgModule} from "@angular/core";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
@@ -11,9 +15,11 @@ import {UserDetailComponent} from "../component/user-detail.component";
 import {UserService} from "../service/implementation/user.service";
 import {DashboardComponent} from "../component/dashboard.component";
 import {AppRoutingModule} from "./app-routing.module";
-import {AdminFormComponent} from "../component/admin-form.component";
+import {LoginFormComponent} from "../component/login-form.component";
 import {HomeComponent} from "../component/home.component";
 import {AuthenticationService} from "../service/implementation/authentication.service";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {SignupFormComponent} from '../component/signup-form.component';
 
 const URL_I18N_FILES = 'assets/i18n/';
 const FILE_FORMAT = '.json';
@@ -38,12 +44,26 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
         UserComponent,
         UserDetailComponent,
         DashboardComponent,
-        AdminFormComponent,
-        HomeComponent
+        LoginFormComponent,
+        HomeComponent,
+        SignupFormComponent
     ],
     imports: [
         BrowserModule,
+
+        BrowserAnimationsModule,
+        MdToolbarModule,
+        MdTabsModule,
+        MdButtonModule,
+        MdMenuModule,
+        MdIconModule,
+        MdCardModule,
+        MdInputModule,
+        MdProgressSpinnerModule,
+        MdExpansionModule,
+
         FormsModule,
+        ReactiveFormsModule,
         AppRoutingModule,
         HttpModule,
         HttpClientModule,
