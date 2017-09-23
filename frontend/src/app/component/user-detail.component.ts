@@ -54,6 +54,8 @@ export class UserDetailComponent implements OnInit {
      */
     save(): void {
         this.userService.save(this.user)
-            .then(() => this.goBack());
+            .subscribe(result => {
+                this.router.navigate(['/'])
+            });
     }
 }

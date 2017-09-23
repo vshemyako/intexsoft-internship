@@ -27,8 +27,7 @@ export class LoginFormComponent implements OnInit {
     private submitted: boolean = false;
 
     constructor(@Inject('authenticationService') private authenticationService: IAuthenticationService,
-                private router: Router) {
-    }
+                private router: Router) {}
 
     /**
      * Deletes any information which somehow remained in the localStorage and

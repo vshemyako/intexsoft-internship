@@ -17,7 +17,7 @@ import by.intexsoft.application.service.AbstractEntityService;
 public class AbstractEntityServiceImpl<T extends AbstractEntity> implements AbstractEntityService<T> {
 
     @Autowired
-    JpaRepository<T, Integer> repository;
+    private JpaRepository<T, Integer> repository;
 
     @Override
     public void delete(int id) {

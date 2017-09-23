@@ -1,7 +1,7 @@
 package by.intexsoft.application.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.List;
@@ -56,7 +56,7 @@ public class User extends AbstractEntity {
     public String email;
 
     @ManyToMany(fetch = EAGER)
-    @JsonManagedReference
+    @JsonBackReference
     @JoinTable(
             name = "users_authorities",
             joinColumns = @JoinColumn(name = "user_id"),

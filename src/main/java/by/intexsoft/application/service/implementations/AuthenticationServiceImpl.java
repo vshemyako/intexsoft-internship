@@ -1,6 +1,10 @@
 package by.intexsoft.application.service.implementations;
 
+import by.intexsoft.application.model.User;
 import by.intexsoft.application.service.AuthenticationService;
+import by.intexsoft.application.service.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -12,6 +16,8 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -35,6 +41,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private static final String JWT_PREFIX = "Bearer";
     // @Value("${jwt.auth_header}")
     private static final String AUTH_HEADER = "Authorization";
+    // @Value("${jwt.content_type}")
+    private static final String CONTENT_TYPE = "application/json";
+
+    // @Autowired
+    UserService userService = new UserServiceImpl();
 
     /**
      * Attaches generated JSON Web Token to a {@link HttpServletResponse} object after successful
@@ -54,6 +65,27 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         String JWT = generateJWT(claims);
         response.addHeader(AUTH_HEADER, JWT_PREFIX + " " + JWT);
+        response.setContentType(CONTENT_TYPE);
+
+        attachJsonToResponseBody(response, convertObjectToJson(authorities));
+    }
+
+    /**
+     * In order to reduce server requests  - authorities of an authenticated user
+     * are converted to JSON format, which later on are attached to response body
+     *
+     * @param authorities - of a given {@link User}
+     * @return object converted to JSON String
+     */
+    private String convertObjectToJson(Set<String> authorities) {
+        String jsonString = null;
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            jsonString = objectMapper.writeValueAsString(authorities);
+        } catch (JsonProcessingException exception) {
+            //TODO: insert logger here;
+        }
+        return jsonString;
     }
 
     /**
@@ -127,5 +159,21 @@ public class AuthenticationServiceImpl implements AuthenticationService {
      */
     private Date generateExpirationDate() {
         return new Date(System.currentTimeMillis() + REFRESH_TIME);
+    }
+
+    /**
+     * @param response     - {@link HttpServletResponse} instance which is user to attach authority
+     *                     information to be later used by front-end part of the application
+     * @param infoToAttach - authority information (actually appropriate {@link User} roles.
+     *                     Expected to be in JSON format
+     */
+    private void attachJsonToResponseBody(HttpServletResponse response, String infoToAttach) {
+        try {
+            PrintWriter writer = response.getWriter();
+            writer.print(infoToAttach);
+            writer.flush();
+        } catch (IOException exception) {
+            //TODO: insert logger here;
+        }
     }
 }

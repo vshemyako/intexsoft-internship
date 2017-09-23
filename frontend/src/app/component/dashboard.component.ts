@@ -32,7 +32,7 @@ export class DashboardComponent implements OnInit {
      */
     refresh() {
         this.userService.findAll()
-            .then((users: User[]) => this.users = users.slice(0, NUMBER_OF_USERS))
-            .catch((e: Error) => alert(e.message));
+            .subscribe((users: User[]) => this.users = users.slice(0, NUMBER_OF_USERS)),
+            error => alert(error.message);
     }
 }

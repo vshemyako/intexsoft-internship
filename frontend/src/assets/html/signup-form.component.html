@@ -7,10 +7,10 @@
         <md-card-title>Registration Form</md-card-title>
         <md-error class="mat-error" *ngIf='errorMessage'>{{errorMessage}}</md-error>
         <md-card-content>
-            <form *ngIf='!submitted' [formGroup]='signupFormControl' (ngSubmit)='login()' #loginForm='ngForm'>
+            <form *ngIf='!submitted' [formGroup]='signupFormControl' (ngSubmit)='register()' #loginForm='ngForm'>
                 <md-form-field>
                     <input mdInput formControlName='validName' type='text' placeholder='Login' required
-                           [(ngModel)]='username' name='username'>
+                           [(ngModel)]='newUser.username' name='newUser.username'>
                     <md-error *ngIf='signupFormControl.controls["validName"].errors?.required'>
                         Login is required
                     </md-error>
@@ -20,7 +20,7 @@
                 </md-form-field>
                 <md-form-field>
                     <input mdInput formControlName='validPassword' type='password' placeholder='Password' required
-                           [(ngModel)]='password' name='password'>
+                           [(ngModel)]='newUser.password' name='newUser.password'>
                     <md-error *ngIf='signupFormControl.controls["validPassword"].errors?.required'>
                         Password is required
                     </md-error>
@@ -29,22 +29,22 @@
                     </md-error>
                 </md-form-field>
                 <md-form-field>
-                    <input mdInput formControlName='validFirstName' type='text' placeholder='First name' [(ngModel)]='firstName'
-                           name='firstName'>
+                    <input mdInput formControlName='validFirstName' type='text' placeholder='First name' [(ngModel)]='newUser.firstName'
+                           name='newUser.firstName'>
                     <md-error *ngIf='signupFormControl.controls["validFirstName"].errors?.minlength'>
                         Length must be at least 3 symbols
                     </md-error>
                 </md-form-field>
                 <md-form-field>
-                    <input mdInput formControlName='validLastName' type='text' placeholder='Last name' [(ngModel)]='lastName'
-                           name='lastName'>
+                    <input mdInput formControlName='validLastName' type='text' placeholder='Last name' [(ngModel)]='newUser.lastName'
+                           name='newUser.lastName'>
                     <md-error *ngIf='signupFormControl.controls["validLastName"].errors?.minlength'>
                         Length must be at least 3 symbols
                     </md-error>
                 </md-form-field>
                 <md-form-field>
-                    <input mdInput formControlName='validEmail' type='email' placeholder='Email' [(ngModel)]='email'
-                           name='email'>
+                    <input mdInput formControlName='validEmail' type='email' placeholder='Email' [(ngModel)]='newUser.email'
+                           name='newUser.email'>
                     <md-error *ngIf='signupFormControl.controls["validEmail"].errors?.pattern'>
                         Wrong email address
                     </md-error>
@@ -53,7 +53,7 @@
                     <button md-raised-button type='submit' [disabled]='!loginForm.form.valid'>Sign Up</button>
                 </md-card-actions>
             </form>
-            <md-spinner *ngIf='submitted'    mode='indeterminate'></md-spinner>
+            <md-spinner *ngIf='submitted' mode='indeterminate'></md-spinner>
         </md-card-content>
     </md-card>
 </div>

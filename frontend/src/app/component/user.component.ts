@@ -34,8 +34,8 @@ export class UserComponent implements OnInit {
      */
     findAll(): void {
         this.userService.findAll()
-            .then((users: User[]) => this.users = users)
-            .catch((e: Error) => alert(e.message));
+            .subscribe((users: User[]) => this.users = users),
+            (error => alert(error.message));
     }
 
     /**

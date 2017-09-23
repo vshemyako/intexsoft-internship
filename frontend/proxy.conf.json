@@ -1,10 +1,10 @@
 {
   "/api/*": {
-    "target": "http://localhost:8080/SchoolTimetable",
+    "target": "http://localhost:8080/newsportal",
 	"secure": false
   },
   "/assets/i18n" : {
-    "target": "http://localhost:8080/SchoolTimetable",
+    "target": "http://localhost:8080/newsportal",
     "secure": false
   }
 }
