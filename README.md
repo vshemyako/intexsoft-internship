@@ -9,4 +9,6 @@ Project will be build upon following technologies:
 -- jUnit
 -- Angular 4 
 
-At the moment basic Angular Material incorporation into application is being developed.
+At the moment basic Angular Material incorporation into application is being developed. - Done
+
+All efforts are directed into Angular Guards incorporation into the application.
