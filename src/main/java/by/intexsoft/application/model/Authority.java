@@ -1,15 +1,13 @@
 package by.intexsoft.application.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import java.util.ArrayList;
 import java.util.List;
 
 import static javax.persistence.FetchType.EAGER;
@@ -34,6 +32,6 @@ public class Authority extends AbstractEntity implements GrantedAuthority {
     }
 
     @ManyToMany(fetch = EAGER, mappedBy = "authorities")
-    @JsonBackReference
+    @JsonManagedReference
     public List<User> users;
 }

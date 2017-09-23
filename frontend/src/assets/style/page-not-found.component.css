@@ -8,12 +8,6 @@ md-card {
     margin-bottom: 25px;
 }
 
-md-error {
-    align-self: center;
-    margin-bottom: 16px;
-    font-size: small;
-}
-
 md-card-title {
     display: flex;
     align-self: center;
@@ -22,13 +16,6 @@ md-card-title {
 md-card-subtitle {
     display: flex;
     align-self: center;
-}
-
-md-card-actions {
-    display: flex;
-    flex: 1 0 auto;
-    flex-direction: column;
-    justify-content: flex-end;
 }
 
 md-card-actions button {
@@ -41,7 +28,7 @@ md-card-actions button {
     align-content: flex-end;
 }
 
-.lock {
+.error {
     font-size: 36px;
 }
 
@@ -49,16 +36,4 @@ md-card-content {
     width: inherit;
     display: flex;
     justify-content: center;
-}
-
-form {
-    width: inherit;
-}
-
-md-form-field {
-    width: inherit;
-}
-
-input {
-    width: inherit;
 }

@@ -20,6 +20,9 @@ import {HomeComponent} from "../component/home.component";
 import {AuthenticationService} from "../service/implementation/authentication.service";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {SignupFormComponent} from '../component/signup-form.component';
+import {WorkspaceComponent} from '../component/workspace.component';
+import {PageNotFoundComponent} from '../component/page-not-found.component';
+import {NavigationGuard} from "../guard/navigation.guard";
 
 const URL_I18N_FILES = 'assets/i18n/';
 const FILE_FORMAT = '.json';
@@ -46,7 +49,9 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
         DashboardComponent,
         LoginFormComponent,
         HomeComponent,
-        SignupFormComponent
+        SignupFormComponent,
+        WorkspaceComponent,
+        PageNotFoundComponent
     ],
     imports: [
         BrowserModule,
@@ -75,8 +80,11 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
             }
         })
     ],
-    providers: [{provide: 'userService', useClass: UserService},
-        {provide: 'authenticationService', useClass: AuthenticationService}],
+    providers: [
+        {provide: 'userService', useClass: UserService},
+        {provide: 'authenticationService', useClass: AuthenticationService},
+        NavigationGuard
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

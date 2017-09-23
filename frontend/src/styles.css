@@ -54,3 +54,10 @@ body {
     display: flex;
     flex-direction: column;
 }
+
+.loading-app {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80%;
+}

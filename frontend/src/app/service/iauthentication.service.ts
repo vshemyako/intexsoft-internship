@@ -16,4 +16,16 @@ export interface IAuthenticationService {
      * Logs a user out from a program
      */
     logout(): void;
+
+    /**
+     * Determines whether or not a User is authenticated
+     * @returns {Observable<boolean>} - boolean value wrapper in Observable
+     */
+    isLoggedIn(): boolean;
+
+    /**
+     * @param {User} user - an instance of a User class which will be created
+     * @returns Observable after the completion of the underlying functionality. Generic type is an instance of a User class
+     */
+    register(user: User): Observable<User>;
 }

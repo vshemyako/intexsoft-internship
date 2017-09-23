@@ -1,19 +1,21 @@
-<md-toolbar class="header">
+<md-toolbar class='header'>
     <button md-raised-button routerLink='/home'>Home</button>
-    <button md-raised-button routerLink='/signup'>Sign Up</button>
-    <button md-raised-button routerLink='/login'>Log In</button>
+    <button md-raised-button routerLink='/workspace'>Workspace</button>
+    <button *ngIf='!isLoggedIn()' md-raised-button routerLink='/signup'>Sign Up</button>
+    <button *ngIf='!isLoggedIn()' md-raised-button routerLink='/login'>Log In</button>
+    <button *ngIf='isLoggedIn()' md-raised-button routerLink='/login' (click)='logout()'>Log Out</button>
 </md-toolbar>
 <main>
     <router-outlet></router-outlet>
 </main>
-<md-toolbar class="footer">
+<md-toolbar class='footer'>
     <button md-raised-button md-icon-button>
         <md-icon>arrow_upward</md-icon>
     </button>
-    <button md-raised-button md-icon-button [mdMenuTriggerFor]="langMenu">
+    <button md-raised-button md-icon-button [mdMenuTriggerFor]='langMenu'>
         <md-icon>language</md-icon>
     </button>
-    <md-menu #langMenu="mdMenu">
+    <md-menu #langMenu='mdMenu'>
         <button md-menu-item (click)="switchLanguage('en')">English</button>
         <button md-menu-item (click)="switchLanguage('ru')">Russian</button>
     </md-menu>
