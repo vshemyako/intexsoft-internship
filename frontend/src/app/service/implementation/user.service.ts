@@ -1,10 +1,8 @@
-import {Injectable, Inject} from '@angular/core';
+import {Injectable} from "@angular/core";
 import {Headers, Http, RequestOptions, Response} from "@angular/http";
-import 'rxjs/add/operator/toPromise'
-
+import "rxjs/add/operator/toPromise";
 import {User} from "../../model/user";
 import {IUserService} from "../iuser.service";
-import {IAuthenticationService} from "../iauthentication.service";
 import {Observable} from "rxjs";
 
 const ALL_USERS_PATH = 'api/users';
@@ -16,8 +14,7 @@ const USER_PATH = 'api/user';
 @Injectable()
 export class UserService implements IUserService {
 
-    constructor(@Inject('authenticationService') private authenticationService: IAuthenticationService,
-                private http: Http) {
+    constructor(private http: Http) {
     }
 
     /**

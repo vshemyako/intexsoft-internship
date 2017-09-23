@@ -1,18 +1,18 @@
 <md-toolbar class='header'>
-    <button md-raised-button routerLink='/home'>Home</button>
-    <button md-raised-button routerLink='/workspace'>Workspace</button>
-    <button *ngIf='!isLoggedIn()' md-raised-button routerLink='/signup'>Sign Up</button>
-    <button *ngIf='!isLoggedIn()' md-raised-button routerLink='/login'>Log In</button>
-    <button *ngIf='isLoggedIn()' md-raised-button routerLink='/login' (click)='logout()'>Log Out</button>
+    <button md-raised-button color='primary' routerLink='/news'>News</button>
+    <button md-raised-button color='primary' routerLink='/workspace'>Workspace</button>
+    <button *ngIf='!isLoggedIn()' color='primary' md-raised-button routerLink='/signup'>Sign Up</button>
+    <button *ngIf='!isLoggedIn()' color='primary' md-raised-button routerLink='/login'>Log In</button>
+    <button *ngIf='isLoggedIn()' color='primary' md-raised-button routerLink='/login' (click)='logout()'>Log Out</button>
 </md-toolbar>
 <main>
     <router-outlet></router-outlet>
 </main>
 <md-toolbar class='footer'>
-    <button md-raised-button md-icon-button>
+    <button md-raised-button md-icon-button color='primary' (click)='scrollToTheTop()'>
         <md-icon>arrow_upward</md-icon>
     </button>
-    <button md-raised-button md-icon-button [mdMenuTriggerFor]='langMenu'>
+    <button md-raised-button md-icon-button color='primary' [mdMenuTriggerFor]='langMenu'>
         <md-icon>language</md-icon>
     </button>
     <md-menu #langMenu='mdMenu'>

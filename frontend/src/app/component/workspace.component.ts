@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+//TODO: Logic is not implemented
 @Component({
   selector: 'app-workspace',
   templateUrl: '../../assets/html/workspace.component.html',

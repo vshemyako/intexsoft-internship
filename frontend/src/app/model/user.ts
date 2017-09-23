@@ -1,4 +1,3 @@
-import {Authority} from "./authority";
 /**
  * Blueprint for creating User instances
  */

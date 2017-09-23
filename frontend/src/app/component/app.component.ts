@@ -1,8 +1,7 @@
-import {Component, Inject} from '@angular/core';
+import {Component, Inject} from "@angular/core";
 import {TranslateService} from "@ngx-translate/core";
 import {IAuthenticationService} from "../service/iauthentication.service";
 import {Router} from "@angular/router";
-import {Authority} from "../model/authority";
 
 /**
  * Main controller of a college application which will be first
@@ -37,23 +36,23 @@ export class AppComponent {
     //TODO: remove inline comments
     haveAccess(): boolean {
         /*
-        let condition: boolean = false;
-        let authorities: string[] = JSON.parse(localStorage.getItem('authorities'));
-        // let array: string[] = JSON.parse('["ROLE_ADMIN", "ROLE_EDITOR", "ROLE_REVIEWER", "ROLE_USER"]');
-        // console.log(authorities);
+         let condition: boolean = false;
+         let authorities: string[] = JSON.parse(localStorage.getItem('authorities'));
+         // let array: string[] = JSON.parse('["ROLE_ADMIN", "ROLE_EDITOR", "ROLE_REVIEWER", "ROLE_USER"]');
+         // console.log(authorities);
 
-        if(authorities == null) {
-            // console.log(false);
-            return false;
-        }
+         if(authorities == null) {
+         // console.log(false);
+         return false;
+         }
 
-        for(let role in authorities) {
-            if(role === 'ROLE_USER') {
-                // console.log(role);
-                condition = true;
-            }
-        }
-        return condition;*/
+         for(let role in authorities) {
+         if(role === 'ROLE_USER') {
+         // console.log(role);
+         condition = true;
+         }
+         }
+         return condition;*/
         return !!localStorage.getItem('authorities');
     }
 
@@ -71,5 +70,10 @@ export class AppComponent {
      */
     logout(): void {
         this.authenticationService.logout();
+    }
+
+
+    scrollToTheTop(): void {
+        document.body.scrollTop = 0;
     }
 }
