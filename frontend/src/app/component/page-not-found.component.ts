@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 
+/**
+ * Component of an error page
+ */
 @Component({
     selector: 'page-not-found',
     templateUrl: '../../assets/html/page-not-found.component.html',

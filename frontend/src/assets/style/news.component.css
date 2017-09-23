@@ -1,0 +1,50 @@
+md-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: stretch;
+    width: 500px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+md-card-title {
+    display: flex;
+    align-self: flex-start;
+}
+
+md-card-subtitle {
+    display: flex;
+    align-self: center;
+}
+
+md-card-content {
+    display: flex;
+    align-self: flex-start;
+}
+
+.card-footer md-card-actions {
+    display: flex;
+    align-self: flex-end;
+}
+
+md-card-actions button {
+    display: flex;
+    margin: 5px !important;
+}
+
+.icon-container {
+    display: flex;
+    justify-content: flex-end;
+    align-content: flex-end;
+}
+
+.error {
+    font-size: 36px;
+}
+
+md-card-content {
+    width: inherit;
+    display: flex;
+    justify-content: center;
+}

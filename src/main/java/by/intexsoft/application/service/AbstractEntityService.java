@@ -4,6 +4,8 @@ import java.util.List;
 
 import by.intexsoft.application.model.AbstractEntity;
 import by.intexsoft.application.model.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 /**
  * Global interface for general CRUD operations
@@ -43,4 +45,13 @@ public interface AbstractEntityService<T extends AbstractEntity> {
      * @return all found instances
      */
     List<T> findAll();
+
+    /**
+     * Return a sublist of a stored list of specified objects
+     *
+     * @param pageable - instance of {@link Pageable} interface which is able to perform
+     *                 pagination operations
+     * @return {@link Page<T>} - a sublist of list of objects of type T
+     */
+    Page<T> findAll(Pageable pageable);
 }

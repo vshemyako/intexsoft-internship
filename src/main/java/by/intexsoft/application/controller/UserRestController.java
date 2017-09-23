@@ -61,7 +61,7 @@ public class UserRestController {
     @RequestMapping(value = "/register", method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity<User> register(@RequestBody User user) {
         User createdUser = userService.register(user);
-        return createdUser != null ? new ResponseEntity<User>(createdUser, HttpStatus.CREATED)
-                : new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
+        return createdUser != null ? new ResponseEntity<>(createdUser, HttpStatus.CREATED)
+                : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 }

@@ -5,8 +5,15 @@ import {FormGroup, FormControl, Validators} from "@angular/forms";
 import {User} from "../model/user";
 import {IAuthenticationService} from "../service/iauthentication.service";
 
+/**
+ * @type {RegExp} - is used to validate provided email address
+ */
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
+/**
+ * Controller for sign-up form. Determines whether or not a Guest provides enough information for
+ * http request
+ */
 @Component({
     selector: 'signup-component',
     templateUrl: '../../assets/html/signup-form.component.html',
@@ -31,6 +38,9 @@ export class SignupFormComponent implements OnInit {
                 private router: Router) {
     }
 
+    /**
+     * Creates empty user which later on is filled in with information which is provided in sign-up form
+     */
     ngOnInit(): void {
         this.newUser = new User();
         this.signupFormControl = new FormGroup({
@@ -42,6 +52,10 @@ export class SignupFormComponent implements OnInit {
         });
     }
 
+    /**
+     * A method which is invoked when all needed information has been provided in the sign-up form.
+     * A consequent http request is send to back-end part of the application
+     */
     register(): void {
         this.submitted = true;
         this.errorMessage = null;

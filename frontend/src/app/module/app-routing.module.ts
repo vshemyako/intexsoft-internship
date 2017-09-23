@@ -4,11 +4,12 @@ import {DashboardComponent} from "../component/dashboard.component";
 import {UserComponent} from "../component/user.component";
 import {UserDetailComponent} from "../component/user-detail.component";
 import {LoginFormComponent} from "../component/login-form.component";
-import {HomeComponent} from "../component/home.component";
+import {NewsComponent} from "../component/news.component";
 import {SignupFormComponent} from "../component/signup-form.component";
 import {WorkspaceComponent} from "../component/workspace.component";
 import {PageNotFoundComponent} from "../component/page-not-found.component";
 import {NavigationGuard} from "../guard/navigation.guard";
+import {NewsDetailComponent} from "../component/news-detail.component";
 
 /**
  * An array of key/value pairs which in essence specify what urls correspond to particular views
@@ -20,7 +21,7 @@ const routes: Routes = [
     },
     {
         path: '',
-        redirectTo: 'home',
+        redirectTo: 'news',
         pathMatch: 'full'
     },
     {
@@ -32,8 +33,8 @@ const routes: Routes = [
         component: LoginFormComponent
     },
     {
-        path: 'home',
-        component: HomeComponent
+        path: 'news',
+        component: NewsComponent
     },
     {
         path: 'signup',
@@ -47,6 +48,10 @@ const routes: Routes = [
     {
         path: 'user/:id',
         component: UserDetailComponent
+    },
+    {
+        path: 'news/:id',
+        component: NewsDetailComponent
     },
     {
         path: '**',
