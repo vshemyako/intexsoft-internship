@@ -11,4 +11,6 @@ Project will be build upon following technologies:
 
 At the moment basic Angular Material incorporation into application is being developed. - Done
 
-All efforts are directed into Angular Guards incorporation into the application.
+All efforts are directed into Angular Guards incorporation into the application. - Done
+
+At present I'm trying to implement pagination reguests and handle them with RestControllers
