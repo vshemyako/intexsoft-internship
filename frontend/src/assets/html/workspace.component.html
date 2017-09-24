@@ -1,5 +1,6 @@
-<md-accordion>
+<md-accordion xmlns:maxlength="http://www.w3.org/1999/xhtml">
 
+    <!-- Person information -->
     <md-expansion-panel [expanded]='step === 0' (opened)='setStep(0)' hideToggle='true'>
         <md-expansion-panel-header>
             <md-panel-title>
@@ -13,7 +14,7 @@
 
         <form>
 
-            <md-grid-list cols='2' rowHeight="4.5:1">
+            <md-grid-list cols='2' rowHeight="4:1">
 
                 <md-grid-tile colspan='1'>
                     <md-form-field>
@@ -45,7 +46,7 @@
                     </md-form-field>
                 </md-grid-tile>
 
-                <md-grid-tile>
+                <md-grid-tile colspan='1'>
                     <button md-raised-button color='primary'>Change Personal Information</button>
                 </md-grid-tile>
 
@@ -58,6 +59,7 @@
         </md-action-row>
     </md-expansion-panel>
 
+    <!-- Article Creation -->
     <md-expansion-panel [expanded]='step === 1' (opened)='setStep(1)' hideToggle='true'>
         <md-expansion-panel-header>
             <md-panel-title>
@@ -69,9 +71,87 @@
             </md-panel-description>
         </md-expansion-panel-header>
 
-        <md-form-field>
-            <input mdInput placeholder='Country'>
-        </md-form-field>
+        <form>
+
+            <md-grid-list cols='2' rowHeight="3.5:1">
+
+                <md-grid-tile colspan='2'>
+                    <md-form-field>
+                        <input mdInput class='mat-accent' type='text' placeholder='Article Title'>
+                    </md-form-field>
+                </md-grid-tile>
+
+                <md-grid-tile colspan='1'>
+                    <md-form-field>
+                        <input mdInput placeholder='Start Date' [mdDatepicker]='startDatePicker' (focus)='picker.open()'
+                               readonly>
+                        <md-datepicker-toggle mdSuffix [for]='startDatePicker'></md-datepicker-toggle>
+                        <md-datepicker #startDatePicker></md-datepicker>
+                    </md-form-field>
+                </md-grid-tile>
+
+                <md-grid-tile colspan='1'>
+                    <md-form-field>
+                        <input mdInput placeholder='End Date' [mdDatepicker]='endDatePicker' (focus)='picker.open()'
+                               readonly>
+                        <md-datepicker-toggle mdSuffix [for]='endDatePicker'></md-datepicker-toggle>
+                        <md-datepicker #endDatePicker></md-datepicker>
+                    </md-form-field>
+                </md-grid-tile>
+
+                <md-grid-tile colspan='1'>
+                    <md-form-field>
+                        <input mdInput type='time' placeholder='Start Time'>
+                    </md-form-field>
+                </md-grid-tile>
+
+
+                <md-grid-tile colspan='1'>
+                    <md-form-field>
+                        <input mdInput type='time' placeholder='End Time'>
+                    </md-form-field>
+                </md-grid-tile>
+
+
+                <md-grid-tile colspan='1'>
+                    <md-select placeholder='Category'>
+                        <md-option *ngFor='let category of categories' [value]='category.value'>
+                            {{category.viewValue}}
+                        </md-option>
+                    </md-select>
+                </md-grid-tile>
+
+                <md-grid-tile colspan='1'>
+                    <md-select placeholder='Status'>
+                        <md-option *ngFor='let status of statuses' [value]='status.value'>
+                            {{status.viewValue}}
+                        </md-option>
+                    </md-select>
+                </md-grid-tile>
+
+            </md-grid-list>
+
+            <md-grid-list cols='2' rowHeight='fit' class='article-description'>
+                <md-grid-tile colspan='2' rowspan='4'>
+                    <md-form-field>
+                        <textarea mdInput class='desc-textarea' rows='3' maxlength='160'
+                                  placeholder='Short Description'></textarea>
+                    </md-form-field>
+                </md-grid-tile>
+
+                <md-grid-tile colspan='2' rowspan='17'>
+                    <md-form-field>
+                        <textarea mdInput class='article-textarea' placeholder='Article'></textarea>
+                    </md-form-field>
+                </md-grid-tile>
+
+                <md-grid-tile colspan='2' rowspan='2'>
+                    <button md-raised-button color='primary'>Send Article For Review</button>
+                </md-grid-tile>
+
+            </md-grid-list>
+
+        </form>
 
         <md-action-row>
             <button md-button color='warn' (click)='prevStep()'>Previous Section</button>
@@ -79,6 +159,7 @@
         </md-action-row>
     </md-expansion-panel>
 
+    <!-- Article Revision -->
     <md-expansion-panel [expanded]='step === 2' (opened)='setStep(2)' hideToggle='true'>
         <md-expansion-panel-header>
             <md-panel-title>
@@ -90,10 +171,13 @@
             </md-panel-description>
         </md-expansion-panel-header>
 
-        <md-form-field>
-            <input mdInput placeholder='Date' [mdDatepicker]='picker' (focus)='picker.open()' readonly>
-        </md-form-field>
-        <md-datepicker #picker></md-datepicker>
+        <md-grid-list cols='1' class='admin-section' rowHeight="50px">
+
+            <md-grid-tile colspan='1'>
+                <button md-raised-button color='primary' (click)='getAll()'>Get List Of Unreviewed Articles</button>
+            </md-grid-tile>
+
+        </md-grid-list>
 
         <md-action-row>
             <button md-button color='warn' (click)='prevStep()'>Previous Section</button>
@@ -101,10 +185,11 @@
         </md-action-row>
     </md-expansion-panel>
 
+    <!-- Administration -->
     <md-expansion-panel [expanded]='step === 3' (opened)='setStep(3)' hideToggle='true'>
         <md-expansion-panel-header>
             <md-panel-title>
-                User Administration Section
+                Users Administration Section
             </md-panel-title>
             <md-panel-description>
                 <md-icon *ngIf='step===3' color='accent'>settings</md-icon>
@@ -112,10 +197,21 @@
             </md-panel-description>
         </md-expansion-panel-header>
 
-        <md-form-field>
-            <input mdInput placeholder='Date' readonly>
-        </md-form-field>
-        <md-datepicker #picker></md-datepicker>
+        <md-grid-list cols='3' class='admin-section' rowHeight="4:1">
+
+            <md-grid-tile colspan='1'>
+                <button md-raised-button color='primary' (click)='getAll()'>Display All Users</button>
+            </md-grid-tile>
+
+            <md-grid-tile colspan='1'>
+                <button md-raised-button color='primary' (click)='getAllDisabled()'>Display Disabled Users</button>
+            </md-grid-tile>
+
+            <md-grid-tile colspan='1'>
+                <button md-raised-button color='primary' (click)='getAllEnabled()'>Display Enabled Users</button>
+            </md-grid-tile>
+
+        </md-grid-list>
 
         <md-action-row>
             <button md-button color='warn' (click)='prevStep()'>Previous Section</button>

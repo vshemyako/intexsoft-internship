@@ -2,6 +2,9 @@ md-accordion {
     display: flex;
     flex-direction: column;
     flex: 0 0 auto;
+    width: 600px;
+    margin-top: 25px;
+    margin-bottom: 25px;
 }
 
 md-panel-title {
@@ -21,6 +24,43 @@ md-accordion md-panel-description {
     margin: 0;
 }
 
-md-accordion {
-    width: 600px;
+.article-description {
+    height: 500px;
+}
+
+.article-description md-grid-tile {
+    width: 100%;
+}
+
+.article-description md-form-field {
+    width: 480px;
+}
+
+.desc-textarea {
+    resize: none;
+    height: 20px;
+}
+
+.article-textarea {
+    resize: none;
+    height: 300px;
+}
+
+md-select {
+    width: 200px;
+    padding-top: 0px;
+    padding-bottom: 17.5px;
+}
+
+.mat-select-placeholder {
+    font-size: 14px !important;
+}
+
+md-grid-tile button {
+    width: 480px;
+}
+
+.admin-section button {
+    margin-right: 5px;
+    margin-left: 5px;
 }
