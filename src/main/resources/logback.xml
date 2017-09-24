@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 	<appender name="fileAppenderApplication" class="ch.qos.logback.core.FileAppender">
-		<file>logs/application.log</file>
+		<file>${catalina.base}/logs/newsportal/application.log</file>
 		<encoder>
 			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
 			</pattern>
@@ -9,7 +9,7 @@
 	</appender>
 
 	<appender name="fileAppenderDependencies" class="ch.qos.logback.core.FileAppender">
-		<file>logs/dependencies.log</file>
+		<file>${catalina.base}/logs/newsportal/dependencies.log</file>
 		<encoder>
 			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
 			</pattern>

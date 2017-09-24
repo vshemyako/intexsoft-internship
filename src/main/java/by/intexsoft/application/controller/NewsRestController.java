@@ -2,6 +2,8 @@ package by.intexsoft.application.controller;
 
 import by.intexsoft.application.model.News;
 import by.intexsoft.application.service.NewsService;
+import ch.qos.logback.classic.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class NewsRestController {
+
+    private final static Logger LOGGER = (Logger) LoggerFactory.getLogger(UserRestController.class);
 
     private final NewsService newsService;
 
@@ -40,8 +44,12 @@ public class NewsRestController {
     public ResponseEntity<Page<News>> findSubset(Pageable pageable) {
         Page<News> newsPage = newsService.findAll(pageable);
         if (newsPage != null) {
+            LOGGER.info("Request was received to retrieve news starting from page {} with size {}",
+                    pageable.getPageNumber(), pageable.getPageSize());
             return new ResponseEntity<>(newsPage, HttpStatus.CREATED);
         } else {
+            LOGGER.info("Request to retrieve news starting from page {} with size {} failed",
+                    pageable.getPageNumber(), pageable.getPageSize());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
