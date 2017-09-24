@@ -1,3 +1,126 @@
-<p>
-  workspace works!
-</p>
+<md-accordion>
+
+    <md-expansion-panel [expanded]='step === 0' (opened)='setStep(0)' hideToggle='true'>
+        <md-expansion-panel-header>
+            <md-panel-title>
+                Personal Data Section
+            </md-panel-title>
+            <md-panel-description>
+                <md-icon *ngIf='step===0' color='accent'>account_circle</md-icon>
+                <md-icon *ngIf='step!==0' color='primary'>account_circle</md-icon>
+            </md-panel-description>
+        </md-expansion-panel-header>
+
+        <form>
+
+            <md-grid-list cols='2' rowHeight="4.5:1">
+
+                <md-grid-tile colspan='1'>
+                    <md-form-field>
+                        <input mdInput type='text' placeholder='Login'>
+                    </md-form-field>
+                </md-grid-tile>
+
+                <md-grid-tile colspan='1'>
+                    <md-form-field>
+                        <input mdInput type='text' type='password' placeholder='Password'>
+                    </md-form-field>
+                </md-grid-tile>
+
+                <md-grid-tile colspan='1'>
+                    <md-form-field>
+                        <input mdInput type='text' placeholder='First name'>
+                    </md-form-field>
+                </md-grid-tile>
+
+                <md-grid-tile colspan='1'>
+                    <md-form-field>
+                        <input mdInput type='text' placeholder='Last name'>
+                    </md-form-field>
+                </md-grid-tile>
+
+                <md-grid-tile>
+                    <md-form-field colspan='1'>
+                        <input mdInput type='email' placeholder='Email'>
+                    </md-form-field>
+                </md-grid-tile>
+
+                <md-grid-tile>
+                    <button md-raised-button color='primary'>Change Personal Information</button>
+                </md-grid-tile>
+
+            </md-grid-list>
+
+        </form>
+
+        <md-action-row>
+            <button md-button color='primary' (click)='nextStep()'>Next Section</button>
+        </md-action-row>
+    </md-expansion-panel>
+
+    <md-expansion-panel [expanded]='step === 1' (opened)='setStep(1)' hideToggle='true'>
+        <md-expansion-panel-header>
+            <md-panel-title>
+                Article Creation Section
+            </md-panel-title>
+            <md-panel-description>
+                <md-icon *ngIf='step===1' color='accent'>note_add</md-icon>
+                <md-icon *ngIf='step!==1' color='primary'>note_add</md-icon>
+            </md-panel-description>
+        </md-expansion-panel-header>
+
+        <md-form-field>
+            <input mdInput placeholder='Country'>
+        </md-form-field>
+
+        <md-action-row>
+            <button md-button color='warn' (click)='prevStep()'>Previous Section</button>
+            <button md-button color='primary' (click)='nextStep()'>Next Section</button>
+        </md-action-row>
+    </md-expansion-panel>
+
+    <md-expansion-panel [expanded]='step === 2' (opened)='setStep(2)' hideToggle='true'>
+        <md-expansion-panel-header>
+            <md-panel-title>
+                Article Revision Section
+            </md-panel-title>
+            <md-panel-description>
+                <md-icon *ngIf='step===2' color='accent'>check_circle</md-icon>
+                <md-icon *ngIf='step!==2' color='primary'>check_circle</md-icon>
+            </md-panel-description>
+        </md-expansion-panel-header>
+
+        <md-form-field>
+            <input mdInput placeholder='Date' [mdDatepicker]='picker' (focus)='picker.open()' readonly>
+        </md-form-field>
+        <md-datepicker #picker></md-datepicker>
+
+        <md-action-row>
+            <button md-button color='warn' (click)='prevStep()'>Previous Section</button>
+            <button md-button color='primary' (click)='nextStep()'>Next Section</button>
+        </md-action-row>
+    </md-expansion-panel>
+
+    <md-expansion-panel [expanded]='step === 3' (opened)='setStep(3)' hideToggle='true'>
+        <md-expansion-panel-header>
+            <md-panel-title>
+                User Administration Section
+            </md-panel-title>
+            <md-panel-description>
+                <md-icon *ngIf='step===3' color='accent'>settings</md-icon>
+                <md-icon *ngIf='step!==3' color='primary'>settings</md-icon>
+            </md-panel-description>
+        </md-expansion-panel-header>
+
+        <md-form-field>
+            <input mdInput placeholder='Date' readonly>
+        </md-form-field>
+        <md-datepicker #picker></md-datepicker>
+
+        <md-action-row>
+            <button md-button color='warn' (click)='prevStep()'>Previous Section</button>
+            <button md-button color='primary' (click)='nextStep()'>Close Section</button>
+        </md-action-row>
+    </md-expansion-panel>
+
+</md-accordion>
