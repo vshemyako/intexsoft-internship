@@ -17,4 +17,6 @@ At present I'm trying to implement pagination reguests and handle them with Rest
 
 Logging framework is being tuned. Desired functionality - write log files into Tomcat's directory. - Done
 
-News portal doesn't have full functional news page. Being developed at the moment...
+News portal doesn't have full functional news page. Being developed at the moment... - Done
+
+The next goal is to add functionality to workspace component - the heart of the application

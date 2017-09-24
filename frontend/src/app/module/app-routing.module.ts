@@ -43,6 +43,7 @@ const routes: Routes = [
     {
         path: 'workspace',
         component: WorkspaceComponent,
+        //TODO: uncomment this part later
         /*canActivate: [NavigationGuard]*/
     },
     {
