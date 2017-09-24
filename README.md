@@ -13,4 +13,6 @@ At the moment basic Angular Material incorporation into application is being dev
 
 All efforts are directed into Angular Guards incorporation into the application. - Done
 
-At present I'm trying to implement pagination reguests and handle them with RestControllers
+At present I'm trying to implement pagination reguests and handle them with RestControllers. - Done
+
+Logging framework is being tuned. Desired functionality - write log files into Tomcat's directory
