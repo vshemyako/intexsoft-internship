@@ -15,4 +15,6 @@ All efforts are directed into Angular Guards incorporation into the application.
 
 At present I'm trying to implement pagination reguests and handle them with RestControllers. - Done
 
-Logging framework is being tuned. Desired functionality - write log files into Tomcat's directory
+Logging framework is being tuned. Desired functionality - write log files into Tomcat's directory. - Done
+
+News portal doesn't have full functional news page. Being developed at the moment...
