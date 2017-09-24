@@ -2,6 +2,8 @@ package by.intexsoft.application.controller;
 
 import by.intexsoft.application.model.User;
 import by.intexsoft.application.service.UserService;
+import ch.qos.logback.classic.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,8 @@ import java.util.List;
  */
 @RestController
 public class UserRestController {
+
+    private final static Logger LOGGER = (Logger) LoggerFactory.getLogger(UserRestController.class);
 
     private final UserService userService;
 
@@ -32,6 +36,7 @@ public class UserRestController {
      */
     @RequestMapping(value = "/users", method = RequestMethod.GET, produces = "application/json")
     public List<User> findAll() {
+        LOGGER.info("Request was received to retrieve all users");
         return userService.findAll();
     }
 
@@ -41,6 +46,7 @@ public class UserRestController {
      */
     @RequestMapping(value = "/user", method = RequestMethod.POST, consumes = "application/json")
     public User save(@RequestBody User user) {
+        LOGGER.info("Request was received to save new user");
         return userService.save(user);
     }
 
@@ -50,6 +56,7 @@ public class UserRestController {
      */
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET, produces = "application/json")
     public User findOne(@PathVariable("id") int id) {
+        LOGGER.info("Request was received to find a single user {}", id);
         return userService.findOne(id);
     }
 
@@ -61,7 +68,12 @@ public class UserRestController {
     @RequestMapping(value = "/register", method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity<User> register(@RequestBody User user) {
         User createdUser = userService.register(user);
-        return createdUser != null ? new ResponseEntity<>(createdUser, HttpStatus.CREATED)
-                : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        if (createdUser != null) {
+            LOGGER.info("Request was received to create new user");
+            return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+        } else {
+            LOGGER.info("Request to created a new user failed");
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 }
