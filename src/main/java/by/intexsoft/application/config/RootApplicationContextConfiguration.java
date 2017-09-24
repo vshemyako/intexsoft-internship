@@ -39,7 +39,7 @@ import javax.sql.DataSource;
 @EnableJpaRepositories("by.intexsoft.application.repository")
 @PropertySource("classpath:base.properties")
 @EnableTransactionManagement
-public class RootApplicationContextConfiguration {
+public class    RootApplicationContextConfiguration {
 
     @Value("${db.hostname}")
     private String hostName;

@@ -2,7 +2,7 @@ import {BrowserModule} from "@angular/platform-browser";
 import {
     MdToolbarModule, MdTabsModule, MdButtonModule, MdMenuModule, MdIconModule,
     MdCardModule, MdInputModule, MdProgressSpinnerModule, MdExpansionModule,
-    MdDatepickerModule, MdNativeDateModule, MdGridListModule
+    MdDatepickerModule, MdNativeDateModule, MdGridListModule, MdSelectModule
 } from '@angular/material';
 import {NgModule} from "@angular/core";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -75,6 +75,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
         MdDatepickerModule,
         MdNativeDateModule,
         MdGridListModule,
+        MdSelectModule,
 
         FormsModule,
         ReactiveFormsModule,
