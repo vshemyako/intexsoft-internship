@@ -1,13 +1,12 @@
-You're welcome at the detailed view
-<button (click)="goBack()">Back</button>
-<!--
-<div *ngIf='user'>
-    <h2>You've selected the following user:</h2>
-    <div><label>id: </label>{{user.id}}</div>
-    <div><label>name: </label>{{user.name}}</div>
-    <div><label>surname: </label>{{user.familyName}}</div>
-    <div><input [(ngModel)]='user.name' placeholder='Name of a user'></div>
-    <div><input [(ngModel)]='user.familyName' placeholder='Family name of a user'></div>
-    <button (click)="goBack()">Back</button>
-    <button (click)="save()">Update</button>
-</div>-->
+<md-card>
+    <md-card-title class='mat-h1'>{{singleArticle?.description}}</md-card-title>
+    <img md-card-image src='/assets/image/006.jpeg' alt='picture'>
+    <div class='card-footer' color='primary'>
+        <md-card-content class='mat-body'>{{singleArticle?.article}}</md-card-content>
+        <div class='button-container'>
+            <button md-raised-button color='primary' (click)="goBack()">Go Back</button>
+            <button md-raised-button color='primary' (click)="readComments()">Read Comments</button>
+        </div>
+    </div>
+</md-card>
+

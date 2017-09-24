@@ -1,7 +1,8 @@
 import {BrowserModule} from "@angular/platform-browser";
 import {
     MdToolbarModule, MdTabsModule, MdButtonModule, MdMenuModule, MdIconModule,
-    MdCardModule, MdInputModule, MdProgressSpinnerModule, MdExpansionModule
+    MdCardModule, MdInputModule, MdProgressSpinnerModule, MdExpansionModule,
+    MdDatepickerModule, MdNativeDateModule, MdGridListModule
 } from '@angular/material';
 import {NgModule} from "@angular/core";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -50,8 +51,10 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
         UserDetailComponent,
         DashboardComponent,
         LoginFormComponent,
+
         NewsComponent,
         NewsDetailComponent,
+
         SignupFormComponent,
         WorkspaceComponent,
         PageNotFoundComponent
@@ -69,6 +72,9 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
         MdInputModule,
         MdProgressSpinnerModule,
         MdExpansionModule,
+        MdDatepickerModule,
+        MdNativeDateModule,
+        MdGridListModule,
 
         FormsModule,
         ReactiveFormsModule,

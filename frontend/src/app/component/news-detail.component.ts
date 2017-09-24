@@ -12,7 +12,7 @@ import {ActivatedRoute, Router, ParamMap} from "@angular/router";
 })
 export class NewsDetailComponent implements OnInit {
 
-    private article: News;
+    private singleArticle: News;
 
     constructor(@Inject('newsService') private newsService: INewsService,
                 private route: ActivatedRoute,
@@ -35,8 +35,24 @@ export class NewsDetailComponent implements OnInit {
     getOne(): void {
         this.route.paramMap
             .switchMap((params: ParamMap) => this.newsService.getOne(+params.get('id')))
-            .subscribe((article: News) => this.article = article);
+            .subscribe((article: News) => {
+                    this.singleArticle = article;
+                }
+            );
     }
+
+    /*
+     ngOnInit(): void {
+     this.newsService.findSubset(this.pageNumber.toString(), SIZE_OF_A_PAGE.toString())
+     .subscribe((articles: News[]) => {
+     this.articles = articles;
+     },
+     error => {
+     this.errorMessage = 'Sorry! No more articles available at the moment!';
+     });
+     this.pageNumber += PAGE_STEP;
+     }
+     */
 
     //TODO: check this implementation
     /**
@@ -51,7 +67,7 @@ export class NewsDetailComponent implements OnInit {
      * Persists an instance of a News class into underlying data storage
      */
     save(): void {
-        this.newsService.save(this.article)
+        this.newsService.save(this.singleArticle)
             .subscribe(result => {
                 this.router.navigate(['/'])
             });

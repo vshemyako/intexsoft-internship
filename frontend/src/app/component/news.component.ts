@@ -8,7 +8,6 @@ import {News} from "../model/news";
 const SIZE_OF_A_PAGE = 2;
 
 /**
- *
  * @type {number} - defines how big increment will be
  */
 const PAGE_STEP = 1;
@@ -41,7 +40,7 @@ export class NewsComponent implements OnInit {
     ngOnInit(): void {
         this.newsService.findSubset(this.pageNumber.toString(), SIZE_OF_A_PAGE.toString())
             .subscribe((articles: News[]) => {
-                  this.articles = articles;
+                    this.articles = articles;
                 },
                 error => {
                     this.errorMessage = 'Sorry! No more articles available at the moment!';

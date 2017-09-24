@@ -43,7 +43,7 @@ const routes: Routes = [
     {
         path: 'workspace',
         component: WorkspaceComponent,
-        canActivate: [NavigationGuard]
+        /*canActivate: [NavigationGuard]*/
     },
     {
         path: 'user/:id',

@@ -34,9 +34,9 @@ export class NewsService implements INewsService {
      */
     getOne(id: number): Observable<News> {
         const url = `${NEWS_PATH}/${id}`;
-        return this.http.get(url, this.getAuthRequestOptions())
+        return this.http.get(url, this.getPlainRequestOptions())
             .map((response: Response) => {
-                response.json();
+                return response.json();
             })
             .catch((error: any) => Observable.throw(error));
     }
@@ -65,16 +65,6 @@ export class NewsService implements INewsService {
             })
             .catch((error: any) => Observable.throw(error));
     }
-
-    /*
-    findAll(): Observable<User[]> {
-        return this.http.get(ALL_USERS_PATH, this.getAuthRequestOptions())
-            .map((response: Response) => {
-                response.json()
-            })
-            .catch((error: any) => Observable.throw(error));
-    }
-    */
 
     //TODO: move such methods to another new class
     /**

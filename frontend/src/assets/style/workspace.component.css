@@ -1,0 +1,26 @@
+md-accordion {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 auto;
+}
+
+md-panel-title {
+    display: flex;
+    flex: 20 0 auto;
+    align-self: center;
+}
+
+md-accordion md-panel-title,
+md-accordion md-panel-description {
+    flex-basis: 0;
+}
+
+md-accordion md-panel-description {
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+}
+
+md-accordion {
+    width: 600px;
+}
