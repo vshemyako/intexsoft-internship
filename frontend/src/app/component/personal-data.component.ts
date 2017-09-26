@@ -48,10 +48,6 @@ export class PersonalDataComponent implements OnInit {
         });
     }
 
-    private save(): User {
-        return new User();
-    }
-
     /**
      * Trying to retrieve personal information of a currently logged in User withour provided any extra information
      * that may accidentally expose some security information
@@ -61,6 +57,25 @@ export class PersonalDataComponent implements OnInit {
         this.errorMessage = null;
 
         this.userService.obtainUser(this.currentUser)
+            .subscribe((user: User) => {
+                    this.currentUser = user;
+                    this.currentUser.password = '';
+                },
+                error => {
+                    this.errorMessage = "Sorry! Credentials you've provided are incorrect";
+                });
+        this.submitted = false;
+    }
+
+    /**
+     * Intention to use - save changed state of a User instance. Information from personal form is retrieved
+     * and send to the back end part of the application
+     */
+    private save(): void {
+        this.submitted = true;
+        this.errorMessage = null;
+
+        this.userService.save(this.currentUser)
             .subscribe((user: User) => {
                     this.currentUser = user;
                     this.currentUser.password = '';

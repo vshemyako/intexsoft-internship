@@ -50,9 +50,10 @@ public class UserRestController {
      * @return newly created instance of a {@link User}
      */
     @RequestMapping(value = "/user", method = RequestMethod.POST, consumes = "application/json")
-    public User save(@RequestBody User user) {
-        LOGGER.info("Request was received to save new user");
-        return userService.save(user);
+    public ResponseEntity<User> save(@RequestBody User user) {
+        LOGGER.info("Request was received to save a new user");
+        User savedUser = userService.save(user);
+        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 
     /**

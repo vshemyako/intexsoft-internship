@@ -61,7 +61,8 @@
                 </md-grid-tile>
 
                 <md-grid-tile colspan='1'>
-                    <button md-raised-button color='accent' type='submit' [disabled]='!personalForm.form.valid'>Change
+                    <button md-raised-button color='accent' type='submit' [disabled]='!personalForm.form.valid'
+                            (click)='save()' >Change
                         Personal Information
                     </button>
                 </md-grid-tile>
@@ -85,7 +86,7 @@
     </md-card-content>
 
     <md-card-footer class='mat-action-row'>
-        <button md-raised-button color='primary' form='personal-form' (click)='obtainUser()'>Obtain Personal
+        <button md-raised-button color='primary' (click)='obtainUser()'>Obtain Personal
             Information
         </button>
     </md-card-footer>
