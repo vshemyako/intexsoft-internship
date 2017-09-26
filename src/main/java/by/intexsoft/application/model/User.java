@@ -1,7 +1,9 @@
 package by.intexsoft.application.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.util.List;
@@ -41,6 +43,7 @@ public class User extends AbstractEntity {
     public String username;
 
     @Column(name = "password")
+    @JsonIgnore
     public String password;
 
     @Column(name = "enabled")
@@ -63,4 +66,14 @@ public class User extends AbstractEntity {
             inverseJoinColumns = @JoinColumn(name = "authority_id")
     )
     public List<Authority> authorities;
+
+    @JsonIgnore
+    public String getPassword() {
+        return password;
+    }
+
+    @JsonProperty
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

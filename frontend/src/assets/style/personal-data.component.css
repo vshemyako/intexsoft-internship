@@ -1,0 +1,49 @@
+md-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: stretch;
+    width: 600px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+#personal-header {
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: -24px -24px 0px -24px;
+    padding: 16px 20px 16px 8px;
+    border-bottom: 1px solid rgba(0,0,0,.12);
+}
+
+#personal-header div {
+    margin-right: auto;
+}
+
+#personal-grid {
+    margin-top: 20px;
+}
+
+md-card-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 16px 24px 16px 24px;
+    border-top: 1px solid rgba(0,0,0,.12);
+}
+
+md-error {
+    display: flex;
+    justify-content: center;
+    padding-top: 30px;
+    font-size: small;
+}
+
+.spinner {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}

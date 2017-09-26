@@ -6,7 +6,8 @@ import {IUserService} from "../iuser.service";
 import {Observable} from "rxjs";
 
 const ALL_USERS_PATH = 'api/users';
-const USER_PATH = 'api/user';
+const USER_PATH = 'api/user/';
+const CURRENT_USER_PATH = 'api/user/current';
 
 /**
  * Service which provides method to perform basic CRUD operations
@@ -32,12 +33,25 @@ export class UserService implements IUserService {
     }
 
     /**
+     * Provides means to obtain headers with content-type information
+     * @returns {RequestOptions} - object with content-type information
+     */
+    private getPlainRequestOptions(): RequestOptions {
+        return new RequestOptions({
+                headers: new Headers({
+                    'Content-Type': 'application/json'
+                })
+            }
+        );
+    }
+
+    /**
      * @returns Observable after the completion of the underlying functionality. Generic type is array of User instances
      */
     findAll(): Observable<User[]> {
         return this.http.get(ALL_USERS_PATH, this.getAuthRequestOptions())
             .map((response: Response) => {
-            response.json()
+                response.json()
             })
             .catch((error: any) => Observable.throw(error));
     }
@@ -47,7 +61,7 @@ export class UserService implements IUserService {
      * @returns Observable after the completion of the underlying functionality. Generic type is an instance of a User class
      */
     getOne(id: number): Observable<User> {
-        const url = `${USER_PATH}/${id}`;
+        let url = `${USER_PATH}/${id}`;
         return this.http.get(url, this.getAuthRequestOptions())
             .map((response: Response) => {
                 response.json();
@@ -63,6 +77,18 @@ export class UserService implements IUserService {
         return this.http.post(USER_PATH, JSON.stringify(user), this.getAuthRequestOptions())
             .map((response: Response) => {
                 response.json();
+            })
+            .catch((error: any) => Observable.throw(error));
+    }
+
+    /**
+     * @param username of a User instance to obtain
+     * @returns Observable after the completion of the underlying functionality. Generic type is an instance of a User class
+     */
+    obtainUser(user: User): Observable<User> {
+        return this.http.post(CURRENT_USER_PATH, JSON.stringify(user), this.getAuthRequestOptions())
+            .map((response: Response) => {
+                return response.json();
             })
             .catch((error: any) => Observable.throw(error));
     }

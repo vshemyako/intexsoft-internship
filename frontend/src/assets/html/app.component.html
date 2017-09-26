@@ -1,9 +1,18 @@
 <md-toolbar class='header'>
     <button md-raised-button color='primary' routerLink='/news'>News</button>
+
+    <button md-raised-button color='primary' [mdMenuTriggerFor]='workspaceMenu'>Workspace</button>
+    <md-menu #workspaceMenu='mdMenu'>
+        <button md-menu-item routerLink='/personal'>Personal Data Section</button>
+        <button md-menu-item routerLink='/create'>Article Creation Section</button>
+        <button md-menu-item routerLink='/review'>Article Revision Section</button>
+        <button md-menu-item routerLink='/admin'>Administration Section</button>
+    </md-menu>
+
     <button md-raised-button color='primary' routerLink='/workspace'>Workspace</button>
     <button *ngIf='!isLoggedIn()' color='primary' md-raised-button routerLink='/signup'>Sign Up</button>
     <button *ngIf='!isLoggedIn()' color='primary' md-raised-button routerLink='/login'>Log In</button>
-    <button *ngIf='isLoggedIn()' color='primary' md-raised-button routerLink='/login' (click)='logout()'>Log Out</button>
+    <button *ngIf='isLoggedIn()' color='primary' md-raised-button (click)='logout()'>Log Out</button>
 </md-toolbar>
 <main>
     <router-outlet></router-outlet>

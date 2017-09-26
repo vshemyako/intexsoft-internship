@@ -10,7 +10,7 @@ export interface IAuthenticationService {
      * Whatever logic is provided, in essence, should log a user into a system
      * and return a value denoting provided operation
      */
-    login(username: string, password: string): Observable<boolean>;
+    login(username: string, password: string): Observable<User>;
 
     /**
      * Logs a user out from a program

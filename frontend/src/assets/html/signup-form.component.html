@@ -47,7 +47,7 @@
                 <input mdInput formControlName='validEmail' type='email' placeholder='Email' [(ngModel)]='newUser.email'
                        name='newUser.email'>
                 <md-error *ngIf='signupFormControl.controls["validEmail"].errors?.pattern'>
-                    Wrong email address
+                    Invalid email address
                 </md-error>
             </md-form-field>
             <md-card-actions>

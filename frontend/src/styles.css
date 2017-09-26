@@ -1,6 +1,6 @@
 /*@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';*/
-/*@import '~@angular/material/prebuilt-themes/indigo-pink.css';*/
-@import '~@angular/material/prebuilt-themes/pink-bluegrey.css';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+/*@import '~@angular/material/prebuilt-themes/pink-bluegrey.css';*/
 /*@import '~@angular/material/prebuilt-themes/purple-green.css';*/
 
 /* Global reset css */
@@ -62,4 +62,12 @@ body {
     align-items: center;
     justify-content: center;
     height: 80%;
+}
+
+/* Disable input background color*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
 }

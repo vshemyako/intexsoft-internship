@@ -1,0 +1,92 @@
+<md-card>
+    <md-card-header id='personal-header'>
+        <div>Personal Data Section</div>
+        <md-icon color='accent'>account_circle</md-icon>
+    </md-card-header>
+    <md-card-content>
+        <md-error class="mat-error" *ngIf='errorMessage'>{{errorMessage}}</md-error>
+        <form *ngIf='!submitted' id='personal-form' [formGroup]='personalFormControl' (ngSubmit)='save()'
+              #personalForm='ngForm'>
+            <md-grid-list id='personal-grid' cols='2' rowHeight="4:1">
+
+                <!-- Login -->
+                <md-grid-tile colspan='1'>
+                    <md-form-field>
+                        <input mdInput formControlName='validName' type='text' placeholder='Login' required
+                               [(ngModel)]='currentUser.username' name='currentUser.username'>
+                        <md-error *ngIf='personalFormControl.controls["validName"].errors?.required'>
+                            Login is required
+                        </md-error>
+                        <md-error *ngIf='personalFormControl.controls["validName"].errors?.minlength'>
+                            Length must be at least 3 symbols
+                        </md-error>
+                    </md-form-field>
+                </md-grid-tile>
+
+                <!-- First name -->
+                <md-grid-tile colspan='1'>
+                    <md-form-field>
+                        <input mdInput formControlName='validFirstName' type='text' type='text' placeholder='First name'
+                               [(ngModel)]='currentUser.firstName'>
+                        <md-error *ngIf='personalFormControl.controls["validFirstName"].errors?.minlength'>
+                            Length must be at least 3 symbols
+                        </md-error>
+                    </md-form-field>
+                </md-grid-tile>
+
+                <!-- Password -->
+                <md-grid-tile colspan='1'>
+                    <md-form-field>
+                        <input mdInput formControlName='validPassword' type='password' placeholder='Current password'
+                               required
+                               [(ngModel)]='currentUser.password' name='currentUser.password'>
+                        <md-error *ngIf='personalFormControl.controls["validPassword"].errors?.required'>
+                            Password is required
+                        </md-error>
+                        <md-error *ngIf='personalFormControl.controls["validPassword"].errors?.minlength'>
+                            Length must be at least 3 symbols
+                        </md-error>
+                    </md-form-field>
+                </md-grid-tile>
+
+                <!-- Last name -->
+                <md-grid-tile colspan='1'>
+                    <md-form-field>
+                        <input mdInput type='text' formControlName='validLastName' placeholder='Last name'
+                               [(ngModel)]='currentUser.lastName'>
+                        <md-error *ngIf='personalFormControl.controls["validLastName"].errors?.minlength'>
+                            Length must be at least 3 symbols
+                        </md-error>
+                    </md-form-field>
+                </md-grid-tile>
+
+                <md-grid-tile colspan='1'>
+                    <button md-raised-button color='accent' type='submit' [disabled]='!personalForm.form.valid'>Change
+                        Personal Information
+                    </button>
+                </md-grid-tile>
+
+                <!-- Email -->
+                <md-grid-tile>
+                    <md-form-field colspan='1'>
+                        <input mdInput formControlName='validEmail' type='email' placeholder='Email'
+                               [(ngModel)]='currentUser.email'>
+                        <md-error *ngIf='personalFormControl.controls["validEmail"].errors?.pattern'>
+                            Invalid email address
+                        </md-error>
+                    </md-form-field>
+                </md-grid-tile>
+
+            </md-grid-list>
+        </form>
+        <div class='spinner'>
+            <md-spinner *ngIf='submitted' mode='indeterminate'></md-spinner>
+        </div>
+    </md-card-content>
+
+    <md-card-footer class='mat-action-row'>
+        <button md-raised-button color='primary' form='personal-form' (click)='obtainUser()'>Obtain Personal
+            Information
+        </button>
+    </md-card-footer>
+</md-card>

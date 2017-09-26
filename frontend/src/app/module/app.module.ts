@@ -1,9 +1,19 @@
 import {BrowserModule} from "@angular/platform-browser";
 import {
-    MdToolbarModule, MdTabsModule, MdButtonModule, MdMenuModule, MdIconModule,
-    MdCardModule, MdInputModule, MdProgressSpinnerModule, MdExpansionModule,
-    MdDatepickerModule, MdNativeDateModule, MdGridListModule, MdSelectModule
-} from '@angular/material';
+    MdToolbarModule,
+    MdTabsModule,
+    MdButtonModule,
+    MdMenuModule,
+    MdIconModule,
+    MdCardModule,
+    MdInputModule,
+    MdProgressSpinnerModule,
+    MdExpansionModule,
+    MdDatepickerModule,
+    MdNativeDateModule,
+    MdGridListModule,
+    MdSelectModule
+} from "@angular/material";
 import {NgModule} from "@angular/core";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
@@ -20,12 +30,13 @@ import {LoginFormComponent} from "../component/login-form.component";
 import {NewsComponent} from "../component/news.component";
 import {AuthenticationService} from "../service/implementation/authentication.service";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {SignupFormComponent} from '../component/signup-form.component';
-import {WorkspaceComponent} from '../component/workspace.component';
-import {PageNotFoundComponent} from '../component/page-not-found.component';
+import {SignupFormComponent} from "../component/signup-form.component";
+import {WorkspaceComponent} from "../component/workspace.component";
+import {PageNotFoundComponent} from "../component/page-not-found.component";
 import {NavigationGuard} from "../guard/navigation.guard";
 import {NewsService} from "../service/implementation/news.service";
 import {NewsDetailComponent} from "../component/news-detail.component";
+import {PersonalDataComponent} from "../component/personal-data.component";
 
 const URL_I18N_FILES = 'assets/i18n/';
 const FILE_FORMAT = '.json';
@@ -51,17 +62,15 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
         UserDetailComponent,
         DashboardComponent,
         LoginFormComponent,
-
         NewsComponent,
         NewsDetailComponent,
-
         SignupFormComponent,
         WorkspaceComponent,
-        PageNotFoundComponent
+        PageNotFoundComponent,
+        PersonalDataComponent
     ],
     imports: [
         BrowserModule,
-
         BrowserAnimationsModule,
         MdToolbarModule,
         MdTabsModule,
@@ -76,7 +85,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
         MdNativeDateModule,
         MdGridListModule,
         MdSelectModule,
-
         FormsModule,
         ReactiveFormsModule,
         AppRoutingModule,

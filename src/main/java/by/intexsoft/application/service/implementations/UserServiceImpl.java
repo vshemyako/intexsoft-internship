@@ -6,6 +6,8 @@ import by.intexsoft.application.repository.UserRepository;
 import by.intexsoft.application.service.AuthorityService;
 import by.intexsoft.application.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -35,5 +37,10 @@ public class UserServiceImpl extends AbstractEntityServiceImpl<User> implements 
         authorities.add(authorityService.findByAuthority("ROLE_USER"));
         user.authorities = authorities;
         return userRepository.save(user);
+    }
+
+    @Override
+    public User obtainUser(String username) {
+        return findByUserName(username);
     }
 }

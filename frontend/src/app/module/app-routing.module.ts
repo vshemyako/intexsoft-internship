@@ -10,6 +10,7 @@ import {WorkspaceComponent} from "../component/workspace.component";
 import {PageNotFoundComponent} from "../component/page-not-found.component";
 import {NavigationGuard} from "../guard/navigation.guard";
 import {NewsDetailComponent} from "../component/news-detail.component";
+import {PersonalDataComponent} from "../component/personal-data.component";
 
 /**
  * An array of key/value pairs which in essence specify what urls correspond to particular views
@@ -45,6 +46,10 @@ const routes: Routes = [
         component: WorkspaceComponent,
         //TODO: uncomment this part later
         /*canActivate: [NavigationGuard]*/
+    },
+    {
+        path: 'personal',
+        component: PersonalDataComponent
     },
     {
         path: 'user/:id',

@@ -27,4 +27,13 @@ public interface UserService extends AbstractEntityService<User> {
      */
     @Transactional
     User register(User user);
+
+    /**
+     * Returns User instance if provided credentials were correct
+     *
+     * @param username - username of a {@link User} instance to obtain
+     * @return instance of a {@link User}
+     */
+    @Transactional
+    User obtainUser(String username);
 }
