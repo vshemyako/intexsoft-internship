@@ -30,8 +30,7 @@ export class PersonalDataComponent implements OnInit {
      */
     private submitted: boolean = false;
 
-    constructor(@Inject('userService') private userService: IUserService,
-                @Inject('authenticationService') private authenticationService: IAuthenticationService) {
+    constructor(@Inject('userService') private userService: IUserService) {
     }
 
     /**

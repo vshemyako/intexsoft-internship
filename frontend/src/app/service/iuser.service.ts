@@ -28,4 +28,11 @@ export interface IUserService {
      * @returns Observable after the completion of the underlying functionality. Generic type is an instance of a User class
      */
     obtainUser(user: User): Observable<User>;
+
+    /**
+     * Retrieves specified subset of data in manageable form
+     * @param page - the page of data to retrieve
+     * @param size - the size of the page
+     */
+    findSubset(page: string, size: string): Observable<User[]>;
 }

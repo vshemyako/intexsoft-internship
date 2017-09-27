@@ -1,11 +1,12 @@
 import {Injectable} from "@angular/core";
-import {Headers, Http, RequestOptions, Response} from "@angular/http";
+import {Headers, Http, RequestOptions, Response, URLSearchParams} from "@angular/http";
 import "rxjs/add/operator/toPromise";
 import {User} from "../../model/user";
 import {IUserService} from "../iuser.service";
 import {Observable} from "rxjs";
 
-const ALL_USERS_PATH = 'api/users';
+const SUBSET_USERS_PATH = 'api/users';
+const ALL_USERS_PATH = 'api/users/all';
 const USER_PATH = 'api/user/';
 const CURRENT_USER_PATH = 'api/user/current';
 
@@ -43,6 +44,46 @@ export class UserService implements IUserService {
                 })
             }
         );
+    }
+
+    /**
+     * Provides means to obtain headers and request params
+     * @returns {RequestOptions} - object with specified content-type and parameters information
+     */
+    private getRequestOptionsWithPage(page: string, size: string): RequestOptions {
+        return new RequestOptions({
+                headers: new Headers({
+                    'Content-Type': 'application/json'
+                }),
+                params: this.getUrlSearchParams(page, size)
+            }
+        );
+    }
+
+    /**
+     * Search params to request just a chunk of data
+     * @param page - the page of data to retrieve
+     * @param size - the size of the page
+     * @returns {URLSearchParams} - Map-like representation of the url search parameters
+     */
+    private getUrlSearchParams(page: string, size: string): URLSearchParams {
+        let params = new URLSearchParams();
+        params.set('page', page);
+        params.set('size', size);
+        return params;
+    }
+
+    /**
+     * Retrieves specified subset of data in manageable form
+     * @param page - the page of data to retrieve
+     * @param size - the size of the page
+     */
+    findSubset(page: string, size: string): Observable<User[]> {
+        return this.http.get(SUBSET_USERS_PATH, this.getRequestOptionsWithPage(page, size))
+            .map((response: Response) => {
+                return response.json().content;
+            })
+            .catch((error: any) => Observable.throw(error));
     }
 
     /**

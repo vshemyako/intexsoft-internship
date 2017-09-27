@@ -8,6 +8,7 @@ export class User {
     firstName: string;
     lastName: string;
     email: string;
+    enabled: boolean;
 
     /**
      * Constructs a User instance, required field of who are username and password

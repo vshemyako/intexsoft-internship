@@ -1,8 +1,11 @@
 package by.intexsoft.application.service;
 
 import by.intexsoft.application.model.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 /**
  * Service that allows performing basic CRUD operations upon {@link User}
@@ -36,4 +39,12 @@ public interface UserService extends AbstractEntityService<User> {
      */
     @Transactional
     User obtainUser(String username);
+
+    /**
+     * Returns a {@link Page} of entities meeting the paging restriction provided in the {@code Pageable} object.
+     *
+     * @param pageable - sublist of list of objects to retrieve
+     * @return a page of entities
+     */
+    Page<User> findByEnabled(Pageable pageable, boolean enabled);
 }

@@ -5,7 +5,7 @@ import {Observable} from "rxjs";
 import {INewsService} from "../inews.service";
 import {News} from "../../model/news";
 
-const ALL_NEWS_PATH = 'api/all/news';
+const SUBSET_NEWS_PATH = 'api/news';
 const NEWS_PATH = 'api/news';
 
 /**
@@ -21,7 +21,7 @@ export class NewsService implements INewsService {
      * @returns Observable after the completion of the underlying functionality. Generic type is array of News instances
      */
     findAll(): Observable<News[]> {
-        return this.http.get(ALL_NEWS_PATH, this.getAuthRequestOptions())
+        return this.http.get(SUBSET_NEWS_PATH, this.getAuthRequestOptions())
             .map((response: Response) => {
                 response.json()
             })
@@ -59,7 +59,7 @@ export class NewsService implements INewsService {
      * @param size - the size of the page
      */
     findSubset(page: string, size: string): Observable<News[]> {
-        return this.http.get(ALL_NEWS_PATH, this.getRequestOptionsWithPage(page, size))
+        return this.http.get(SUBSET_NEWS_PATH, this.getRequestOptionsWithPage(page, size))
             .map((response: Response) => {
                 return response.json().content;
             })

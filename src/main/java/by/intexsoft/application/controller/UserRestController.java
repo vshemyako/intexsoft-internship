@@ -6,6 +6,8 @@ import by.intexsoft.application.service.UserService;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -39,10 +41,10 @@ public class UserRestController {
     /**
      * @return a list of users retrieved from a corresponding service
      */
-    @RequestMapping(value = "/users", method = RequestMethod.GET, produces = "application/json")
-    public List<User> findAll() {
+    @RequestMapping(value = "/users/all", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<List<User>> findAll() {
         LOGGER.info("Request was received to retrieve all users");
-        return userService.findAll();
+        return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
     }
 
     /**
@@ -68,7 +70,7 @@ public class UserRestController {
             LOGGER.info("Personal information was obtained");
             return new ResponseEntity<>(obtainedUser, HttpStatus.OK);
         } else {
-            LOGGER.info("Provided credentials were incorrect");
+            LOGGER.warn("Provided credentials were incorrect");
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
@@ -89,9 +91,9 @@ public class UserRestController {
      * @return a reference to the entity with the given identifier
      */
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET, produces = "application/json")
-    public User findOne(@PathVariable("id") int id) {
+    public ResponseEntity<User> findOne(@PathVariable("id") int id) {
         LOGGER.info("Request was received to find a single user {}", id);
-        return userService.findOne(id);
+        return new ResponseEntity<>(userService.findOne(id), HttpStatus.OK);
     }
 
     /**
@@ -107,7 +109,52 @@ public class UserRestController {
             LOGGER.info("New user was successfully created");
             return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
         } else {
-            LOGGER.info("Request to created a new user failed");
+            LOGGER.warn("Request to created a new user failed");
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    /**
+     * @param pageable - instance of {@link Pageable} interface which is has pagination methods
+     * @return {@link ResponseEntity<Page<User>>} - response entity with embedded sublist of instances
+     * and http status code
+     */
+    @RequestMapping(value = "/users", method = RequestMethod.GET)
+    public ResponseEntity<Page<User>> findSubset(Pageable pageable) {
+        LOGGER.info("Request was received to retrieve users starting from page {} with size {}",
+                pageable.getPageNumber(), pageable.getPageSize());
+        Page<User> userPage = userService.findAll(pageable);
+
+        if (userPage != null) {
+            LOGGER.info("Request to retrieve users starting from page {} with size {} succeed",
+                    pageable.getPageNumber(), pageable.getPageSize());
+            return new ResponseEntity<>(userPage, HttpStatus.CREATED);
+        } else {
+            LOGGER.warn("Request to retrieve users starting from page {} with size {} failed",
+                    pageable.getPageNumber(), pageable.getPageSize());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    /**
+     * @param pageable - instance of {@link Pageable} interface which is has pagination methods
+     * @param enabled  - determines whether to retrieve enabled or disabled users
+     * @return {@link ResponseEntity<Page<User>>} - response entity with embedded sublist of instances
+     * and http status code
+     */
+    @RequestMapping(value = "/users/{enabled}", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<Page<User>> findAll(@PathVariable("enabled") boolean enabled, Pageable pageable) {
+        LOGGER.info("Request was received to retrieve users starting from page {} with size {}",
+                pageable.getPageNumber(), pageable.getPageSize());
+        Page<User> enabledUserPage = userService.findByEnabled(pageable, enabled);
+
+        if (enabledUserPage != null) {
+            LOGGER.info("Request to retrieve enabled users starting from page {} with size {} succeed",
+                    pageable.getPageNumber(), pageable.getPageSize());
+            return new ResponseEntity<>(enabledUserPage, HttpStatus.CREATED);
+        } else {
+            LOGGER.warn("Request to retrieve enabled users starting from page {} with size {} failed",
+                    pageable.getPageNumber(), pageable.getPageSize());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }

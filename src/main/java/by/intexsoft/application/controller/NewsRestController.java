@@ -39,7 +39,8 @@ public class NewsRestController {
      * and http status code
      */
     //TODO: Don't forget to substitute user with somekind of DTO. Otherwise pw is exposed
-    @RequestMapping(value = "/all/news", method = RequestMethod.GET)
+    //TODO: Temporary solution - annotated entity with @JsonIgnore @JsonProperty
+    @RequestMapping(value = "/news", method = RequestMethod.GET)
     public ResponseEntity<Page<News>> findSubset(Pageable pageable) {
         LOGGER.info("Request was received to retrieve news starting from page {} with size {}",
                 pageable.getPageNumber(), pageable.getPageSize());

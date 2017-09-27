@@ -12,7 +12,8 @@ import {
     MdDatepickerModule,
     MdNativeDateModule,
     MdGridListModule,
-    MdSelectModule
+    MdSelectModule,
+    MdTableModule
 } from "@angular/material";
 import {NgModule} from "@angular/core";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -37,6 +38,7 @@ import {NavigationGuard} from "../guard/navigation.guard";
 import {NewsService} from "../service/implementation/news.service";
 import {NewsDetailComponent} from "../component/news-detail.component";
 import {PersonalDataComponent} from "../component/personal-data.component";
+import {AdminComponent} from '../component/admin.component';
 
 const URL_I18N_FILES = 'assets/i18n/';
 const FILE_FORMAT = '.json';
@@ -67,7 +69,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
         SignupFormComponent,
         WorkspaceComponent,
         PageNotFoundComponent,
-        PersonalDataComponent
+        PersonalDataComponent,
+        AdminComponent
     ],
     imports: [
         BrowserModule,
@@ -85,6 +88,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
         MdNativeDateModule,
         MdGridListModule,
         MdSelectModule,
+        MdTableModule,
         FormsModule,
         ReactiveFormsModule,
         AppRoutingModule,

@@ -1,0 +1,46 @@
+<md-card>
+    <md-card-header id='admin-header'>
+        <div>Users Administration Section</div>
+        <md-icon color='accent'>settings</md-icon>
+    </md-card-header>
+    <md-card-content>
+        <md-error class='mat-error' *ngIf='errorMessage'>{{errorMessage}}</md-error>
+        <md-error class='info-message' *ngIf='showInfo'>{{infoMessage}}</md-error>
+        <div class='admin-get-buttons'>
+            <button md-raised-button color='primary' (click)='findAll()'>Display All Users</button>
+            <button md-raised-button color='primary' (click)='getAllDisabled()' disabled>Display Disabled Users</button>
+            <button md-raised-button color='primary' (click)='getAllEnabled()' disabled>Display Enabled Users</button>
+        </div>
+
+        <!-- Administration Section -->
+        <md-grid-list class='table-header' cols='6' rowHeight='30px'>
+            <md-grid-tile id='header-tile'>Pos. №</md-grid-tile>
+            <md-grid-tile>User Name</md-grid-tile>
+            <md-grid-tile>First Name</md-grid-tile>
+            <md-grid-tile>Last Name</md-grid-tile>
+            <md-grid-tile>Email</md-grid-tile>
+            <md-grid-tile>Account Status</md-grid-tile>
+        </md-grid-list>
+
+        <div *ngIf='submitted'>
+        <md-grid-list class='table-row' *ngFor='let user of users' cols='6' rowHeight='30px'>
+            <md-grid-tile >{{users.indexOf(user) + 1}}</md-grid-tile>
+            <md-grid-tile >{{user.username}}</md-grid-tile>
+            <md-grid-tile >{{user.firstName}}</md-grid-tile>
+            <md-grid-tile >{{user.lastName}}</md-grid-tile>
+            <md-grid-tile >{{user.email}}</md-grid-tile>
+            <md-grid-tile >{{user.enabled}}</md-grid-tile>
+        </md-grid-list>
+        </div>
+
+        <div class='spinner'>
+            <md-spinner color='accent' *ngIf='!submitted' mode='indeterminate'></md-spinner>
+        </div>
+    </md-card-content>
+
+    <md-card-footer class='mat-action-row'>
+        <button [disabled]='!hasPreviousUsers()' md-raised-button color='primary' (click)='previous()'>Previous Users</button>
+        <div class='page-number'><md-icon color='primary'>note</md-icon> {{pageNumber + 1}}</div>
+        <button [disabled]='!hasNextUsers()' md-raised-button color='primary' (click)='next()'>Next Users</button>
+    </md-card-footer>
+</md-card>

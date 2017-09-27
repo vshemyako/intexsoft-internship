@@ -6,8 +6,8 @@ import by.intexsoft.application.repository.UserRepository;
 import by.intexsoft.application.service.AuthorityService;
 import by.intexsoft.application.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -42,5 +42,15 @@ public class UserServiceImpl extends AbstractEntityServiceImpl<User> implements 
     @Override
     public User obtainUser(String username) {
         return findByUserName(username);
+    }
+
+    /**
+     * Returns a {@link Page} of entities meeting the paging restriction provided in the {@code Pageable} object.
+     *
+     * @param pageable - sublist of list of objects to retrieve
+     * @return a page of entities
+     */
+    public Page<User> findByEnabled(Pageable pageable, boolean enabled) {
+        return userRepository.findByEnabled(pageable, enabled);
     }
 }

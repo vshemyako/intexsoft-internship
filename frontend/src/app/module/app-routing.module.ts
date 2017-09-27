@@ -11,6 +11,7 @@ import {PageNotFoundComponent} from "../component/page-not-found.component";
 import {NavigationGuard} from "../guard/navigation.guard";
 import {NewsDetailComponent} from "../component/news-detail.component";
 import {PersonalDataComponent} from "../component/personal-data.component";
+import {AdminComponent} from "../component/admin.component";
 
 /**
  * An array of key/value pairs which in essence specify what urls correspond to particular views
@@ -50,6 +51,10 @@ const routes: Routes = [
     {
         path: 'personal',
         component: PersonalDataComponent
+    },
+    {
+        path: 'admin',
+        component: AdminComponent
     },
     {
         path: 'user/:id',
