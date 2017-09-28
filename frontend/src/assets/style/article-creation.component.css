@@ -23,8 +23,74 @@ md-card {
     margin-right: auto;
 }
 
-#personal-grid {
-    margin-top: 20px;
+.article-creation-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.article-title {
+    padding-top: 30px;
+}
+
+.date-container {
+    display: flex;
+}
+
+.start-date-block {
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    margin-right: 25px;
+    margin-top: 25px;
+    border: 1px solid rgba(0,0,0,.12);
+}
+
+.end-article-date {
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    margin-top: 25px;
+    margin-left: 25px;
+    border: 1px solid rgba(0,0,0,.12);
+}
+
+.time-field, .desc-textarea {
+    resize: none;
+}
+
+.desc-textarea {
+    width: 500px;
+}
+
+.desc-container  {
+    display: flex;
+    justify-content: center;
+    padding: 10px 25px 5px 25px;
+    width: 500px;
+}
+
+.article-container {
+    width: 500px;
+    padding: 10px 30px 30px 30px;
+    border: 1px solid rgba(0,0,0,.12);
+}
+
+.article-textarea {
+    resize: none;
+    height: 300px;
+    width: 500px;
+}
+
+.category-grid {
+    padding-top: 10px;
+    margin-bottom: -15px;
+}
+
+#category-grid-header {
+    display: flex;
+    justify-content: flex-start;
+    font-size: 16px;
 }
 
 md-card-footer {
