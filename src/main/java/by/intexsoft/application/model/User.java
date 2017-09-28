@@ -59,7 +59,6 @@ public class User extends AbstractEntity {
     public String email;
 
     @ManyToMany(fetch = EAGER)
-    @JsonBackReference
     @JoinTable(
             name = "users_authorities",
             joinColumns = @JoinColumn(name = "user_id"),

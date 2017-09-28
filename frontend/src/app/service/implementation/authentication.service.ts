@@ -45,7 +45,7 @@ export class AuthenticationService implements IAuthenticationService {
     }
 
     /**
-     * Removes user and token related information from the localStorage
+     * Removes currentUser and token related information from the localStorage
      */
     logout(): void {
         localStorage.removeItem('token');

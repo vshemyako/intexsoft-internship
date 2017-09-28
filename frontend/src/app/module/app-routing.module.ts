@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
 import {DashboardComponent} from "../component/dashboard.component";
 import {UserComponent} from "../component/user.component";
@@ -8,10 +8,10 @@ import {NewsComponent} from "../component/news.component";
 import {SignupFormComponent} from "../component/signup-form.component";
 import {WorkspaceComponent} from "../component/workspace.component";
 import {PageNotFoundComponent} from "../component/page-not-found.component";
-import {NavigationGuard} from "../guard/navigation.guard";
 import {NewsDetailComponent} from "../component/news-detail.component";
 import {PersonalDataComponent} from "../component/personal-data.component";
 import {AdminComponent} from "../component/admin.component";
+import {ArticleCreationComponent} from "../component/article-creation.component";
 
 /**
  * An array of key/value pairs which in essence specify what urls correspond to particular views
@@ -55,6 +55,10 @@ const routes: Routes = [
     {
         path: 'admin',
         component: AdminComponent
+    },
+    {
+        path: 'create',
+        component: ArticleCreationComponent
     },
     {
         path: 'user/:id',

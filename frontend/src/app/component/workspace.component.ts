@@ -13,7 +13,7 @@ import {Component, OnInit} from '@angular/core';
 export class WorkspaceComponent {
 
     /**
-     * Determines what part of the workspace is opened and visible for the user
+     * Determines what part of the workspace is opened and visible for the currentUser
      */
     private step: number;
 

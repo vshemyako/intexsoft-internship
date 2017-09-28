@@ -42,7 +42,7 @@ export class LoginFormComponent implements OnInit {
     }
 
     /**
-     * Passes user-provided information to an authentication service
+     * Passes currentUser-provided information to an authentication service
      */
     login(): void {
         this.submitted = true;

@@ -1,6 +1,5 @@
 package by.intexsoft.application.controller;
 
-import by.intexsoft.application.model.CustomUserDetails;
 import by.intexsoft.application.model.User;
 import by.intexsoft.application.service.UserService;
 import ch.qos.logback.classic.Logger;
@@ -10,13 +9,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.List;
-import java.util.Map;
 
 /**
  * A controller class which maps received requests to an appropriate handler
@@ -48,13 +43,15 @@ public class UserRestController {
     }
 
     /**
-     * @param user - spring-generated entity based on a json in a request body
+     * @param currentUser - spring-generated entity based on a json in a request body
      * @return newly created instance of a {@link User}
      */
     @RequestMapping(value = "/user", method = RequestMethod.POST, consumes = "application/json")
-    public ResponseEntity<User> save(@RequestBody User user) {
+    public ResponseEntity<User> save(@RequestBody User currentUser) {
         LOGGER.info("Request was received to save a new user");
-        User savedUser = userService.save(user);
+        User obtainedUser = userService.obtainUser(currentUser.username);
+        currentUser.setPassword(obtainedUser.password);
+        User savedUser = userService.save(currentUser);
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 
@@ -66,7 +63,7 @@ public class UserRestController {
     public ResponseEntity<User> obtainUser(@RequestBody User currentUser) {
         LOGGER.info("Request was received to obtain user's personal information");
         User obtainedUser = userService.obtainUser(currentUser.username);
-        if (checkForUsernameEquality(obtainedUser, currentUser)) {
+        if (checkForPasswordEquality(obtainedUser, currentUser)) {
             LOGGER.info("Personal information was obtained");
             return new ResponseEntity<>(obtainedUser, HttpStatus.OK);
         } else {
@@ -82,7 +79,7 @@ public class UserRestController {
      * @param currentUser  - {@link User} instance retrieved from the request body
      * @return - true if both password are the same, otherwise - false
      */
-    private boolean checkForUsernameEquality(User obtainedUser, User currentUser) {
+    private boolean checkForPasswordEquality(User obtainedUser, User currentUser) {
         return obtainedUser.password.equals(currentUser.password);
     }
 
@@ -92,8 +89,9 @@ public class UserRestController {
      */
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<User> findOne(@PathVariable("id") int id) {
+        User currentUser = userService.findOne(id);
         LOGGER.info("Request was received to find a single user {}", id);
-        return new ResponseEntity<>(userService.findOne(id), HttpStatus.OK);
+        return new ResponseEntity<>(currentUser, HttpStatus.OK);
     }
 
     /**
@@ -155,6 +153,23 @@ public class UserRestController {
         } else {
             LOGGER.warn("Request to retrieve enabled users starting from page {} with size {} failed",
                     pageable.getPageNumber(), pageable.getPageSize());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    /**
+     * @param id - unique identifier of an entity
+     * @return a reference to the entity with the given identifier
+     */
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE, produces = "application/json")
+    public ResponseEntity<?> delete(@PathVariable("id") int id) {
+        LOGGER.info("Request was received to delete a single user {}", id);
+        try {
+            userService.delete(id);
+            LOGGER.info("Success user {} has been deleted", id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (IllegalArgumentException ex) {
+            LOGGER.warn("Error occurred while deleting a user {}", id);
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }

@@ -38,7 +38,7 @@ export class SignupFormComponent implements OnInit {
     }
 
     /**
-     * Creates empty user which later on is filled in with information which is provided in sign-up form
+     * Creates empty currentUser which later on is filled in with information which is provided in sign-up form
      */
     ngOnInit(): void {
         this.newUser = new User();

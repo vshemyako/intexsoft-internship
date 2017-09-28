@@ -66,13 +66,15 @@ export class AppComponent {
 
     /**
      * Logs a User out of the application. Service functionality which is invoked by this method
-     * will also discard all user related information which is stored in the 'LocalStorage'
+     * will also discard all currentUser related information which is stored in the 'LocalStorage'
      */
     logout(): void {
         this.authenticationService.logout();
     }
 
-
+    /**
+     * Scrolls viewport to the top
+     */
     scrollToTheTop(): void {
         document.body.scrollTop = 0;
     }

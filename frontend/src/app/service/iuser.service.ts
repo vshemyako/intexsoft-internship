@@ -35,4 +35,17 @@ export interface IUserService {
      * @param size - the size of the page
      */
     findSubset(page: string, size: string): Observable<User[]>;
+
+    /**
+     * Retrieves specified subset of data in manageable form
+     * @param page - the page of data to retrieve
+     * @param size - the size of the page
+     */
+    findAllEnabled(page: string, size: string, enabled: boolean): Observable<User[]>;
+
+    /**
+     * @param id - id of an instance of a User class which will be deleted
+     * @returns Observable after the completion of the underlying functionality. Generic type is a boolean
+     */
+    deleteUser(id: number): Observable<boolean>;
 }

@@ -87,6 +87,19 @@ export class UserService implements IUserService {
     }
 
     /**
+     * Retrieves specified subset of data in manageable form
+     * @param page - the page of data to retrieve
+     * @param size - the size of the page
+     */
+    findAllEnabled(page: string, size: string, enabled: boolean): Observable<User[]> {
+        return this.http.get(SUBSET_USERS_PATH + '/' + enabled, this.getRequestOptionsWithPage(page, size))
+            .map((response: Response) => {
+                return response.json().content;
+            })
+            .catch((error: any) => Observable.throw(error));
+    }
+
+    /**
      * @returns Observable after the completion of the underlying functionality. Generic type is array of User instances
      */
     findAll(): Observable<User[]> {
@@ -102,10 +115,10 @@ export class UserService implements IUserService {
      * @returns Observable after the completion of the underlying functionality. Generic type is an instance of a User class
      */
     getOne(id: number): Observable<User> {
-        let url = `${USER_PATH}/${id}`;
+        let url = `${USER_PATH}${id}`;
         return this.http.get(url, this.getAuthRequestOptions())
             .map((response: Response) => {
-                response.json();
+                return response.json();
             })
             .catch((error: any) => Observable.throw(error));
     }
@@ -117,7 +130,7 @@ export class UserService implements IUserService {
     save(user: User): Observable<User> {
         return this.http.post(USER_PATH, JSON.stringify(user), this.getAuthRequestOptions())
             .map((response: Response) => {
-                response.json();
+                return response.json();
             })
             .catch((error: any) => Observable.throw(error));
     }
@@ -130,6 +143,19 @@ export class UserService implements IUserService {
         return this.http.post(CURRENT_USER_PATH, JSON.stringify(user), this.getAuthRequestOptions())
             .map((response: Response) => {
                 return response.json();
+            })
+            .catch((error: any) => Observable.throw(error));
+    }
+
+    /**
+     * @param id - id of an instance of a User class which will be deleted
+     * @returns Observable after the completion of the underlying functionality. Generic type is a boolean
+     */
+    deleteUser(id: number): Observable<boolean> {
+        let url = `${USER_PATH}${id}`;
+        return this.http.get(url, this.getAuthRequestOptions())
+            .map((response: Response) => {
+                return true;
             })
             .catch((error: any) => Observable.throw(error));
     }

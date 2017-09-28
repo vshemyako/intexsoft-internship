@@ -1,3 +1,4 @@
+import {Authority} from "./authority";
 /**
  * Blueprint for creating User instances
  */
@@ -9,6 +10,7 @@ export class User {
     lastName: string;
     email: string;
     enabled: boolean;
+    authorities: Authority[];
 
     /**
      * Constructs a User instance, required field of who are username and password
