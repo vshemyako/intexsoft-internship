@@ -1,7 +1,7 @@
 <md-toolbar class='header'>
     <button md-raised-button color='primary' routerLink='/news'>News</button>
 
-    <button md-raised-button color='primary' [mdMenuTriggerFor]='workspaceMenu'>Workspace</button>
+    <button md-raised-button color='primary' [disabled]='!isLoggedIn()' [mdMenuTriggerFor]='workspaceMenu'>Workspace</button>
     <md-menu #workspaceMenu='mdMenu'>
         <button md-menu-item routerLink='/personal'>Personal Data Section</button>
         <button md-menu-item routerLink='/create'>Article Creation Section</button>
@@ -9,7 +9,9 @@
         <button md-menu-item routerLink='/admin'>Administration Section</button>
     </md-menu>
 
-    <button md-raised-button color='primary' routerLink='/workspace'>Workspace</button>
+    <!-- TODO Don't forget to delete old button. Is hidden for now! -->
+    <button md-raised-button *ngIf=false color='primary' routerLink='/workspace'>Workspace</button>
+
     <button *ngIf='!isLoggedIn()' color='primary' md-raised-button routerLink='/signup'>Sign Up</button>
     <button *ngIf='!isLoggedIn()' color='primary' md-raised-button routerLink='/login'>Log In</button>
     <button *ngIf='isLoggedIn()' color='primary' md-raised-button (click)='logout()'>Log Out</button>

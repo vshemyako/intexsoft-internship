@@ -33,6 +33,7 @@ export class AuthenticationService implements IAuthenticationService {
             .map((response: Response) => {
                 let token: string = response.headers.get('Authorization').slice(7);
                 let authorities: string[] = JSON.parse(response.text());
+                console.log(authorities);
                 if (token) {
                     localStorage.setItem('token', JSON.stringify(token));
                     localStorage.setItem('authorities', response.text());

@@ -43,6 +43,7 @@ const routes: Routes = [
         component: SignupFormComponent
     },
     {
+        //TODO: workspace component is substituted
         path: 'workspace',
         component: WorkspaceComponent,
         //TODO: uncomment this part later

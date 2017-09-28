@@ -26,28 +26,26 @@
                 <!-- Start Date -->
                 <div class='start-date-block'>
                     <md-form-field>
-                        <input mdInput placeholder='Start Date' [mdDatepicker]='startDatePicker' (focus)='picker.open()'
-                               readonly>
+                        <input [(ngModel)]='startDate' mdInput placeholder='Start Date' [mdDatepicker]='startDatePicker' readonly [ngModelOptions]="{standalone: true}">
                         <md-datepicker-toggle mdSuffix [for]='startDatePicker'></md-datepicker-toggle>
                         <md-datepicker #startDatePicker></md-datepicker>
                     </md-form-field>
 
                     <md-form-field>
-                        <input class='time-field' mdInput type='time' placeholder='Start Time'>
+                        <input [(ngModel)]='startTime' [ngModelOptions]="{standalone: true}" class='time-field' mdInput type='time' placeholder='Start Time'>
                     </md-form-field>
                 </div>
 
                 <!-- End Date -->
                 <div class='end-article-date'>
                     <md-form-field>
-                        <input mdInput placeholder='End Date' [mdDatepicker]='endDatePicker' (focus)='picker.open()'
-                               readonly>
+                        <input [(ngModel)]='endDate' mdInput placeholder='End Date' [mdDatepicker]='endDatePicker' readonly [ngModelOptions]="{standalone: true}">
                         <md-datepicker-toggle mdSuffix [for]='endDatePicker'></md-datepicker-toggle>
                         <md-datepicker #endDatePicker></md-datepicker>
                     </md-form-field>
 
                     <md-form-field>
-                        <input class='time-field' mdInput type='time' placeholder='End Time'>
+                        <input [(ngModel)]='endTime' [ngModelOptions]="{standalone: true}" class='time-field' mdInput type='time' placeholder='End Time'>
                     </md-form-field>
                 </div>
             </div>

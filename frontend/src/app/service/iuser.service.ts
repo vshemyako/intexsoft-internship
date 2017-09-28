@@ -24,6 +24,13 @@ export interface IUserService {
     save(user: User): Observable<User>;
 
     /**
+     * Similar method, but is designed especially for administrator to change users' information
+     * @param {User} user - an instance of a User class which will be updated/saved
+     * @returns Observable after the completion of the underlying functionality. Generic type is an instance of a User class
+     */
+    saveAdmin(user: User): Observable<User>;
+
+    /**
      * @param username of a User instance to obtain
      * @returns Observable after the completion of the underlying functionality. Generic type is an instance of a User class
      */

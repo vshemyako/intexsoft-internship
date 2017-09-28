@@ -8,6 +8,7 @@ import {Observable} from "rxjs";
 const SUBSET_USERS_PATH = 'api/users';
 const ALL_USERS_PATH = 'api/users/all';
 const USER_PATH = 'api/user/';
+const USER_PATH_FOR_ADMIN = 'api/user/admin';
 const CURRENT_USER_PATH = 'api/user/current';
 
 /**
@@ -53,7 +54,8 @@ export class UserService implements IUserService {
     private getRequestOptionsWithPage(page: string, size: string): RequestOptions {
         return new RequestOptions({
                 headers: new Headers({
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token'))
                 }),
                 params: this.getUrlSearchParams(page, size)
             }
@@ -129,6 +131,19 @@ export class UserService implements IUserService {
      */
     save(user: User): Observable<User> {
         return this.http.post(USER_PATH, JSON.stringify(user), this.getAuthRequestOptions())
+            .map((response: Response) => {
+                return response.json();
+            })
+            .catch((error: any) => Observable.throw(error));
+    }
+
+    /**
+     * Similar method, but is designed especially for administrator to change users' information
+     * @param {User} user - an instance of a User class which will be updated/saved
+     * @returns Observable after the completion of the underlying functionality. Generic type is an instance of a User class
+     */
+    saveAdmin(user: User): Observable<User> {
+        return this.http.post(USER_PATH_FOR_ADMIN, JSON.stringify(user), this.getAuthRequestOptions())
             .map((response: Response) => {
                 return response.json();
             })

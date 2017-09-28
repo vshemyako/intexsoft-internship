@@ -9,8 +9,8 @@ export class News {
     title: string;
     description: string;
     article: string;
-    startDisplay: Date;
-    endDisplay: Date;
+    startDisplay: number;
+    endDisplay: number;
     author: User;
     status: Status;
     categories: Category[];

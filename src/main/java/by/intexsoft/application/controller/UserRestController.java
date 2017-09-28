@@ -43,6 +43,20 @@ public class UserRestController {
     }
 
     /**
+     * Only admin is allowed to use this controller's method to change any kind of users' information
+     * @param currentUser - spring-generated entity based on a json in a request body
+     * @return newly created instance of a {@link User}
+     */
+    @RequestMapping(value = "/user/admin", method = RequestMethod.POST, consumes = "application/json")
+    public ResponseEntity<User> adminSave(@RequestBody User currentUser) {
+        LOGGER.info("Admin request was received to save a new user");
+        User obtainedUser = userService.obtainUser(currentUser.username);
+        currentUser.setPassword(obtainedUser.password);
+        User savedUser = userService.save(currentUser);
+        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+    }
+
+    /**
      * @param currentUser - spring-generated entity based on a json in a request body
      * @return newly created instance of a {@link User}
      */
@@ -50,9 +64,14 @@ public class UserRestController {
     public ResponseEntity<User> save(@RequestBody User currentUser) {
         LOGGER.info("Request was received to save a new user");
         User obtainedUser = userService.obtainUser(currentUser.username);
-        currentUser.setPassword(obtainedUser.password);
-        User savedUser = userService.save(currentUser);
-        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+        if (checkForPasswordEquality(obtainedUser, currentUser)) {
+            LOGGER.info("Addition password comparison succeeded");
+            obtainedUser = userService.save(currentUser);
+            return new ResponseEntity<>(obtainedUser, HttpStatus.OK);
+        } else {
+            LOGGER.warn("Provided credentials were incorrect");
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     /**

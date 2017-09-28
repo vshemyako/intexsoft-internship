@@ -111,7 +111,7 @@ export class UserDetailComponent implements OnInit {
      */
     private saveUser(): void {
         this.currentUser.authorities = this.createAuthorityArray();
-        this.userService.save(this.currentUser)
+        this.userService.saveAdmin(this.currentUser)
             .subscribe(result => {
                 this.goBack();
             });
