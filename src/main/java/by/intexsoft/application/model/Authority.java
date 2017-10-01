@@ -1,7 +1,7 @@
 package by.intexsoft.application.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.Column;
@@ -10,7 +10,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.util.List;
 
-import static javax.persistence.FetchType.EAGER;
+import static javax.persistence.FetchType.LAZY;
 
 /**
  * Simple blueprint for authority entity. Corresponding table holds information
@@ -31,7 +31,7 @@ public class Authority extends AbstractEntity implements GrantedAuthority {
         return this.authority;
     }
 
-    @ManyToMany(fetch = EAGER, mappedBy = "authorities")
-    @JsonManagedReference
+    @ManyToMany(fetch = LAZY, mappedBy = "authorities")
+    @JsonIgnore
     public List<User> users;
 }

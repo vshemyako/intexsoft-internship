@@ -10,10 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * A controller class which maps received requests to an appropriate handler
@@ -42,7 +39,8 @@ public class NewsRestController {
      * and http status code
      */
     //TODO: Don't forget to substitute user with somekind of DTO. Otherwise pw is exposed
-    @RequestMapping(value = "/all/news", method = RequestMethod.GET)
+    //TODO: Temporary solution - annotated entity with @JsonIgnore @JsonProperty
+    @RequestMapping(value = "/news", method = RequestMethod.GET)
     public ResponseEntity<Page<News>> findSubset(Pageable pageable) {
         LOGGER.info("Request was received to retrieve news starting from page {} with size {}",
                 pageable.getPageNumber(), pageable.getPageSize());
@@ -73,6 +71,24 @@ public class NewsRestController {
             return new ResponseEntity<>(singleNews, HttpStatus.CREATED);
         } else {
             LOGGER.info("Single news article {} retrieval failed", id);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    /**
+     * @param news - spring-generated entity based on a json in a request body
+     * @return newly created instance of a {@link News}
+     */
+    @RequestMapping(value = "/news", method = RequestMethod.POST, consumes = "application/json")
+    public ResponseEntity<News> save(@RequestBody News news) {
+        LOGGER.info("Request was received to save news {}", news.getId());
+        News singleNews = newsService.save(news);
+
+        if (singleNews != null) {
+            LOGGER.info("Single news article {} has been saved", singleNews.getId());
+            return new ResponseEntity<>(singleNews, HttpStatus.CREATED);
+        } else {
+            LOGGER.info("Single news article {} hasn't been saved", news.getId());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }

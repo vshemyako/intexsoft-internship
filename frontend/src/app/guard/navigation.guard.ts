@@ -14,7 +14,7 @@ export class NavigationGuard implements CanActivate {
     }
 
     /**
-     * @param route - requested route by a random user
+     * @param route - requested route by a random currentUser
      * @param state - a tree of activated route snapshots
      * @returns {boolean} - true - allows users to pass; false - do not
      */

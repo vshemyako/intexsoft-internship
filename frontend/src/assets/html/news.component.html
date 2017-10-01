@@ -1,6 +1,6 @@
 <md-card *ngFor='let article of articles'>
     <md-card-title>{{article.title}}</md-card-title>
-    <img md-card-image src='/assets/image/006.jpeg' alt='picture'>
+    <img md-card-image src='./assets/image/006.jpeg' alt='picture'>
     <div class='card-footer' color='primary'>
         <md-card-content>{{article.description}}</md-card-content>
         <button md-raised-button color='primary' [routerLink]='["/news", article.id]'>Read more...</button>

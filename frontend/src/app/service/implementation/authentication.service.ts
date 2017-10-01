@@ -1,13 +1,11 @@
-import {Injectable} from '@angular/core';
-import {Http, Headers, Response, RequestOptions, URLSearchParams} from '@angular/http';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/throw';
+import {Injectable} from "@angular/core";
+import {Http, Headers, Response, RequestOptions} from "@angular/http";
+import "rxjs/add/operator/map";
+import "rxjs/add/operator/catch";
+import "rxjs/add/observable/throw";
 import {Observable} from "rxjs/Observable";
 import {IAuthenticationService} from "../iauthentication.service";
-import {Authority} from "../../model/authority";
 import {User} from "../../model/user";
-import {BehaviorSubject} from "rxjs";
 
 const AUTH_USER_PATH: string = 'api/auth';
 const REGISTER_USER_PATH = 'api/register';
@@ -26,10 +24,10 @@ export class AuthenticationService implements IAuthenticationService {
      * information
      * @param username of a User which wants to authenticate
      * @param password corresponding User's password
-     * @returns {Observable<boolean>} encapsulated boolean value which represents
+     * @returns {Observable<User>} encapsulated User instance which represents
      *          loginFormControl success
      */
-    login(username: string, password: string): Observable<boolean> {
+    login(username: string, password: string): Observable<User> {
         return this.http.post(AUTH_USER_PATH, JSON.stringify({username: username, password: password}),
             this.getPlainRequestOptions())
             .map((response: Response) => {
@@ -48,7 +46,7 @@ export class AuthenticationService implements IAuthenticationService {
     }
 
     /**
-     * Removes user and token related information from the localStorage
+     * Removes currentUser and token related information from the localStorage
      */
     logout(): void {
         localStorage.removeItem('token');

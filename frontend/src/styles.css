@@ -1,6 +1,6 @@
 /*@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';*/
-/*@import '~@angular/material/prebuilt-themes/indigo-pink.css';*/
-@import '~@angular/material/prebuilt-themes/pink-bluegrey.css';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+/*@import '~@angular/material/prebuilt-themes/pink-bluegrey.css';*/
 /*@import '~@angular/material/prebuilt-themes/purple-green.css';*/
 
 /* Global reset css */
@@ -20,7 +20,6 @@ time, mark, audio, video {
     margin: 0;
     padding: 0;
     border: 0;
-    font-size: 14px;
     vertical-align: baseline;
 }
 
@@ -28,20 +27,25 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
     display: block;
 }
+
 body {
     line-height: 1;
 }
+
 ol, ul {
     list-style: none;
 }
+
 blockquote, q {
     quotes: none;
 }
+
 blockquote:before, blockquote:after,
 q:before, q:after {
     content: '';
     content: none;
 }
+
 table {
     border-collapse: collapse;
     border-spacing: 0;
@@ -62,4 +66,12 @@ body {
     align-items: center;
     justify-content: center;
     height: 80%;
+}
+
+/* Disable input background color*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
 }

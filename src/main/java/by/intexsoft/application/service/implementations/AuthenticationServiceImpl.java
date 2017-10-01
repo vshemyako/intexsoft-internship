@@ -4,6 +4,7 @@ import by.intexsoft.application.model.User;
 import by.intexsoft.application.service.AuthenticationService;
 import by.intexsoft.application.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -104,6 +105,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 authentication = new UsernamePasswordAuthenticationToken(getUsernameFromJWT(token), null,
                         AuthorityUtils.commaSeparatedStringToAuthorityList(String.join(",", getAuthoritiesFromJWT(token))));
             } catch (NullPointerException exc) {
+                //TODO: remove this line
                 System.out.print("A JSON Web Token verification error occurred.");
             }
         }

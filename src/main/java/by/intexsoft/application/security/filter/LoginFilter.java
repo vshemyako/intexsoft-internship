@@ -25,10 +25,7 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
 
     AuthenticationService authenticationService = new AuthenticationServiceImpl();
 
-    public LoginFilter(
-            String defaultFilterProcessesUrl,
-            AuthenticationManager authManager) {
-
+    public LoginFilter(String defaultFilterProcessesUrl, AuthenticationManager authManager) {
         super(defaultFilterProcessesUrl);
         setAuthenticationManager(authManager);
     }

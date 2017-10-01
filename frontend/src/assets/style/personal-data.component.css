@@ -14,7 +14,7 @@ md-card {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin: -24px -24px 0 -24px;
+    margin: -24px -24px 0px -24px;
     padding: 16px 20px 16px 8px;
     border-bottom: 1px solid rgba(0,0,0,.12);
 }
@@ -23,51 +23,19 @@ md-card {
     margin-right: auto;
 }
 
-#top-grid {
+#personal-grid {
     margin-top: 20px;
-}
-
-md-slide-toggle {
-    display: flex;
-    align-self: center;
-}
-
-md-grid-list {
-    margin-top: 0;
-}
-
-md-select {
-    width: 200px;
-    padding-top: 0;
-    padding-bottom: 18px;
-}
-
-#user-enabler {
-    height: 40px;
-    padding: 20px 0 20px 50px;
-}
-
-.authority-grid {
-    padding-top: 10px;
-    border-top: 1px solid rgba(0,0,0,.12);
-}
-
-#authority-grid-header {
-    display: flex;
-    justify-content: flex-start;
-    font-size: 16px;
 }
 
 md-card-footer {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center;
     padding: 16px 24px 16px 24px;
-    border-top: 1px solid rgba(0, 0, 0, .12);
+    border-top: 1px solid rgba(0,0,0,.12);
 }
 
-md-error {
+.header-error {
     display: flex;
     justify-content: center;
     padding-top: 30px;

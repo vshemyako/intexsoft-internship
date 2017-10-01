@@ -4,10 +4,10 @@
         <md-icon color='accent'>account_circle</md-icon>
     </md-card-header>
     <md-card-content>
-        <md-error class="mat-error" *ngIf='errorMessage'>{{errorMessage}}</md-error>
+        <md-error class='header-error' *ngIf='errorMessage'>{{errorMessage}}</md-error>
         <form *ngIf='!submitted' id='personal-form' [formGroup]='personalFormControl' (ngSubmit)='save()'
               #personalForm='ngForm'>
-            <md-grid-list id='top-grid' cols='2' rowHeight="4:1">
+            <md-grid-list id='personal-grid' cols='2' rowHeight="4:1">
 
                 <!-- Login -->
                 <md-grid-tile colspan='1'>
@@ -34,6 +34,21 @@
                     </md-form-field>
                 </md-grid-tile>
 
+                <!-- Password -->
+                <md-grid-tile colspan='1'>
+                    <md-form-field>
+                        <input mdInput formControlName='validPassword' type='password' placeholder='Current password'
+                               required
+                               [(ngModel)]='currentUser.password' name='currentUser.password'>
+                        <md-error *ngIf='personalFormControl.controls["validPassword"].errors?.required'>
+                            Password is required
+                        </md-error>
+                        <md-error *ngIf='personalFormControl.controls["validPassword"].errors?.minlength'>
+                            Length must be at least 3 symbols
+                        </md-error>
+                    </md-form-field>
+                </md-grid-tile>
+
                 <!-- Last name -->
                 <md-grid-tile colspan='1'>
                     <md-form-field>
@@ -43,6 +58,13 @@
                             Length must be at least 3 symbols
                         </md-error>
                     </md-form-field>
+                </md-grid-tile>
+
+                <md-grid-tile colspan='1'>
+                    <button md-raised-button color='accent' type='submit' [disabled]='!personalForm.form.valid'
+                            (click)='save()' >Change
+                        Personal Information
+                    </button>
                 </md-grid-tile>
 
                 <!-- Email -->
@@ -58,46 +80,14 @@
 
             </md-grid-list>
         </form>
-
-        <!-- Status -->
-        <div>
-            <md-slide-toggle id='user-enabler' [(ngModel)]='currentUser.enabled'>
-                Turn On to Enable User
-            </md-slide-toggle>
-        </div>
-
-        <!-- Authority -->
-        <md-grid-list class='authority-grid' cols='4' rowHeight="3:1">
-            <md-grid-tile id='authority-grid-header' colspan='4'>
-                Choose roles:
-            </md-grid-tile>
-            <md-grid-tile colspan='1'>
-                <md-checkbox [(ngModel)]="roles.isAdmin">Admin</md-checkbox>
-            </md-grid-tile>
-            <md-grid-tile colspan='1'>
-                <md-checkbox [(ngModel)]="roles.isEditor">Editor</md-checkbox>
-            </md-grid-tile>
-            <md-grid-tile colspan='1'>
-                <md-checkbox [(ngModel)]="roles.isReviewer">Reviewer</md-checkbox>
-            </md-grid-tile>
-            <md-grid-tile colspan='1'>
-                <md-checkbox [(ngModel)]="roles.isUser">User</md-checkbox>
-            </md-grid-tile>
-        </md-grid-list>
-
         <div class='spinner'>
             <md-spinner *ngIf='submitted' mode='indeterminate'></md-spinner>
         </div>
     </md-card-content>
 
-    <md-card-footer>
-        <button md-raised-button color='accent' (click)='saveUser()'>
-            Change Personal Information
+    <md-card-footer class='mat-action-row'>
+        <button md-raised-button color='primary' (click)='obtainUser()'>Obtain Personal
+            Information
         </button>
-
-        <button md-raised-button color='primary' (click)='goBack()'>
-            Return to Admin Page
-        </button>
-
     </md-card-footer>
 </md-card>

@@ -4,14 +4,11 @@
  * application
  */
 export class Authority {
-    roles: string[];
+    id: number;
+    authority: string;
 
-    /**
-     * An array of strings which represent authority level of authenticated user
-     * It's quite obvious that constructor demands roles parameter
-     * @param roles - array of roles
-     */
-    constructor(roles: string[]) {
-        this.roles = roles;
+    constructor(id:number, authority: string) {
+        this.id = id;
+        this.authority = authority;
     }
 }

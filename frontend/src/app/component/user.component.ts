@@ -46,7 +46,7 @@ export class UserComponent implements OnInit {
     }
 
     /**
-     * Method is showing extra detail of a chosen user with the help of router method navigate. This method receives
+     * Method is showing extra detail of a chosen currentUser with the help of router method navigate. This method receives
      * an array consisting of a path and a route parameter. Both of them specify what controllers template will be
      * generated
      */

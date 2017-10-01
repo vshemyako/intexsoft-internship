@@ -1,6 +1,5 @@
 import {Component, OnInit, Inject} from "@angular/core";
 import {Router} from "@angular/router";
-import {IUserService} from "../service/iuser.service";
 import {FormGroup, FormControl, Validators} from "@angular/forms";
 import {User} from "../model/user";
 import {IAuthenticationService} from "../service/iauthentication.service";
@@ -39,7 +38,7 @@ export class SignupFormComponent implements OnInit {
     }
 
     /**
-     * Creates empty user which later on is filled in with information which is provided in sign-up form
+     * Creates empty currentUser which later on is filled in with information which is provided in sign-up form
      */
     ngOnInit(): void {
         this.newUser = new User();
