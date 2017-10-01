@@ -22,6 +22,10 @@ const SIZE_OF_A_PAGE = 5;
  */
 const PAGE_STEP = 1;
 
+/**
+ * Controls features of the application associated with users administration process:
+ * disable/enable users, roles association, altering personal information
+ */
 @Component({
     selector: 'app-admin',
     templateUrl: '../../assets/html/admin.component.html',
@@ -142,10 +146,8 @@ export class AdminComponent {
      * @returns {boolean} false - if not users to display
      */
     private hasPreviousUsers(): boolean {
-        if (this.pageNumber !== 0) {
-            return true;
-        }
-        return false;
+        return this.pageNumber !== 0;
+
     }
 
     /**
@@ -153,10 +155,8 @@ export class AdminComponent {
      * @returns {boolean} false - if not users to display
      */
     private hasNextUsers(): boolean {
-        if (this.users.length) {
-            return true;
-        }
-        return false;
+        return !!this.users.length;
+
     }
 
     /**

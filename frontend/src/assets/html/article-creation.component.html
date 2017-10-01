@@ -6,7 +6,7 @@
     <md-card-content>
         <md-error class='header-error' *ngIf='errorMessage'>{{errorMessage}}</md-error>
 
-        <form *ngIf='!submitted' class='article-creation-form' [formGroup]='articleFormControl'>
+        <form *ngIf='!submitted' class='article-creation-form' [formGroup]='articleFormControl' #articleForm='ngForm'>
             <!-- Article Title -->
             <div class='article-title'>
                 <md-form-field>
@@ -26,26 +26,30 @@
                 <!-- Start Date -->
                 <div class='start-date-block'>
                     <md-form-field>
-                        <input [(ngModel)]='startDate' mdInput placeholder='Start Date' [mdDatepicker]='startDatePicker' readonly [ngModelOptions]="{standalone: true}">
+                        <input [(ngModel)]='startDate' mdInput placeholder='Start Date' [mdDatepicker]='startDatePicker'
+                               readonly [ngModelOptions]="{standalone: true}">
                         <md-datepicker-toggle mdSuffix [for]='startDatePicker'></md-datepicker-toggle>
                         <md-datepicker #startDatePicker></md-datepicker>
                     </md-form-field>
 
                     <md-form-field>
-                        <input [(ngModel)]='startTime' [ngModelOptions]="{standalone: true}" class='time-field' mdInput type='time' placeholder='Start Time'>
+                        <input [(ngModel)]='startTime' [ngModelOptions]="{standalone: true}" class='time-field' mdInput
+                               type='time' placeholder='Start Time'>
                     </md-form-field>
                 </div>
 
                 <!-- End Date -->
                 <div class='end-article-date'>
                     <md-form-field>
-                        <input [(ngModel)]='endDate' mdInput placeholder='End Date' [mdDatepicker]='endDatePicker' readonly [ngModelOptions]="{standalone: true}">
+                        <input [(ngModel)]='endDate' mdInput placeholder='End Date' [mdDatepicker]='endDatePicker'
+                               readonly [ngModelOptions]="{standalone: true}">
                         <md-datepicker-toggle mdSuffix [for]='endDatePicker'></md-datepicker-toggle>
                         <md-datepicker #endDatePicker></md-datepicker>
                     </md-form-field>
 
                     <md-form-field>
-                        <input [(ngModel)]='endTime' [ngModelOptions]="{standalone: true}" class='time-field' mdInput type='time' placeholder='End Time'>
+                        <input [(ngModel)]='endTime' [ngModelOptions]="{standalone: true}" class='time-field' mdInput
+                               type='time' placeholder='End Time'>
                     </md-form-field>
                 </div>
             </div>
@@ -68,7 +72,8 @@
 
             <!-- Article -->
             <md-form-field class='article-container'>
-                <textarea formControlName='validArticle' required mdInput class='article-textarea' [(ngModel)]='article.article' name='article.article' placeholder='Article'></textarea>
+                <textarea formControlName='validArticle' required mdInput class='article-textarea'
+                          [(ngModel)]='article.article' name='article.article' placeholder='Article'></textarea>
                 <md-error *ngIf='articleFormControl.controls["validArticle"].errors?.required'>
                     Article Body is required
                 </md-error>
@@ -107,7 +112,8 @@
     </md-card-content>
 
     <md-card-footer class='mat-action-row'>
-        <button md-raised-button color='primary' (click)='uploadArticle()'>
+        <button md-raised-button color='primary' [disabled]='!articleFormControl?.valid'
+                (click)='uploadArticle()'>
             Send Article For Review
         </button>
     </md-card-footer>

@@ -6,8 +6,9 @@ import {NativeDateAdapter, DateAdapter} from "@angular/material";
 import {Timestamp} from "rxjs";
 import {Category} from "../model/category";
 
-
-//TODO: Bind time
+/**
+ * Controls features of the application associated with article creation logic
+ */
 @Component({
     selector: 'app-article-creation',
     templateUrl: '../../assets/html/article-creation.component.html',
@@ -15,6 +16,7 @@ import {Category} from "../model/category";
 })
 export class ArticleCreationComponent implements OnInit {
 
+    //TODO: bind article creator
     private currentUser: User;
     private article: News;
     private articleFormControl: FormGroup;

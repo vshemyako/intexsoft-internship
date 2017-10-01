@@ -6,7 +6,7 @@
     <md-card-title>Registration Form</md-card-title>
     <md-error class="mat-error" *ngIf='errorMessage'>{{errorMessage}}</md-error>
     <md-card-content>
-        <form *ngIf='!submitted' [formGroup]='signupFormControl' (ngSubmit)='register()' #loginForm='ngForm'>
+        <form *ngIf='!submitted' [formGroup]='signupFormControl' (ngSubmit)='register()' #signupForm='ngForm'>
             <md-form-field>
                 <input mdInput formControlName='validName' type='text' placeholder='Login' required
                        [(ngModel)]='newUser.username' name='newUser.username'>
@@ -51,7 +51,7 @@
                 </md-error>
             </md-form-field>
             <md-card-actions>
-                <button md-raised-button color='primary' type='submit' [disabled]='!loginForm.form.valid'>Sign Up</button>
+                <button md-raised-button color='primary' type='submit' [disabled]='!signupForm.form.valid'>Sign Up</button>
             </md-card-actions>
         </form>
         <md-spinner *ngIf='submitted' mode='indeterminate'></md-spinner>

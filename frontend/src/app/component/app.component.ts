@@ -75,7 +75,7 @@ export class AppComponent {
     /**
      * Scrolls viewport to the top
      */
-    scrollToTheTop(): void {
-        document.body.scrollTop = 0;
+    private scrollToTop(): void {
+        window.scrollTo(0,0);
     }
 }
