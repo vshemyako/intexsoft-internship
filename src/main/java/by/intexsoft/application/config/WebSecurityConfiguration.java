@@ -2,6 +2,7 @@ package by.intexsoft.application.config;
 
 import by.intexsoft.application.security.filter.AuthenticationFilter;
 import by.intexsoft.application.security.filter.LoginFilter;
+import by.intexsoft.application.service.AuthenticationService;
 import by.intexsoft.application.service.implementations.CustomUserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -27,10 +28,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
+    private final AuthenticationService authenticationService;
 
     @Autowired
-    public WebSecurityConfiguration(UserDetailsService userDetailsService) {
+    public WebSecurityConfiguration(
+            UserDetailsService userDetailsService,
+            AuthenticationService authenticationService) {
         this.userDetailsService = userDetailsService;
+        this.authenticationService = authenticationService;
     }
 
     /**
@@ -73,8 +78,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/user/admin").hasAuthority("ROLE_ADMIN")
                 .anyRequest().authenticated()
                 .and()
-                .addFilterBefore(new LoginFilter("/api/auth", authenticationManager()), UsernamePasswordAuthenticationFilter.class)
-                .addFilterBefore(new AuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(new LoginFilter("/api/auth", authenticationManager(), authenticationService), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new AuthenticationFilter(authenticationService), UsernamePasswordAuthenticationFilter.class);
     }
 
     /**

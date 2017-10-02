@@ -1,9 +1,7 @@
-import {Component, OnInit, Inject} from '@angular/core';
+import {Component, OnInit, Inject} from "@angular/core";
 import {FormGroup, FormControl, Validators} from "@angular/forms";
 import {User} from "../model/user";
 import {IUserService} from "../service/iuser.service";
-import {IAuthenticationService} from "../service/iauthentication.service";
-import {delay} from "rxjs/operator/delay";
 
 /**
  * @type {RegExp} - is used to validate provided email address

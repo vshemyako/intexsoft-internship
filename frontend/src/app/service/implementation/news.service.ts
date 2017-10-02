@@ -6,6 +6,7 @@ import {INewsService} from "../inews.service";
 import {News} from "../../model/news";
 
 const SUBSET_NEWS_PATH = 'api/news';
+const SUBSET_STATUS_NEW_PATH = 'api/news/all';
 const NEWS_PATH = 'api/news';
 
 /**
@@ -21,7 +22,7 @@ export class NewsService implements INewsService {
      * @returns Observable after the completion of the underlying functionality. Generic type is array of News instances
      */
     findAll(): Observable<News[]> {
-        return this.http.get(SUBSET_NEWS_PATH, this.getAuthRequestOptions())
+        return this.http.get(SUBSET_NEWS_PATH, NewsService.getAuthRequestOptions())
             .map((response: Response) => {
                 response.json()
             })
@@ -34,7 +35,7 @@ export class NewsService implements INewsService {
      */
     getOne(id: number): Observable<News> {
         const url = `${NEWS_PATH}/${id}`;
-        return this.http.get(url, this.getPlainRequestOptions())
+        return this.http.get(url, NewsService.getPlainRequestOptions())
             .map((response: Response) => {
                 return response.json();
             })
@@ -46,7 +47,7 @@ export class NewsService implements INewsService {
      * @returns Observable after the completion of the underlying functionality. Generic type is an instance of a News class
      */
     save(news: News): Observable<News> {
-        return this.http.post(NEWS_PATH, JSON.stringify(news), this.getAuthRequestOptions())
+        return this.http.post(NEWS_PATH, JSON.stringify(news), NewsService.getAuthRequestOptions())
             .map((response: Response) => {
                 response.json();
             })
@@ -59,7 +60,21 @@ export class NewsService implements INewsService {
      * @param size - the size of the page
      */
     findSubset(page: string, size: string): Observable<News[]> {
-        return this.http.get(SUBSET_NEWS_PATH, this.getRequestOptionsWithPage(page, size))
+        return this.http.get(SUBSET_NEWS_PATH, NewsService.getRequestOptionsWithPage(page, size))
+            .map((response: Response) => {
+                return response.json().content;
+            })
+            .catch((error: any) => Observable.throw(error));
+    }
+
+    /**
+     * Retrieves specified subset of data in manageable form
+     * @param page - the page of data to retrieve
+     * @param size - the size of the page
+     * @param status - determines what type of articles to request
+     */
+    findAllReviewed(page: string, size: string, status: String): Observable<News[]> {
+        return this.http.get(SUBSET_STATUS_NEW_PATH + '/' + status, NewsService.getRequestOptionsWithPage(page, size))
             .map((response: Response) => {
                 return response.json().content;
             })
@@ -73,7 +88,7 @@ export class NewsService implements INewsService {
      * @param size - the size of the page
      * @returns {URLSearchParams} - Map-like representation of the url search parameters
      */
-    private getUrlSearchParams(page: string, size: string): URLSearchParams {
+    private static getUrlSearchParams(page: string, size: string): URLSearchParams {
         let params = new URLSearchParams();
         params.set('page', page);
         params.set('size', size);
@@ -84,7 +99,7 @@ export class NewsService implements INewsService {
      * Provides means to obtain headers with embedded authentication information
      * @returns {RequestOptions} - object with JWT authentication information
      */
-    private getAuthRequestOptions(): RequestOptions {
+    private static getAuthRequestOptions(): RequestOptions {
         return new RequestOptions({
                 headers: new Headers({
                     'Content-Type': 'application/json',
@@ -98,7 +113,7 @@ export class NewsService implements INewsService {
      * Provides means to obtain headers with content-type information
      * @returns {RequestOptions} - object with content-type information
      */
-    private getPlainRequestOptions(): RequestOptions {
+    private static getPlainRequestOptions(): RequestOptions {
         return new RequestOptions({
                 headers: new Headers({
                     'Content-Type': 'application/json'
@@ -111,12 +126,12 @@ export class NewsService implements INewsService {
      * Provides means to obtain headers and request params
      * @returns {RequestOptions} - object with specified content-type and parameters information
      */
-    private getRequestOptionsWithPage(page: string, size: string): RequestOptions {
+    private static getRequestOptionsWithPage(page: string, size: string): RequestOptions {
         return new RequestOptions({
                 headers: new Headers({
                     'Content-Type': 'application/json'
                 }),
-                params: this.getUrlSearchParams(page, size)
+                params: NewsService.getUrlSearchParams(page, size)
             }
         );
     }

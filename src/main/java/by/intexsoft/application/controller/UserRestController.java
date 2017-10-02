@@ -132,7 +132,7 @@ public class UserRestController {
     }
 
     /**
-     * @param pageable - instance of {@link Pageable} interface which is has pagination methods
+     * @param pageable - instance of {@link Pageable} interface which has pagination methods
      * @return {@link ResponseEntity<Page<User>>} - response entity with embedded sublist of instances
      * and http status code
      */
@@ -154,7 +154,7 @@ public class UserRestController {
     }
 
     /**
-     * @param pageable - instance of {@link Pageable} interface which is has pagination methods
+     * @param pageable - instance of {@link Pageable} interface which has pagination methods
      * @param enabled  - determines whether to retrieve enabled or disabled users
      * @return {@link ResponseEntity<Page<User>>} - response entity with embedded sublist of instances
      * and http status code

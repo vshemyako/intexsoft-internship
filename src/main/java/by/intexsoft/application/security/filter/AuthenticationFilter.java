@@ -3,6 +3,7 @@ package by.intexsoft.application.security.filter;
 import by.intexsoft.application.service.AuthenticationService;
 
 import by.intexsoft.application.service.implementations.AuthenticationServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.GenericFilterBean;
@@ -20,7 +21,12 @@ import java.io.IOException;
  */
 public class AuthenticationFilter extends GenericFilterBean {
 
-    private AuthenticationService authenticationService = new AuthenticationServiceImpl();
+    private final AuthenticationService authenticationService;
+
+    @Autowired
+    public AuthenticationFilter(AuthenticationService authenticationService) {
+        this.authenticationService = authenticationService;
+    }
 
     /**
      * Filters requests which do not have verified JSON Web Token

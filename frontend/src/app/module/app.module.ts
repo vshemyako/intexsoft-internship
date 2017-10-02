@@ -43,6 +43,9 @@ import {NewsDetailComponent} from "../component/news-detail.component";
 import {PersonalDataComponent} from "../component/personal-data.component";
 import {AdminComponent} from "../component/admin.component";
 import {ArticleCreationComponent} from "../component/article-creation.component";
+import {ArticleRevisionComponent} from "../component/article-revision.component";
+import {ArticleCreationDetailComponent} from "../component/article-creation-detail.component";
+import {MomentModule} from "angular2-moment";
 
 const URL_I18N_FILES = 'assets/i18n/';
 const FILE_FORMAT = '.json';
@@ -75,7 +78,9 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
         PageNotFoundComponent,
         PersonalDataComponent,
         AdminComponent,
-        ArticleCreationComponent
+        ArticleCreationComponent,
+        ArticleRevisionComponent,
+        ArticleCreationDetailComponent
     ],
     imports: [
         BrowserModule,
@@ -102,6 +107,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
         AppRoutingModule,
         HttpModule,
         HttpClientModule,
+        MomentModule,
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,

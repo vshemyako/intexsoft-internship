@@ -35,11 +35,11 @@ import javax.sql.DataSource;
  * capability<br>
  */
 @Configuration
-@ComponentScan("by.intexsoft.application.service")
+@ComponentScan(basePackages = {"by.intexsoft.application.service", "by.intexsoft.application.security"})
 @EnableJpaRepositories("by.intexsoft.application.repository")
 @PropertySource("classpath:base.properties")
 @EnableTransactionManagement
-public class    RootApplicationContextConfiguration {
+public class RootApplicationContextConfiguration {
 
     @Value("${db.hostname}")
     private String hostName;

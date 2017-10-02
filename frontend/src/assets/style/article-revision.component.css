@@ -8,7 +8,7 @@ md-card {
     margin-bottom: 25px;
 }
 
-#admin-header {
+#revision-header {
     display: flex;
     flex: 0 0 auto;
     flex-direction: row;
@@ -19,8 +19,15 @@ md-card {
     border-bottom: 1px solid rgba(0, 0, 0, .12);
 }
 
-#admin-header div {
+#revision-header div {
     margin-right: auto;
+}
+
+md-error {
+    display: flex;
+    justify-content: center;
+    padding-top: 30px;
+    font-size: small;
 }
 
 .info-message {
@@ -28,7 +35,7 @@ md-card {
     text-decoration: solid;
 }
 
-.admin-get-buttons {
+.article-get-buttons {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -41,12 +48,18 @@ md-card {
     border-top: 1px solid rgba(0, 0, 0, .12);
 }
 
-.table-row {
-    border-bottom: 1px solid rgba(0, 0, 0, .12);
-}
-
 md-grid-tile {
     font-size: 12px;
+}
+
+.spinner {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.table-row {
+    border-bottom: 1px solid rgba(0, 0, 0, .12);
 }
 
 md-card-footer {
@@ -66,17 +79,4 @@ md-card-footer {
     width: 40px;
     margin-left: auto;
     margin-right: auto;
-}
-
-md-error {
-    display: flex;
-    justify-content: center;
-    padding-top: 30px;
-    font-size: small;
-}
-
-.spinner {
-    display: flex;
-    justify-content: center;
-    padding-top: 20px;
 }

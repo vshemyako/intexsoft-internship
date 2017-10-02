@@ -1,5 +1,6 @@
 package by.intexsoft.application.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.Column;
@@ -9,6 +10,7 @@ import javax.persistence.Table;
 import java.util.List;
 
 import static javax.persistence.FetchType.EAGER;
+import static javax.persistence.FetchType.LAZY;
 
 /**
  * Simple blueprint for creating News instances, which later on will be added
@@ -23,7 +25,7 @@ public class Category extends AbstractEntity {
     @Column(name = "name")
     public String name;
 
-    @ManyToMany(fetch = EAGER, mappedBy = "categories")
-    @JsonManagedReference
+    @ManyToMany(fetch = LAZY, mappedBy = "categories")
+    @JsonIgnore
     public List<News> news;
 }

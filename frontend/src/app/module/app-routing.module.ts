@@ -12,6 +12,8 @@ import {NewsDetailComponent} from "../component/news-detail.component";
 import {PersonalDataComponent} from "../component/personal-data.component";
 import {AdminComponent} from "../component/admin.component";
 import {ArticleCreationComponent} from "../component/article-creation.component";
+import {ArticleRevisionComponent} from "../component/article-revision.component";
+import {ArticleCreationDetailComponent} from "../component/article-creation-detail.component";
 
 /**
  * An array of key/value pairs which in essence specify what urls correspond to particular views
@@ -60,6 +62,14 @@ const routes: Routes = [
     {
         path: 'create',
         component: ArticleCreationComponent
+    },
+    {
+        path: 'news/detail/:id',
+        component: ArticleCreationDetailComponent
+    },
+    {
+        path: 'review',
+        component: ArticleRevisionComponent
     },
     {
         path: 'user/:id',
