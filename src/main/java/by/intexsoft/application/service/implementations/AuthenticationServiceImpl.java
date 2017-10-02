@@ -4,6 +4,8 @@ import by.intexsoft.application.model.User;
 import by.intexsoft.application.service.AuthenticationService;
 import by.intexsoft.application.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Claims;
@@ -34,19 +36,24 @@ import static io.jsonwebtoken.SignatureAlgorithm.HS256;
 public class AuthenticationServiceImpl implements AuthenticationService {
 
     private static final SignatureAlgorithm SIGNATURE_ALGORITHM = HS256;
-    // @Value("${jwt.refresh_time}")
-    private static final long REFRESH_TIME = 3600000;
-    // @Value("${jwt.secret_word}")
-    private static final String SECRET_WORD = "hello";
-    // @Value("${jwt.prefix}")
-    private static final String JWT_PREFIX = "Bearer";
-    // @Value("${jwt.auth_header}")
-    private static final String AUTH_HEADER = "Authorization";
-    // @Value("${jwt.content_type}")
-    private static final String CONTENT_TYPE = "application/json";
 
-    // @Autowired
-    UserService userService = new UserServiceImpl();
+    @Value("${jwt.refresh_time}")
+    private long REFRESH_TIME;
+    @Value("${jwt.secret_word}")
+    private String SECRET_WORD;
+    @Value("${jwt.prefix}")
+    private String JWT_PREFIX;
+    @Value("${jwt.auth_header}")
+    private String AUTH_HEADER;
+    @Value("${jwt.content_type}")
+    private String CONTENT_TYPE;
+
+    private final UserService userService;
+
+    @Autowired
+    public AuthenticationServiceImpl(UserService userService) {
+        this.userService = userService;
+    }
 
     /**
      * Attaches generated JSON Web Token to a {@link HttpServletResponse} object after successful

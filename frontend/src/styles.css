@@ -59,6 +59,7 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
+    background-image: url("./assets/image/background.png");
 }
 
 .loading-app {

@@ -92,4 +92,27 @@ public class NewsRestController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+
+    /**
+     * @param pageable - instance of {@link Pageable} interface which has pagination methods
+     * @param statusName  - determines news of what status to retrieve
+     * @return {@link ResponseEntity<Page<News>>} - response entity with embedded sublist of instances
+     * and http status code
+     */
+    @RequestMapping(value = "/news/all/{statusName}", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<Page<News>> findAll(@PathVariable("statusName") String statusName, Pageable pageable) {
+        LOGGER.info("Request was received to retrieve news starting from page {} with size {}",
+                pageable.getPageNumber(), pageable.getPageSize());
+        Page<News> reviewedNewsPage = newsService.findByStatusName(pageable, statusName);
+
+        if (reviewedNewsPage != null) {
+            LOGGER.info("Request to retrieve reviewed news starting from page {} with size {} succeed",
+                    pageable.getPageNumber(), pageable.getPageSize());
+            return new ResponseEntity<>(reviewedNewsPage, HttpStatus.CREATED);
+        } else {
+            LOGGER.warn("Request to retrieve reviewed news starting from page {} with size {} failed",
+                    pageable.getPageNumber(), pageable.getPageSize());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
 }

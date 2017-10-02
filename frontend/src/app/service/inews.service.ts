@@ -1,4 +1,3 @@
-import {User} from "../model/user";
 import {Observable} from "rxjs";
 import {News} from "../model/news";
 
@@ -30,4 +29,12 @@ export interface INewsService {
      * @param size - the size of the page
      */
     findSubset(page: string, size: string): Observable<News[]>;
+
+    /**
+     * Retrieves specified subset of data in manageable form
+     * @param page - the page of data to retrieve
+     * @param size - the size of the page
+     * @param status - determines what type of articles to request
+     */
+    findAllReviewed(page: string, size: string, status: String): Observable<News[]>;
 }

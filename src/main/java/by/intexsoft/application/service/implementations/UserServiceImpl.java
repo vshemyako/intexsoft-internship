@@ -3,11 +3,13 @@ package by.intexsoft.application.service.implementations;
 import by.intexsoft.application.model.Authority;
 import by.intexsoft.application.model.User;
 import by.intexsoft.application.repository.UserRepository;
+import by.intexsoft.application.service.AuthenticationService;
 import by.intexsoft.application.service.AuthorityService;
 import by.intexsoft.application.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,11 +22,18 @@ import java.util.List;
 @Service
 public class UserServiceImpl extends AbstractEntityServiceImpl<User> implements UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final AuthorityService authorityService;
 
     @Autowired
-    private AuthorityService authorityService;
+    public UserServiceImpl(
+            JpaRepository<User, Integer> jpaRepository,
+            UserRepository userRepository,
+            AuthorityService authorityService) {
+        super(jpaRepository);
+        this.userRepository = userRepository;
+        this.authorityService = authorityService;
+    }
 
     @Override
     public User findByUserName(String userName) {

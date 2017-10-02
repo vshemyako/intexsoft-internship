@@ -1,7 +1,7 @@
 <md-card>
     <md-card-header id='personal-header'>
         <div>Article Creation Section</div>
-        <md-icon color='accent'>note_add</md-icon>
+        <md-icon color='accent'>build</md-icon>
     </md-card-header>
     <md-card-content>
         <md-error class='header-error' *ngIf='errorMessage'>{{errorMessage}}</md-error>
@@ -27,14 +27,14 @@
                 <div class='start-date-block'>
                     <md-form-field>
                         <input [(ngModel)]='startDate' mdInput placeholder='Start Date' [mdDatepicker]='startDatePicker'
-                               readonly [ngModelOptions]="{standalone: true}">
+                               readonly [ngModelOptions]="{standalone: true}" required>
                         <md-datepicker-toggle mdSuffix [for]='startDatePicker'></md-datepicker-toggle>
                         <md-datepicker #startDatePicker></md-datepicker>
                     </md-form-field>
 
                     <md-form-field>
                         <input [(ngModel)]='startTime' [ngModelOptions]="{standalone: true}" class='time-field' mdInput
-                               type='time' placeholder='Start Time'>
+                               type='time' placeholder='Start Time' required>
                     </md-form-field>
                 </div>
 
@@ -42,14 +42,14 @@
                 <div class='end-article-date'>
                     <md-form-field>
                         <input [(ngModel)]='endDate' mdInput placeholder='End Date' [mdDatepicker]='endDatePicker'
-                               readonly [ngModelOptions]="{standalone: true}">
+                               readonly [ngModelOptions]="{standalone: true}" required>
                         <md-datepicker-toggle mdSuffix [for]='endDatePicker'></md-datepicker-toggle>
                         <md-datepicker #endDatePicker></md-datepicker>
                     </md-form-field>
 
                     <md-form-field>
                         <input [(ngModel)]='endTime' [ngModelOptions]="{standalone: true}" class='time-field' mdInput
-                               type='time' placeholder='End Time'>
+                               type='time' placeholder='End Time' required>
                     </md-form-field>
                 </div>
             </div>
@@ -103,6 +103,13 @@
             <md-grid-tile colspan='1'>
                 <md-checkbox [(ngModel)]="categories.isJoy">Joy</md-checkbox>
             </md-grid-tile>
+            <md-grid-tile colspan='3'>
+            </md-grid-tile>
+            <md-grid-tile id='review-toggle' colspan='2'>
+                <md-slide-toggle id='articles-reviewed' [(ngModel)]='status'>
+                    Set Article State to Approved
+                </md-slide-toggle>
+            </md-grid-tile>
         </md-grid-list>
 
         <div class='spinner'>
@@ -112,9 +119,12 @@
     </md-card-content>
 
     <md-card-footer class='mat-action-row'>
+        <button md-raised-button color='primary' (click)='goBack()'>
+            Return to Article Review Page
+        </button>
         <button md-raised-button color='primary' [disabled]='!articleFormControl?.valid'
                 (click)='uploadArticle()'>
-            Send Article For Review
+            Save Article
         </button>
     </md-card-footer>
 </md-card>

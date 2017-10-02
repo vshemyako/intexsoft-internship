@@ -80,7 +80,7 @@ export class AdminComponent {
     }
 
     /**
-     * Makes use of userService to request more users to display from db
+     * Makes use of userService to request more users to display from database
      */
     private findSubset(): void {
         this.submitted = false;
@@ -152,7 +152,7 @@ export class AdminComponent {
 
     /**
      * Disables/enables next UI button
-     * @returns {boolean} false - if not users to display
+     * @returns {boolean} false - if no users to display
      */
     private hasNextUsers(): boolean {
         return !!this.users.length;
@@ -167,7 +167,6 @@ export class AdminComponent {
         this.methodNumber = 1;
         this.getAllEnabled(true);
     }
-
 
     /**
      * Helper method to request only disabled users

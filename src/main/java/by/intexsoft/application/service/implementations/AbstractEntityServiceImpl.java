@@ -16,10 +16,14 @@ import by.intexsoft.application.service.AbstractEntityService;
  *
  * @param <T> - entity upon which basic CRUD operations will take place
  */
-public class AbstractEntityServiceImpl<T extends AbstractEntity> implements AbstractEntityService<T> {
+public abstract class AbstractEntityServiceImpl<T extends AbstractEntity> implements AbstractEntityService<T> {
+
+    private final JpaRepository<T, Integer> repository;
 
     @Autowired
-    private JpaRepository<T, Integer> repository;
+    public AbstractEntityServiceImpl(JpaRepository<T, Integer> repository) {
+        this.repository = repository;
+    }
 
     @Override
     public void delete(int id) {

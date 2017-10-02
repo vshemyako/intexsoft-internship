@@ -5,7 +5,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 /**
  * Service that allows performing basic CRUD operations upon {@link User}
@@ -25,7 +24,7 @@ public interface UserService extends AbstractEntityService<User> {
      * Saves a given entity. Save operation might change a given instance, for
      * this reason an instance is returned
      *
-     * @param {@link User} which has to be saved in a database
+     * @param user - {@link User} which has to be saved in a database
      * @return - saved {@link User}
      */
     @Transactional

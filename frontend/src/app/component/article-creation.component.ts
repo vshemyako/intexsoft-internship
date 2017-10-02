@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Inject} from "@angular/core";
 import {FormGroup, FormControl, Validators} from "@angular/forms";
 import {User} from "../model/user";
 import {News} from "../model/news";
 import {NativeDateAdapter, DateAdapter} from "@angular/material";
-import {Timestamp} from "rxjs";
 import {Category} from "../model/category";
+import {INewsService} from "../service/inews.service";
+import {Router} from "@angular/router";
 
 /**
  * Controls features of the application associated with article creation logic
@@ -38,7 +39,7 @@ export class ArticleCreationComponent implements OnInit {
     private submitted: boolean = false;
 
     /**
-     * Defines possible user roles
+     * Defines possible article categories
      */
     private categories = {
         isGlobal: false,
@@ -48,36 +49,47 @@ export class ArticleCreationComponent implements OnInit {
         isJoy: false
     };
 
-    constructor(dateAdapter: DateAdapter<NativeDateAdapter>) {
+    constructor(@Inject('newsService') private newsService: INewsService,
+                private router: Router,
+                dateAdapter: DateAdapter<NativeDateAdapter>) {
         dateAdapter.setLocale('en-GB');
     }
 
     ngOnInit() {
         this.article = new News();
         this.articleFormControl = new FormGroup({
-            'validTitle':new FormControl((this.article.title, [Validators.required, Validators.minLength(5)])),
+            'validTitle': new FormControl((this.article.title, [Validators.required, Validators.minLength(5)])),
             'validDescription': new FormControl(this.article.description, [Validators.required, Validators.minLength(20), Validators.maxLength(160)]),
             'validArticle': new FormControl(this.article.article, [Validators.required, Validators.minLength(100), Validators.maxLength(1500)]),
         });
     }
 
+    /**
+     * Adds information to article object and invoke save() method to persist new article in a database
+     */
     private uploadArticle(): void {
         this.article.startDisplay = this.getTimeInLocalMillis(this.startTime, this.startDate);
         this.article.endDisplay = this.getTimeInLocalMillis(this.endTime, this.endDate);
         this.article.categories = this.createCategoriesArray();
-        console.log(this.article);
+        this.save();
     }
 
     /**
-     * Convert provided time and date values into local milliseconds from 1970
+     * Convert provided time and date values into local milliseconds from 01.01.1970
      * @param time - string which represents time value
      * @param date - string which represents date value
-     * @returns {number} - sum number of millis from 1970 IN UTC
+     * @returns {number} - sum number of millis from 01.01.1970 IN UTC
      */
     private getTimeInLocalMillis(time: string, date: string): number {
-        let timeArray: String[] = time.split(':');
-        let millisFromTime: number = +timeArray[0] * 60 * 60 * 1000 + +timeArray[1] * 60 * 1000;
-        let millisFromDate: number = Date.parse(date) + 3 * 60 * 60 * 1000;
+        let millisFromTime: number = 0;
+        if (time) {
+            let timeArray: String[] = time.split(':');
+            millisFromTime = +timeArray[0] * 60 * 60 * 1000 + +timeArray[1] * 60 * 1000;
+        }
+        let millisFromDate: number = 0;
+        if (date) {
+            millisFromDate = Date.parse(date);
+        }
         return millisFromTime + millisFromDate;
     }
 
@@ -85,22 +97,41 @@ export class ArticleCreationComponent implements OnInit {
      * Creates new Authority array which is appended to user instance
      */
     private createCategoriesArray(): Category[] {
-        let authorityArray: Category[] = [];
+        let categoryArray: Category[] = [];
         if (this.categories.isGlobal) {
-            authorityArray.push(new Category(17, 'global'))
+            categoryArray.push(new Category(17, 'global'))
         }
         if (this.categories.isSport) {
-            authorityArray.push(new Category(18, 'sport'))
+            categoryArray.push(new Category(18, 'sport'))
         }
         if (this.categories.isArt) {
-            authorityArray.push(new Category(19, 'art'))
+            categoryArray.push(new Category(19, 'art'))
         }
         if (this.categories.isPolitics) {
-            authorityArray.push(new Category(20, 'politics'))
+            categoryArray.push(new Category(20, 'politics'))
         }
         if (this.categories.isJoy) {
-            authorityArray.push(new Category(20, 'entertainment'))
+            categoryArray.push(new Category(21, 'entertainment'))
         }
-        return authorityArray;
+        return categoryArray;
+    }
+
+    /**
+     * A method which is invoked when all needed information has been provided in the article creation form.
+     * A consequent http request is send to back-end part of the application
+     */
+    save(): void {
+        this.submitted = true;
+        this.errorMessage = null;
+
+        let article: News = this.article;
+        this.newsService.save(article)
+            .subscribe(result => {
+                    this.router.navigate(['/'])
+                },
+                error => {
+                    this.submitted = false;
+                    this.errorMessage = "An error occurred! Article wasn't created";
+                });
     }
 }

@@ -31,7 +31,7 @@ export interface IUserService {
     saveAdmin(user: User): Observable<User>;
 
     /**
-     * @param username of a User instance to obtain
+     * @param  user instance to obtain
      * @returns Observable after the completion of the underlying functionality. Generic type is an instance of a User class
      */
     obtainUser(user: User): Observable<User>;
