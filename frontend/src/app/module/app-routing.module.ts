@@ -11,6 +11,10 @@ import {AdminComponent} from "../component/admin.component";
 import {ArticleCreationComponent} from "../component/article-creation.component";
 import {ArticleRevisionComponent} from "../component/article-revision.component";
 import {ArticleCreationDetailComponent} from "../component/article-creation-detail.component";
+import {AdminSectionGuard} from "../guard/admin-section.guard";
+import {PersonalSectionGuard} from "../guard/personal-section.guard";
+import {ArticleCreationSectionGuard} from "../guard/article-creation-section-guard";
+import {ArticleRevisionSectionGuard} from "../guard/article-revision-section-guard";
 
 /**
  * An array of key/value pairs which in essence specify what urls correspond to particular views
@@ -35,33 +39,33 @@ const routes: Routes = [
     },
     {
         path: 'personal',
-        component: PersonalDataComponent
-        /*canActivate: [NavigationGuard]*/
+        component: PersonalDataComponent,
+        canActivate: [PersonalSectionGuard]
     },
     {
         path: 'admin',
-        component: AdminComponent
-        /*canActivate: [NavigationGuard]*/
+        component: AdminComponent,
+        canActivate: [AdminSectionGuard]
     },
     {
         path: 'create',
-        component: ArticleCreationComponent
-        /*canActivate: [NavigationGuard]*/
+        component: ArticleCreationComponent,
+        canActivate: [ArticleCreationSectionGuard]
     },
     {
         path: 'news/detail/:id',
-        component: ArticleCreationDetailComponent
-        /*canActivate: [NavigationGuard]*/
+        component: ArticleCreationDetailComponent,
+        canActivate: [ArticleRevisionSectionGuard]
     },
     {
         path: 'review',
-        component: ArticleRevisionComponent
-        /*canActivate: [NavigationGuard]*/
+        component: ArticleRevisionComponent,
+        canActivate: [ArticleRevisionSectionGuard]
     },
     {
         path: 'user/:id',
-        component: UserDetailComponent
-        /*canActivate: [NavigationGuard]*/
+        component: UserDetailComponent,
+        canActivate: [AdminSectionGuard]
     },
     {
         path: 'news/:id',

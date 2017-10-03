@@ -9,9 +9,6 @@
         <button md-menu-item routerLink='/admin'>Administration Section</button>
     </md-menu>
 
-    <!-- TODO Don't forget to delete old button. Is hidden for now! -->
-    <button md-raised-button *ngIf=false color='primary' routerLink='/workspace'>Workspace</button>
-
     <button *ngIf='!isLoggedIn()' color='primary' md-raised-button routerLink='/signup'>Sign Up</button>
     <button *ngIf='!isLoggedIn()' color='primary' md-raised-button routerLink='/login'>Log In</button>
     <button *ngIf='isLoggedIn()' color='primary' md-raised-button (click)='logout()'>Log Out</button>
