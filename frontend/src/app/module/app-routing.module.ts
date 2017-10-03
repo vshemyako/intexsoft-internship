@@ -1,12 +1,9 @@
 import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
-import {DashboardComponent} from "../component/dashboard.component";
-import {UserComponent} from "../component/user.component";
 import {UserDetailComponent} from "../component/user-detail.component";
 import {LoginFormComponent} from "../component/login-form.component";
 import {NewsComponent} from "../component/news.component";
 import {SignupFormComponent} from "../component/signup-form.component";
-import {WorkspaceComponent} from "../component/workspace.component";
 import {PageNotFoundComponent} from "../component/page-not-found.component";
 import {NewsDetailComponent} from "../component/news-detail.component";
 import {PersonalDataComponent} from "../component/personal-data.component";
@@ -20,17 +17,9 @@ import {ArticleCreationDetailComponent} from "../component/article-creation-deta
  */
 const routes: Routes = [
     {
-        path: 'users',
-        component: UserComponent
-    },
-    {
         path: '',
         redirectTo: 'news',
         pathMatch: 'full'
-    },
-    {
-        path: 'dashboard',
-        component: DashboardComponent
     },
     {
         path: 'login',
@@ -45,35 +34,34 @@ const routes: Routes = [
         component: SignupFormComponent
     },
     {
-        //TODO: workspace component is substituted
-        path: 'workspace',
-        component: WorkspaceComponent,
-        //TODO: uncomment this part later
-        /*canActivate: [NavigationGuard]*/
-    },
-    {
         path: 'personal',
         component: PersonalDataComponent
+        /*canActivate: [NavigationGuard]*/
     },
     {
         path: 'admin',
         component: AdminComponent
+        /*canActivate: [NavigationGuard]*/
     },
     {
         path: 'create',
         component: ArticleCreationComponent
+        /*canActivate: [NavigationGuard]*/
     },
     {
         path: 'news/detail/:id',
         component: ArticleCreationDetailComponent
+        /*canActivate: [NavigationGuard]*/
     },
     {
         path: 'review',
         component: ArticleRevisionComponent
+        /*canActivate: [NavigationGuard]*/
     },
     {
         path: 'user/:id',
         component: UserDetailComponent
+        /*canActivate: [NavigationGuard]*/
     },
     {
         path: 'news/:id',

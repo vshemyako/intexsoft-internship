@@ -37,4 +37,11 @@ export interface INewsService {
      * @param status - determines what type of articles to request
      */
     findAllReviewed(page: string, size: string, status: String): Observable<News[]>;
+
+    /**
+     * Retrieves approved and relevant subset of data in manageable form
+     * @param page - the page of data to retrieve
+     * @param size - the size of the page
+     */
+    findAllReviewedAndRelevant(page: string, size: string): Observable<News[]>;
 }

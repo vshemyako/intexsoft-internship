@@ -94,8 +94,8 @@ public class NewsRestController {
     }
 
     /**
-     * @param pageable - instance of {@link Pageable} interface which has pagination methods
-     * @param statusName  - determines news of what status to retrieve
+     * @param pageable   - instance of {@link Pageable} interface which has pagination methods
+     * @param statusName - determines news of what status to retrieve
      * @return {@link ResponseEntity<Page<News>>} - response entity with embedded sublist of instances
      * and http status code
      */
@@ -111,6 +111,31 @@ public class NewsRestController {
             return new ResponseEntity<>(reviewedNewsPage, HttpStatus.CREATED);
         } else {
             LOGGER.warn("Request to retrieve reviewed news starting from page {} with size {} failed",
+                    pageable.getPageNumber(), pageable.getPageSize());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    /**
+     * Retrieves news which are reviewed and have appropriate time for review
+     *
+     * @param pageable    - instance of {@link Pageable} interface which has pagination methods
+     * @return {@link ResponseEntity<Page<News>>} - response entity with embedded sublist of instances
+     * and http status code
+     */
+    @RequestMapping(value = "/news/all/reviewed/relevant", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<Page<News>> findAllReviewedAndRelevant(Pageable pageable) {
+        System.out.println("Received request!!!");
+        LOGGER.info("Request was received to retrieve reviewed relevant news starting from page {} with size {}",
+                pageable.getPageNumber(), pageable.getPageSize());
+        Page<News> reviewedNewsPage = newsService.findAllReviewedAndRelevant(pageable);
+
+        if (reviewedNewsPage != null) {
+            LOGGER.info("Request to retrieve reviewed relevant news starting from page {} with size {} succeed",
+                    pageable.getPageNumber(), pageable.getPageSize());
+            return new ResponseEntity<>(reviewedNewsPage, HttpStatus.CREATED);
+        } else {
+            LOGGER.warn("Request to retrieve reviewed relevant news starting from page {} with size {} failed",
                     pageable.getPageNumber(), pageable.getPageSize());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

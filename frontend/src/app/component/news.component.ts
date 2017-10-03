@@ -38,7 +38,7 @@ export class NewsComponent implements OnInit {
      * As soon as a component is initialized several articles are requested to be displayed
      */
     ngOnInit(): void {
-        this.newsService.findSubset(this.pageNumber.toString(), SIZE_OF_A_PAGE.toString())
+        this.newsService.findAllReviewedAndRelevant(this.pageNumber.toString(), SIZE_OF_A_PAGE.toString())
             .subscribe((articles: News[]) => {
                     this.articles = articles;
                 },
@@ -52,15 +52,17 @@ export class NewsComponent implements OnInit {
      * Makes use of newsService to request more articles to display from db
      */
     loadMoreArticles(): void {
-        this.newsService.findSubset(this.pageNumber.toString(), SIZE_OF_A_PAGE.toString())
+        this.newsService.findAllReviewedAndRelevant(this.pageNumber.toString(), SIZE_OF_A_PAGE.toString())
             .subscribe((articles: News[]) => {
-                    articles.forEach(article =>
-                        this.articles.push(article)
-                    )
+                    if (articles.length > 0) {
+                        articles.forEach(article =>
+                            this.articles.push(article)
+                        );
+                        this.pageNumber += PAGE_STEP;
+                    }
                 },
                 error => {
                     this.errorMessage = 'Sorry! No more articles available at the moment!';
                 });
-        this.pageNumber += PAGE_STEP;
     }
 }
