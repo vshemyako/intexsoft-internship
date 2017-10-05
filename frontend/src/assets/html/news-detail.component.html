@@ -1,11 +1,11 @@
 <md-card>
     <md-card-title class='mat-h1'>{{singleArticle?.description}}</md-card-title>
-    <img md-card-image src='./assets/image/006.jpeg' alt='picture'>
+    <img md-card-image src={{imageSource+imageNumber+imageFormat}} alt='picture'>
     <div class='card-footer' color='primary'>
         <md-card-content class='mat-body'>{{singleArticle?.article}}</md-card-content>
         <div class='button-container'>
-            <button md-raised-button color='primary' (click)="goBack()">Go Back</button>
-            <button md-raised-button color='primary' (click)="readComments()">Read Comments</button>
+            <button md-raised-button color='primary' (click)="goBack()">{{'Go_Back' | translate}}</button>
+            <button md-raised-button color='primary' disabled>{{'Read_Comments' | translate}}</button>
         </div>
     </div>
 </md-card>

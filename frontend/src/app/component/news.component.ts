@@ -12,6 +12,8 @@ const SIZE_OF_A_PAGE = 2;
  */
 const PAGE_STEP = 1;
 
+const IMAGE_SOURCE = './assets/image/';
+
 /**
  * Renders news objects which are intended to be displayed on the home page.
  * Provides only superficial information of articles
@@ -29,6 +31,9 @@ export class NewsComponent implements OnInit {
     private pageNumber: number;
     private errorMessage: string;
     private articles: News[];
+    private Math: any;
+    private imageSource:string = './assets/image/';
+    private imageFormat:string = '.jpeg';
 
     constructor(@Inject('newsService') private newsService: INewsService) {
         this.pageNumber = 0;
@@ -55,9 +60,9 @@ export class NewsComponent implements OnInit {
         this.newsService.findAllReviewedAndRelevant(this.pageNumber.toString(), SIZE_OF_A_PAGE.toString())
             .subscribe((articles: News[]) => {
                     if (articles.length > 0) {
-                        articles.forEach(article =>
-                            this.articles.push(article)
-                        );
+                        articles.forEach(article => {
+                            this.articles.push(article);
+                        });
                         this.pageNumber += PAGE_STEP;
                     }
                 },

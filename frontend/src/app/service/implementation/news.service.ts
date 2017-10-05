@@ -88,14 +88,13 @@ export class NewsService implements INewsService {
      * @param status - determines what type of articles to request
      */
     findAllReviewed(page: string, size: string, status: String): Observable<News[]> {
-        return this.http.get(SUBSET_REVIEWED_RELEVANT_PATH + '/' + status, NewsService.getRequestOptionsWithPage(page, size))
+        return this.http.get(SUBSET_STATUS_NEWS_PATH + '/' + status, NewsService.getRequestOptionsWithPage(page, size))
             .map((response: Response) => {
                 return response.json().content;
             })
             .catch((error: any) => Observable.throw(error));
     }
 
-    //TODO: move such methods to another new class
     /**
      * Search params to request just a chunk of data
      * @param page - the page of data to retrieve

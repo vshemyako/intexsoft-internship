@@ -33,29 +33,6 @@ export class AppComponent {
         this.translate.use(language);
     }
 
-    //TODO: remove inline comments
-    haveAccess(): boolean {
-        /*
-         let condition: boolean = false;
-         let authorities: string[] = JSON.parse(localStorage.getItem('authorities'));
-         // let array: string[] = JSON.parse('["ROLE_ADMIN", "ROLE_EDITOR", "ROLE_REVIEWER", "ROLE_USER"]');
-         // console.log(authorities);
-
-         if(authorities == null) {
-         // console.log(false);
-         return false;
-         }
-
-         for(let role in authorities) {
-         if(role === 'ROLE_USER') {
-         // console.log(role);
-         condition = true;
-         }
-         }
-         return condition;*/
-        return !!localStorage.getItem('authorities');
-    }
-
     /**
      * Is used to determine which components of UI should be displayed to a User
      * @returns {boolean} - value which determines set of visualized components

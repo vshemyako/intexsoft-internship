@@ -59,7 +59,7 @@ export class PersonalDataComponent implements OnInit {
                     this.currentUser.password = '';
                 },
                 error => {
-                    this.errorMessage = "Sorry! Credentials you've provided are incorrect";
+                    this.errorMessage = "Personal_Admin_Error";
                 });
         this.submitted = false;
     }

@@ -17,8 +17,6 @@ import {Router} from "@angular/router";
 })
 export class ArticleCreationComponent implements OnInit {
 
-    //TODO: bind article creator
-    private currentUser: User;
     private article: News;
     private articleFormControl: FormGroup;
 
@@ -131,7 +129,7 @@ export class ArticleCreationComponent implements OnInit {
                 },
                 error => {
                     this.submitted = false;
-                    this.errorMessage = "An error occurred! Article wasn't created";
+                    this.errorMessage = "Article_Creation_Error";
                 });
     }
 }

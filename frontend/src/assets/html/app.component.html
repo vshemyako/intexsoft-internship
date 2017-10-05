@@ -1,17 +1,19 @@
 <md-toolbar class='header'>
-    <button md-raised-button color='primary' routerLink='/news'>News</button>
+    <button md-raised-button color='primary' routerLink='/news' [translate]>{{'News' | translate}}</button>
 
-    <button md-raised-button color='primary' [disabled]='!isLoggedIn()' [mdMenuTriggerFor]='workspaceMenu'>Workspace</button>
+    <button md-raised-button color='primary' [disabled]='!isLoggedIn()' [mdMenuTriggerFor]='workspaceMenu'>
+        {{'Workspace' | translate}}
+    </button>
     <md-menu #workspaceMenu='mdMenu'>
-        <button md-menu-item routerLink='/personal'>Personal Data Section</button>
-        <button md-menu-item routerLink='/create'>Article Creation Section</button>
-        <button md-menu-item routerLink='/review'>Article Revision Section</button>
-        <button md-menu-item routerLink='/admin'>Administration Section</button>
+        <button md-menu-item routerLink='/personal'>{{'Personal_Data_Section' | translate}}</button>
+        <button md-menu-item routerLink='/create'>{{'Article_Creation_Section' | translate}}</button>
+        <button md-menu-item routerLink='/review'>{{'Article_Revision_Section' | translate}}</button>
+        <button md-menu-item routerLink='/admin'>{{'Administration_Section' | translate}}</button>
     </md-menu>
 
-    <button *ngIf='!isLoggedIn()' color='primary' md-raised-button routerLink='/signup'>Sign Up</button>
-    <button *ngIf='!isLoggedIn()' color='primary' md-raised-button routerLink='/login'>Log In</button>
-    <button *ngIf='isLoggedIn()' color='primary' md-raised-button (click)='logout()'>Log Out</button>
+    <button *ngIf='!isLoggedIn()' color='primary' md-raised-button routerLink='/signup'>{{'Sign_Up' | translate}}</button>
+    <button *ngIf='!isLoggedIn()' color='primary' md-raised-button routerLink='/login'>{{'Log_In' | translate}}</button>
+    <button *ngIf='isLoggedIn()' color='primary' md-raised-button (click)='logout()'>{{'Log_Out' | translate}}</button>
 </md-toolbar>
 <main>
     <router-outlet></router-outlet>

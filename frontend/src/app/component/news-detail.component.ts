@@ -2,6 +2,7 @@ import {News} from "../model/news";
 import {Component, OnInit, Inject} from "@angular/core";
 import {INewsService} from "../service/inews.service";
 import {ActivatedRoute, Router, ParamMap} from "@angular/router";
+
 /**
  * Component which controls News extra information which might be rendered
  */
@@ -13,6 +14,9 @@ import {ActivatedRoute, Router, ParamMap} from "@angular/router";
 export class NewsDetailComponent implements OnInit {
 
     private singleArticle: News;
+    private imageSource: string = './assets/image/';
+    private imageFormat: string = '.jpeg';
+    private imageNumber: number = Math.floor(Math.random() * 6 + 1);
 
     constructor(@Inject('newsService') private newsService: INewsService,
                 private route: ActivatedRoute,
@@ -41,20 +45,6 @@ export class NewsDetailComponent implements OnInit {
             );
     }
 
-    /*
-     ngOnInit(): void {
-     this.newsService.findSubset(this.pageNumber.toString(), SIZE_OF_A_PAGE.toString())
-     .subscribe((articles: News[]) => {
-     this.articles = articles;
-     },
-     error => {
-     this.errorMessage = 'Sorry! No more articles available at the moment!';
-     });
-     this.pageNumber += PAGE_STEP;
-     }
-     */
-
-    //TODO: check this implementation
     /**
      *  Simply displays previously rendered page. This is possible due to the Location service which is navigates one
      *  step backwards in the browser's history stack

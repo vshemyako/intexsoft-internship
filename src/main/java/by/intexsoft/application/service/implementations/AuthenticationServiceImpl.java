@@ -1,16 +1,18 @@
 package by.intexsoft.application.service.implementations;
 
+import by.intexsoft.application.controller.UserRestController;
 import by.intexsoft.application.model.User;
 import by.intexsoft.application.service.AuthenticationService;
 import by.intexsoft.application.service.UserService;
+import ch.qos.logback.classic.Logger;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.context.SecurityContextHolder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -36,6 +38,7 @@ import static io.jsonwebtoken.SignatureAlgorithm.HS256;
 public class AuthenticationServiceImpl implements AuthenticationService {
 
     private static final SignatureAlgorithm SIGNATURE_ALGORITHM = HS256;
+    private final static Logger LOGGER = (Logger) LoggerFactory.getLogger(UserRestController.class);
 
     @Value("${jwt.refresh_time}")
     private long REFRESH_TIME;
@@ -91,7 +94,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         try {
             jsonString = objectMapper.writeValueAsString(authorities);
         } catch (JsonProcessingException exception) {
-            //TODO: insert logger here;
+            LOGGER.error("Error occurred while processing JSON!");
         }
         return jsonString;
     }
@@ -112,8 +115,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 authentication = new UsernamePasswordAuthenticationToken(getUsernameFromJWT(token), null,
                         AuthorityUtils.commaSeparatedStringToAuthorityList(String.join(",", getAuthoritiesFromJWT(token))));
             } catch (NullPointerException exc) {
-                //TODO: remove this line
-                System.out.print("A JSON Web Token verification error occurred.");
+                LOGGER.error("A JSON Web Token verification error occurred.");
             }
         }
         return authentication;
@@ -182,7 +184,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             writer.print(infoToAttach);
             writer.flush();
         } catch (IOException exception) {
-            //TODO: insert logger here;
+            LOGGER.error("An error occurred while writing authority information into response object");
         }
     }
 }

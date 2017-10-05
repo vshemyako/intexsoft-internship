@@ -5,12 +5,12 @@ import {User} from "../model/user";
 /**
  * Info message which will be displayed to admin until he performs an action
  */
-const INFO_MESSAGE: string = 'None users are selected yet. Awaiting for your action';
+const INFO_MESSAGE: string = 'Admin_Info';
 
 /**
  * Info message which will be displayed to admin until he performs an action
  */
-const ERROR_MESSAGE: string = 'Sorry! No more users to display!';
+const ERROR_MESSAGE: string = 'Admin_Error';
 
 /**
  * @type {number} - number of users per page request

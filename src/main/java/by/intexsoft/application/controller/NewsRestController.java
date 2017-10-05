@@ -38,8 +38,6 @@ public class NewsRestController {
      * @return {@link ResponseEntity<Page<News>>} - response entity with embedded sublist of instances
      * and http status code
      */
-    //TODO: Don't forget to substitute user with somekind of DTO. Otherwise pw is exposed
-    //TODO: Temporary solution - annotated entity with @JsonIgnore @JsonProperty
     @RequestMapping(value = "/news", method = RequestMethod.GET)
     public ResponseEntity<Page<News>> findSubset(Pageable pageable) {
         LOGGER.info("Request was received to retrieve news starting from page {} with size {}",

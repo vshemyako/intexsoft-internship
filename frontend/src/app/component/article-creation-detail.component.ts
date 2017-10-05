@@ -99,7 +99,6 @@ export class ArticleCreationDetailComponent implements OnInit {
     /**
      * Changes boolean category array to correctly display them on UI
      */
-    //TODO refactor this method
     private syncCategoriesArray(): void {
         for (let category of this.article.categories) {
             if (category.name === 'global') {
@@ -206,7 +205,7 @@ export class ArticleCreationDetailComponent implements OnInit {
                 },
                 error => {
                     this.submitted = false;
-                    this.errorMessage = "An error occurred! Article wasn't created";
+                    this.errorMessage = "Article_Creation_Error";
                 });
     }
 

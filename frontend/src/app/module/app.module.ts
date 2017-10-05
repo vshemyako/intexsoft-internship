@@ -1,3 +1,4 @@
+import {NgModule} from "@angular/core";
 import {BrowserModule} from "@angular/platform-browser";
 import {
     MdToolbarModule,
@@ -18,11 +19,10 @@ import {
     MdSlideToggleModule,
     MdCheckboxModule
 } from "@angular/material";
-import {NgModule} from "@angular/core";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
-import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {AppComponent} from "../component/app.component";
 import {UserDetailComponent} from "../component/user-detail.component";
@@ -47,7 +47,7 @@ import {ArticleRevisionSectionGuard} from "../guard/article-revision-section-gua
 import {ArticleCreationSectionGuard} from "../guard/article-creation-section-guard";
 import {PersonalSectionGuard} from "../guard/personal-section.guard";
 
-const URL_I18N_FILES = 'assets/i18n/';
+const URL_I18N_FILES = './assets/i18n/';
 const FILE_FORMAT = '.json';
 
 /**
