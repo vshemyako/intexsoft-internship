@@ -1,0 +1,82 @@
+md-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: stretch;
+    width: 600px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+#revision-header {
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: -24px -24px 0 -24px;
+    padding: 16px 20px 16px 8px;
+    border-bottom: 1px solid rgba(0, 0, 0, .12);
+}
+
+#revision-header div {
+    margin-right: auto;
+}
+
+md-error {
+    display: flex;
+    justify-content: center;
+    padding-top: 30px;
+    font-size: small;
+}
+
+.info-message {
+    color: rgba(0, 0, 0, .87);
+    text-decoration: solid;
+}
+
+.article-get-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.table-header {
+    border-bottom: 1px solid rgba(0, 0, 0, .12);
+    border-top: 1px solid rgba(0, 0, 0, .12);
+}
+
+md-grid-tile {
+    font-size: 12px;
+}
+
+.spinner {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.table-row {
+    border-bottom: 1px solid rgba(0, 0, 0, .12);
+}
+
+md-card-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px 16px 24px;
+    border-top: 1px solid rgba(0, 0, 0, .12);
+}
+
+.page-number {
+    display: flex;
+    align-self: center;
+    justify-content: space-between;
+    align-items: center;
+    width: 40px;
+    margin-left: auto;
+    margin-right: auto;
+}

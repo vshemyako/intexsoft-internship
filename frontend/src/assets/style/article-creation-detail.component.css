@@ -1,0 +1,120 @@
+md-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: stretch;
+    width: 600px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+#personal-header {
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: -24px -24px 0px -24px;
+    padding: 16px 20px 16px 8px;
+    border-bottom: 1px solid rgba(0, 0, 0, .12);
+}
+
+#personal-header div {
+    margin-right: auto;
+}
+
+.article-creation-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.article-title {
+    padding-top: 30px;
+}
+
+.date-container {
+    display: flex;
+}
+
+.start-date-block {
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    margin-right: 30px;
+    margin-top: 25px;
+    border: 1px solid rgba(0, 0, 0, .12);
+}
+
+.end-article-date {
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    margin-left: 30px;
+    margin-top: 25px;
+    border: 1px solid rgba(0, 0, 0, .12);
+}
+
+.time-field, .desc-textarea {
+    resize: none;
+}
+
+.desc-textarea {
+    width: 500px;
+}
+
+.desc-container {
+    display: flex;
+    justify-content: center;
+    padding: 10px 25px 5px 25px;
+    width: 500px;
+}
+
+.article-container {
+    width: 500px;
+    padding: 10px 30px 30px 30px;
+    border: 1px solid rgba(0, 0, 0, .12);
+}
+
+.article-textarea {
+    resize: none;
+    height: 300px;
+    width: 500px;
+}
+
+.category-grid {
+    padding-top: 10px;
+    margin-bottom: -15px;
+}
+
+#category-grid-header {
+    display: flex;
+    justify-content: flex-start;
+    font-size: 16px;
+}
+
+md-card-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px 16px 24px;
+    border-top: 1px solid rgba(0, 0, 0, .12);
+}
+
+#review-toggle {
+    border-top: 1px solid rgba(0, 0, 0, .12);
+}
+
+.header-error {
+    display: flex;
+    justify-content: center;
+    padding-top: 30px;
+    font-size: small;
+}
+
+.spinner {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}

@@ -1,0 +1,103 @@
+<md-card>
+    <md-card-header id='personal-header'>
+        <div>{{'Personal_Data_Section' | translate}}</div>
+        <md-icon color='accent'>account_circle</md-icon>
+    </md-card-header>
+    <md-card-content>
+        <md-error class="mat-error" *ngIf='errorMessage'>{{errorMessage | translate}}</md-error>
+        <form *ngIf='!submitted' id='personal-form' [formGroup]='personalFormControl' (ngSubmit)='save()'
+              #personalForm='ngForm'>
+            <md-grid-list id='top-grid' cols='2' rowHeight="4:1">
+
+                <!-- Login -->
+                <md-grid-tile colspan='1'>
+                    <md-form-field>
+                        <input mdInput formControlName='validName' type='text' placeholder="{{'Login' | translate}}"
+                               required
+                               [(ngModel)]='currentUser.username' name='currentUser.username'>
+                        <md-error *ngIf='personalFormControl.controls["validName"].errors?.required'>
+                            {{'Login_is_required' | translate}}
+                        </md-error>
+                        <md-error *ngIf='personalFormControl.controls["validName"].errors?.minlength'>
+                            {{'Min_Length' | translate}}
+                        </md-error>
+                    </md-form-field>
+                </md-grid-tile>
+
+                <!-- First name -->
+                <md-grid-tile colspan='1'>
+                    <md-form-field>
+                        <input mdInput formControlName='validFirstName' type='text' type='text'
+                               placeholder="{{'First_name' | translate}}"
+                               [(ngModel)]='currentUser.firstName'>
+                        <md-error *ngIf='personalFormControl.controls["validFirstName"].errors?.minlength'>
+                            {{'Min_Length' | translate}}
+                        </md-error>
+                    </md-form-field>
+                </md-grid-tile>
+
+                <!-- Last name -->
+                <md-grid-tile colspan='1'>
+                    <md-form-field>
+                        <input mdInput type='text' formControlName='validLastName' placeholder="{{'Last_name' | translate}}"
+                               [(ngModel)]='currentUser.lastName'>
+                        <md-error *ngIf='personalFormControl.controls["validLastName"].errors?.minlength'>
+                            {{'Min_Length' | translate}}
+                        </md-error>
+                    </md-form-field>
+                </md-grid-tile>
+
+                <!-- Email -->
+                <md-grid-tile>
+                    <md-form-field colspan='1'>
+                        <input mdInput formControlName='validEmail' type='email' placeholder="{{'Email' | translate}}"
+                               [(ngModel)]='currentUser.email'>
+                        <md-error *ngIf='personalFormControl.controls["validEmail"].errors?.pattern'>
+                            {{'Invalid_email_address' | translate}}
+                        </md-error>
+                    </md-form-field>
+                </md-grid-tile>
+
+            </md-grid-list>
+        </form>
+
+        <!-- Status -->
+        <div>
+            <md-slide-toggle id='user-enabler' [(ngModel)]='currentUser.enabled'>
+                {{'Turn_To_Enable' | translate}}
+            </md-slide-toggle>
+        </div>
+
+        <!-- Authority -->
+        <md-grid-list class='authority-grid' cols='4' rowHeight="3:1">
+            <md-grid-tile id='authority-grid-header' colspan='4'>
+                {{'Choose_Roles' | translate}}
+            </md-grid-tile>
+            <md-grid-tile colspan='1'>
+                <md-checkbox [(ngModel)]="roles.isAdmin">{{'Admin' | translate}}</md-checkbox>
+            </md-grid-tile>
+            <md-grid-tile colspan='1'>
+                <md-checkbox [(ngModel)]="roles.isReviewer">{{'Reviewer' | translate}}</md-checkbox>
+            </md-grid-tile>
+            <md-grid-tile colspan='1'>
+                <md-checkbox [(ngModel)]="roles.isEditor">{{'Editor' | translate}}</md-checkbox>
+            </md-grid-tile>
+            <md-grid-tile colspan='1'>
+                <md-checkbox [(ngModel)]="roles.isUser">{{'User' | translate}}</md-checkbox>
+            </md-grid-tile>
+        </md-grid-list>
+
+        <div class='spinner'>
+            <md-spinner *ngIf='submitted' mode='indeterminate'></md-spinner>
+        </div>
+    </md-card-content>
+
+    <md-card-footer>
+        <button md-raised-button color='accent' (click)='saveUser()'>
+            {{'Change_Personal_Information' | translate}}
+        </button>
+        <button md-raised-button color='primary' (click)='goBack()'>
+            {{'Return_To_Admin_Page' | translate}}
+        </button>
+    </md-card-footer>
+</md-card>

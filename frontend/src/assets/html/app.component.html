@@ -1,0 +1,32 @@
+<md-toolbar class='header'>
+    <button md-raised-button color='primary' routerLink='/news' [translate]>{{'News' | translate}}</button>
+
+    <button md-raised-button color='primary' [disabled]='!isLoggedIn()' [mdMenuTriggerFor]='workspaceMenu'>
+        {{'Workspace' | translate}}
+    </button>
+    <md-menu #workspaceMenu='mdMenu'>
+        <button md-menu-item routerLink='/personal'>{{'Personal_Data_Section' | translate}}</button>
+        <button md-menu-item routerLink='/create'>{{'Article_Creation_Section' | translate}}</button>
+        <button md-menu-item routerLink='/review'>{{'Article_Revision_Section' | translate}}</button>
+        <button md-menu-item routerLink='/admin'>{{'Administration_Section' | translate}}</button>
+    </md-menu>
+
+    <button *ngIf='!isLoggedIn()' color='primary' md-raised-button routerLink='/signup'>{{'Sign_Up' | translate}}</button>
+    <button *ngIf='!isLoggedIn()' color='primary' md-raised-button routerLink='/login'>{{'Log_In' | translate}}</button>
+    <button *ngIf='isLoggedIn()' color='primary' md-raised-button (click)='logout()'>{{'Log_Out' | translate}}</button>
+</md-toolbar>
+<main>
+    <router-outlet></router-outlet>
+</main>
+<md-toolbar class='footer'>
+    <button md-raised-button md-icon-button color='primary' (click)='scrollToTop()'>
+        <md-icon>arrow_upward</md-icon>
+    </button>
+    <button md-raised-button md-icon-button color='primary' [mdMenuTriggerFor]='langMenu'>
+        <md-icon>language</md-icon>
+    </button>
+    <md-menu #langMenu='mdMenu'>
+        <button md-menu-item (click)="switchLanguage('en')">English</button>
+        <button md-menu-item (click)="switchLanguage('ru')">Русский</button>
+    </md-menu>
+</md-toolbar>

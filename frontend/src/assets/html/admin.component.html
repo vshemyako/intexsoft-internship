@@ -1,0 +1,62 @@
+<md-card>
+    <md-card-header id='admin-header'>
+        <div>{{'Users_Administration_Section' | translate}}</div>
+        <md-icon color='accent'>settings</md-icon>
+    </md-card-header>
+    <md-card-content>
+        <md-error class='mat-error' *ngIf='errorMessage'>{{errorMessage | translate}}</md-error>
+        <md-error class='info-message' *ngIf='showInfo'>{{infoMessage | translate}}</md-error>
+        <div class='admin-get-buttons'>
+            <button md-raised-button color='primary' (click)='findAll()'>{{'Display_All_Users' | translate}}</button>
+            <button md-raised-button color='primary' (click)='getDisabled()'>{{'Display_Disabled_Users' | translate}}
+            </button>
+            <button md-raised-button color='primary' (click)='getEnabled()'>{{'Display_Enabled_Users' | translate}}
+            </button>
+        </div>
+
+        <!-- Administration Section -->
+        <md-grid-list class='table-header' cols='12' rowHeight='30px'>
+            <md-grid-tile colspan='1'>{{'Pos' | translate}}</md-grid-tile>
+            <md-grid-tile colspan='2'>{{'Login' | translate}}</md-grid-tile>
+            <md-grid-tile colspan='2'>{{'First_name' | translate}}</md-grid-tile>
+            <md-grid-tile colspan='2'>{{'Last_name' | translate}}</md-grid-tile>
+            <md-grid-tile colspan='2'>{{'Email_' | translate}}</md-grid-tile>
+            <md-grid-tile colspan='2'>{{'Status' | translate}}</md-grid-tile>
+            <md-grid-tile colspan='1'>{{'Details' | translate}}</md-grid-tile>
+        </md-grid-list>
+
+        <div *ngIf='submitted'>
+            <md-grid-list class='table-row' *ngFor='let user of users' cols='12' rowHeight='30px'>
+                <md-grid-tile colspan='1'>{{users.indexOf(user) + pageNumber * 5 + 1}}</md-grid-tile>
+                <md-grid-tile colspan='2'>{{user.username}}</md-grid-tile>
+                <md-grid-tile colspan='2'>{{user.firstName}}</md-grid-tile>
+                <md-grid-tile colspan='2'>{{user.lastName}}</md-grid-tile>
+                <md-grid-tile colspan='2'>{{user.email}}</md-grid-tile>
+                <md-grid-tile colspan='2'>{{user.enabled ? 'enabled' : 'disabled' | translate}}</md-grid-tile>
+                <!-- Details button -->
+                <md-grid-tile colspan='1'>
+                    <button md-icon-button color="accent" [routerLink]='["/user", user.id]'>
+                        <md-icon>visibility</md-icon>
+                    </button>
+                </md-grid-tile>
+            </md-grid-list>
+        </div>
+
+        <div class='spinner'>
+            <md-spinner color='accent' *ngIf='!submitted' mode='indeterminate'></md-spinner>
+        </div>
+    </md-card-content>
+
+    <md-card-footer class='mat-action-row'>
+        <button [disabled]='!hasPreviousUsers()' md-raised-button color='primary' (click)='previous()'>
+            {{'Previous_Users' | translate}}
+        </button>
+        <div class='page-number'>
+            <md-icon color='primary'>note</md-icon>
+            {{pageNumber + 1}}
+        </div>
+        <button [disabled]='!hasNextUsers()' md-raised-button color='primary' (click)='next()'>
+            {{'Next_Users' | translate}}
+        </button>
+    </md-card-footer>
+</md-card>

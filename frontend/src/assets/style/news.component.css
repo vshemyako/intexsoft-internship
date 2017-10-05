@@ -1,0 +1,24 @@
+md-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: stretch;
+    width: 500px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+md-card-title {
+    display: flex;
+    align-self: flex-start;
+}
+
+md-card-subtitle {
+    display: flex;
+    align-self: center;
+}
+
+md-card-content {
+    display: flex;
+    align-self: flex-start;
+}
