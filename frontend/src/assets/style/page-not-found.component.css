@@ -3,7 +3,7 @@ md-card {
     flex-direction: column;
     justify-content: space-around;
     align-items: stretch;
-    width: 250px;
+    width: 300px;
     margin-top: 25px;
     margin-bottom: 25px;
 }

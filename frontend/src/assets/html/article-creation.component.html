@@ -1,23 +1,23 @@
 <md-card>
     <md-card-header id='personal-header'>
-        <div>Article Creation Section</div>
+        <div>{{'Article_Creation_Section' | translate}}</div>
         <md-icon color='accent'>note_add</md-icon>
     </md-card-header>
     <md-card-content>
-        <md-error class='header-error' *ngIf='errorMessage'>{{errorMessage}}</md-error>
+        <md-error class='header-error' *ngIf='errorMessage'>{{errorMessage | translate}}</md-error>
 
         <form *ngIf='!submitted' class='article-creation-form' [formGroup]='articleFormControl' #articleForm='ngForm'>
             <!-- Article Title -->
             <div class='article-title'>
                 <md-form-field>
                     <input mdInput formControlName='validTitle' class='mat-accent' type='text'
-                           placeholder='Article Title' required
+                           placeholder="{{'Article_Title' | translate}}" required
                            [(ngModel)]='article.title' name='article.title'>
                     <md-error *ngIf='articleFormControl.controls["validTitle"].errors?.required'>
-                        Article Title is required
+                        {{'Article_Title_Required' | translate}}
                     </md-error>
                     <md-error *ngIf='articleFormControl.controls["validTitle"].errors?.minlength'>
-                        Length must be at least 5 symbols
+                        {{'Min_5_Length' | translate}}
                     </md-error>
                 </md-form-field>
             </div>
@@ -26,7 +26,8 @@
                 <!-- Start Date -->
                 <div class='start-date-block'>
                     <md-form-field>
-                        <input [(ngModel)]='startDate' mdInput placeholder='Start Date' [mdDatepicker]='startDatePicker'
+                        <input [(ngModel)]='startDate' mdInput placeholder="{{'Start_Date' | translate}}"
+                               [mdDatepicker]='startDatePicker'
                                readonly [ngModelOptions]="{standalone: true}">
                         <md-datepicker-toggle mdSuffix [for]='startDatePicker'></md-datepicker-toggle>
                         <md-datepicker #startDatePicker></md-datepicker>
@@ -34,14 +35,15 @@
 
                     <md-form-field>
                         <input [(ngModel)]='startTime' [ngModelOptions]="{standalone: true}" class='time-field' mdInput
-                               type='time' placeholder='Start Time'>
+                               type='time' placeholder="{{'Start_Time' | translate}}">
                     </md-form-field>
                 </div>
 
                 <!-- End Date -->
                 <div class='end-article-date'>
                     <md-form-field>
-                        <input [(ngModel)]='endDate' mdInput placeholder='End Date' [mdDatepicker]='endDatePicker'
+                        <input [(ngModel)]='endDate' mdInput placeholder="{{'End_Date' | translate}}"
+                               [mdDatepicker]='endDatePicker'
                                readonly [ngModelOptions]="{standalone: true}">
                         <md-datepicker-toggle mdSuffix [for]='endDatePicker'></md-datepicker-toggle>
                         <md-datepicker #endDatePicker></md-datepicker>
@@ -49,7 +51,7 @@
 
                     <md-form-field>
                         <input [(ngModel)]='endTime' [ngModelOptions]="{standalone: true}" class='time-field' mdInput
-                               type='time' placeholder='End Time'>
+                               type='time' placeholder="{{'End_Time' | translate}}">
                     </md-form-field>
                 </div>
             </div>
@@ -60,12 +62,12 @@
                 <textarea formControlName='validDescription' required mdInput class='desc-textarea' rows='1'
                           maxlength='160'
                           [(ngModel)]='article.description' name='article.description'
-                          placeholder='Short Article Description'></textarea>
+                          placeholder="{{'Short_Description' | translate}}"></textarea>
                     <md-error *ngIf='articleFormControl.controls["validDescription"].errors?.required'>
-                        Article Description is required
+                        {{'Article_Description_Error' | translate}}
                     </md-error>
                     <md-error *ngIf='articleFormControl.controls["validDescription"].errors?.minlength'>
-                        Length must be at least 20 symbols
+                        {{'Min_20_Length' | translate}}
                     </md-error>
                 </md-form-field>
             </div>
@@ -73,12 +75,12 @@
             <!-- Article -->
             <md-form-field class='article-container'>
                 <textarea formControlName='validArticle' required mdInput class='article-textarea'
-                          [(ngModel)]='article.article' name='article.article' placeholder='Article'></textarea>
+                          [(ngModel)]='article.article' name='article.article' placeholder="{{'Article' | translate}}"></textarea>
                 <md-error *ngIf='articleFormControl.controls["validArticle"].errors?.required'>
-                    Article Body is required
+                    {{'Article_Body_Error' | translate}}
                 </md-error>
                 <md-error *ngIf='articleFormControl.controls["validArticle"].errors?.minlength'>
-                    Length must be at least 100 symbols
+                    {{'Min_100_Length' | translate}}
                 </md-error>
             </md-form-field>
         </form>
@@ -86,22 +88,22 @@
         <!-- Categories -->
         <md-grid-list *ngIf='!submitted' class='category-grid' cols='5' rowHeight="2.5:1">
             <md-grid-tile id='category-grid-header' colspan='5'>
-                Choose Article Categories:
+                {{'Choose_Article' | translate}}
             </md-grid-tile>
             <md-grid-tile colspan='1'>
-                <md-checkbox [(ngModel)]="categories.isGlobal">Global</md-checkbox>
+                <md-checkbox [(ngModel)]="categories.isGlobal">{{'_Global' | translate}}</md-checkbox>
             </md-grid-tile>
             <md-grid-tile colspan='1'>
-                <md-checkbox [(ngModel)]="categories.isSport">Sport</md-checkbox>
+                <md-checkbox [(ngModel)]="categories.isSport">{{'_Sport' | translate}}</md-checkbox>
             </md-grid-tile>
             <md-grid-tile colspan='1'>
-                <md-checkbox [(ngModel)]="categories.isArt">Art</md-checkbox>
+                <md-checkbox [(ngModel)]="categories.isArt">{{'_Art' | translate}}</md-checkbox>
             </md-grid-tile>
             <md-grid-tile colspan='1'>
-                <md-checkbox [(ngModel)]="categories.isPolitics">Politics</md-checkbox>
+                <md-checkbox [(ngModel)]="categories.isPolitics">{{'_Politics' | translate}}</md-checkbox>
             </md-grid-tile>
             <md-grid-tile colspan='1'>
-                <md-checkbox [(ngModel)]="categories.isJoy">Joy</md-checkbox>
+                <md-checkbox [(ngModel)]="categories.isJoy">{{'_Joy' | translate}}</md-checkbox>
             </md-grid-tile>
         </md-grid-list>
 
@@ -114,7 +116,7 @@
     <md-card-footer class='mat-action-row'>
         <button md-raised-button color='primary' [disabled]='!articleFormControl?.valid'
                 (click)='uploadArticle()'>
-            Send Article For Review
+            {{'Send_For_Review' | translate}}
         </button>
     </md-card-footer>
 </md-card>

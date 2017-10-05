@@ -1,3 +1,4 @@
+import {NgModule} from "@angular/core";
 import {BrowserModule} from "@angular/platform-browser";
 import {
     MdToolbarModule,
@@ -18,26 +19,22 @@ import {
     MdSlideToggleModule,
     MdCheckboxModule
 } from "@angular/material";
-import {NgModule} from "@angular/core";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
-import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {AppComponent} from "../component/app.component";
-import {UserComponent} from "../component/user.component";
 import {UserDetailComponent} from "../component/user-detail.component";
 import {UserService} from "../service/implementation/user.service";
-import {DashboardComponent} from "../component/dashboard.component";
 import {AppRoutingModule} from "./app-routing.module";
 import {LoginFormComponent} from "../component/login-form.component";
 import {NewsComponent} from "../component/news.component";
 import {AuthenticationService} from "../service/implementation/authentication.service";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {SignupFormComponent} from "../component/signup-form.component";
-import {WorkspaceComponent} from "../component/workspace.component";
 import {PageNotFoundComponent} from "../component/page-not-found.component";
-import {NavigationGuard} from "../guard/navigation.guard";
+import {AdminSectionGuard} from "../guard/admin-section.guard";
 import {NewsService} from "../service/implementation/news.service";
 import {NewsDetailComponent} from "../component/news-detail.component";
 import {PersonalDataComponent} from "../component/personal-data.component";
@@ -46,8 +43,11 @@ import {ArticleCreationComponent} from "../component/article-creation.component"
 import {ArticleRevisionComponent} from "../component/article-revision.component";
 import {ArticleCreationDetailComponent} from "../component/article-creation-detail.component";
 import {MomentModule} from "angular2-moment";
+import {ArticleRevisionSectionGuard} from "../guard/article-revision-section-guard";
+import {ArticleCreationSectionGuard} from "../guard/article-creation-section-guard";
+import {PersonalSectionGuard} from "../guard/personal-section.guard";
 
-const URL_I18N_FILES = 'assets/i18n/';
+const URL_I18N_FILES = './assets/i18n/';
 const FILE_FORMAT = '.json';
 
 /**
@@ -67,14 +67,11 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
 @NgModule({
     declarations: [
         AppComponent,
-        UserComponent,
         UserDetailComponent,
-        DashboardComponent,
         LoginFormComponent,
         NewsComponent,
         NewsDetailComponent,
         SignupFormComponent,
-        WorkspaceComponent,
         PageNotFoundComponent,
         PersonalDataComponent,
         AdminComponent,
@@ -120,7 +117,10 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
         {provide: 'userService', useClass: UserService},
         {provide: 'authenticationService', useClass: AuthenticationService},
         {provide: 'newsService', useClass: NewsService},
-        NavigationGuard
+        AdminSectionGuard,
+        ArticleRevisionSectionGuard,
+        ArticleCreationSectionGuard,
+        PersonalSectionGuard
     ],
     bootstrap: [AppComponent]
 })

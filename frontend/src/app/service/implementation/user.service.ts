@@ -92,6 +92,7 @@ export class UserService implements IUserService {
      * Retrieves specified subset of data in manageable form
      * @param page - the page of data to retrieve
      * @param size - the size of the page
+     * @param enabled - boolean value which determines what type of users to retrieve
      */
     findAllEnabled(page: string, size: string, enabled: boolean): Observable<User[]> {
         return this.http.get(SUBSET_USERS_PATH + '/' + enabled, this.getRequestOptionsWithPage(page, size))

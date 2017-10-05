@@ -66,7 +66,7 @@ export class SignupFormComponent implements OnInit {
                 },
                 error => {
                     this.submitted = false;
-                    this.errorMessage = 'Registration failed. Try another username';
+                    this.errorMessage = 'Registration_Fail';
                 });
     }
 }

@@ -1,8 +1,8 @@
 apply plugin: 'war'
 apply plugin: 'com.bmuschko.tomcat'
-version = '0.1.0'
+apply plugin: 'jacoco'
 
-def tomcatVersion = '7.0.76'
+version = '1.0.0'
 
 buildscript {
     repositories {
@@ -16,13 +16,15 @@ repositories {
     mavenCentral()
 }
 
-// compileJava{dependsOn 'frontend:buildFrontend'}
+// compileJava { dependsOn 'frontend:buildFrontend' }
 
 war {
     from 'frontend/dist'
 }
 
 dependencies {
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-core:2.10.0'
     compile 'javax.servlet:javax.servlet-api:3.1.0'
     compile 'org.springframework:spring-webmvc:4.3.9.RELEASE'
     compile 'org.springframework.data:spring-data-jpa:1.11.4.RELEASE'
@@ -33,8 +35,8 @@ dependencies {
     compile 'ch.qos.logback:logback-classic:1.2.3'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.7.9'
     compile 'io.jsonwebtoken:jjwt:0.7.0'
-	compile 'org.flywaydb:flyway-core:4.2.0'
-	tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
-            "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}",
-            "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
+    compile 'org.flywaydb:flyway-core:4.2.0'
+    tomcat 'org.apache.tomcat.embed:tomcat-embed-core:7.0.76',
+            'org.apache.tomcat.embed:tomcat-embed-logging-juli:7.0.76',
+            'org.apache.tomcat.embed:tomcat-embed-jasper:7.0.76'
 }

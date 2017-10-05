@@ -1,12 +1,9 @@
 import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
-import {DashboardComponent} from "../component/dashboard.component";
-import {UserComponent} from "../component/user.component";
 import {UserDetailComponent} from "../component/user-detail.component";
 import {LoginFormComponent} from "../component/login-form.component";
 import {NewsComponent} from "../component/news.component";
 import {SignupFormComponent} from "../component/signup-form.component";
-import {WorkspaceComponent} from "../component/workspace.component";
 import {PageNotFoundComponent} from "../component/page-not-found.component";
 import {NewsDetailComponent} from "../component/news-detail.component";
 import {PersonalDataComponent} from "../component/personal-data.component";
@@ -14,23 +11,19 @@ import {AdminComponent} from "../component/admin.component";
 import {ArticleCreationComponent} from "../component/article-creation.component";
 import {ArticleRevisionComponent} from "../component/article-revision.component";
 import {ArticleCreationDetailComponent} from "../component/article-creation-detail.component";
+import {AdminSectionGuard} from "../guard/admin-section.guard";
+import {PersonalSectionGuard} from "../guard/personal-section.guard";
+import {ArticleCreationSectionGuard} from "../guard/article-creation-section-guard";
+import {ArticleRevisionSectionGuard} from "../guard/article-revision-section-guard";
 
 /**
  * An array of key/value pairs which in essence specify what urls correspond to particular views
  */
 const routes: Routes = [
     {
-        path: 'users',
-        component: UserComponent
-    },
-    {
         path: '',
         redirectTo: 'news',
         pathMatch: 'full'
-    },
-    {
-        path: 'dashboard',
-        component: DashboardComponent
     },
     {
         path: 'login',
@@ -45,35 +38,34 @@ const routes: Routes = [
         component: SignupFormComponent
     },
     {
-        //TODO: workspace component is substituted
-        path: 'workspace',
-        component: WorkspaceComponent,
-        //TODO: uncomment this part later
-        /*canActivate: [NavigationGuard]*/
-    },
-    {
         path: 'personal',
-        component: PersonalDataComponent
+        component: PersonalDataComponent,
+        canActivate: [PersonalSectionGuard]
     },
     {
         path: 'admin',
-        component: AdminComponent
+        component: AdminComponent,
+        canActivate: [AdminSectionGuard]
     },
     {
         path: 'create',
-        component: ArticleCreationComponent
+        component: ArticleCreationComponent,
+        canActivate: [ArticleCreationSectionGuard]
     },
     {
         path: 'news/detail/:id',
-        component: ArticleCreationDetailComponent
+        component: ArticleCreationDetailComponent,
+        canActivate: [ArticleRevisionSectionGuard]
     },
     {
         path: 'review',
-        component: ArticleRevisionComponent
+        component: ArticleRevisionComponent,
+        canActivate: [ArticleRevisionSectionGuard]
     },
     {
         path: 'user/:id',
-        component: UserDetailComponent
+        component: UserDetailComponent,
+        canActivate: [AdminSectionGuard]
     },
     {
         path: 'news/:id',

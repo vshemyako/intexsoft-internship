@@ -1,28 +1,28 @@
 <md-card>
     <md-card-header id='revision-header'>
-        <div>Article Revision Section</div>
+        <div>{{'Article_Revision_Section' | translate}}</div>
         <md-icon color='accent'>build</md-icon>
     </md-card-header>
 
     <md-card-content>
-        <md-error class='mat-error' *ngIf='errorMessage'>{{errorMessage}}</md-error>
-        <md-error class='info-message' *ngIf='showInfo'>{{infoMessage}}</md-error>
+        <md-error class='mat-error' *ngIf='errorMessage'>{{errorMessage | translate}}</md-error>
+        <md-error class='info-message' *ngIf='showInfo'>{{infoMessage | translate}}</md-error>
 
         <div class='article-get-buttons'>
-            <button md-raised-button color='primary' (click)='findAll()'>Display All Articles</button>
-            <button md-raised-button color='primary' (click)='getCreated()'>Display Not Approved Articles</button>
-            <button md-raised-button color='primary' (click)='getDisplayed()'>Display Active Articles</button>
+            <button md-raised-button color='primary' (click)='findAll()'>{{'Display_All_Articles' | translate}}</button>
+            <button md-raised-button color='primary' (click)='getCreated()'>{{'Display_Not_Approved_Articles' | translate}}</button>
+            <button md-raised-button color='primary' (click)='getDisplayed()'>{{'Display_Active_Articles' | translate}}</button>
         </div>
 
         <!-- Article Revision Section -->
         <md-grid-list class='table-header' cols='12' rowHeight='30px'>
-            <md-grid-tile colspan='1'>Pos. №</md-grid-tile>
-            <md-grid-tile colspan='2'>Article Title</md-grid-tile>
-            <md-grid-tile colspan='2'>Author</md-grid-tile>
-            <md-grid-tile colspan='2'>Start Date</md-grid-tile>
-            <md-grid-tile colspan='2'>End Date</md-grid-tile>
-            <md-grid-tile colspan='2'>Status</md-grid-tile>
-            <md-grid-tile colspan='1'>Details</md-grid-tile>
+            <md-grid-tile colspan='1'>{{'Pos' | translate}}</md-grid-tile>
+            <md-grid-tile colspan='2'>{{'Article_Title' | translate}}</md-grid-tile>
+            <md-grid-tile colspan='2'>{{'Author' | translate}}</md-grid-tile>
+            <md-grid-tile colspan='2'>{{'Start_Date' | translate}}</md-grid-tile>
+            <md-grid-tile colspan='2'>{{'End_Date' | translate}}</md-grid-tile>
+            <md-grid-tile colspan='2'>{{'Status' | translate}}</md-grid-tile>
+            <md-grid-tile colspan='1'>{{'Details' | translate}}</md-grid-tile>
         </md-grid-list>
 
         <div *ngIf='submitted'>

@@ -13,6 +13,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 /**
  * Service which provides basic functionality for CRUD operations upon {@link User}
  * instances
@@ -51,8 +53,20 @@ public class NewsServiceImpl extends AbstractEntityServiceImpl<News> implements 
     @Override
     public Page<News> findByStatusName(Pageable pageable, String statusName) {
         Status status = statusService.findByName(statusName);
-        System.out.println("Status name is " + statusName);
-        System.out.println("Status retrieved is" + status);
         return newsRepository.findByStatus(pageable, status);
+    }
+
+    /**
+     * Returns a {@link Page} of entities meeting the paging restriction provided in the {@code Pageable} object.
+     *
+     * @param pageable - sublist of list of objects to retrieve
+     * @return a page of reviewed articles
+     */
+    @Override
+    public Page<News> findAllReviewedAndRelevant(Pageable pageable) {
+        Status status = statusService.findByName("approved");
+        System.out.println(new Date());
+        System.out.println(status.name);
+        return newsRepository.findByStatusAndCurrentTime(pageable, status, new Date());
     }
 }

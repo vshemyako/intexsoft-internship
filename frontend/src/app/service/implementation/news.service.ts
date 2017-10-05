@@ -6,7 +6,8 @@ import {INewsService} from "../inews.service";
 import {News} from "../../model/news";
 
 const SUBSET_NEWS_PATH = 'api/news';
-const SUBSET_STATUS_NEW_PATH = 'api/news/all';
+const SUBSET_STATUS_NEWS_PATH = 'api/news/all';
+const SUBSET_REVIEWED_RELEVANT_PATH = 'api/news/all/reviewed/relevant';
 const NEWS_PATH = 'api/news';
 
 /**
@@ -68,20 +69,32 @@ export class NewsService implements INewsService {
     }
 
     /**
-     * Retrieves specified subset of data in manageable form
+     * Retrieves approved and relevant subset of data in manageable form
      * @param page - the page of data to retrieve
      * @param size - the size of the page
-     * @param status - determines what type of articles to request
      */
-    findAllReviewed(page: string, size: string, status: String): Observable<News[]> {
-        return this.http.get(SUBSET_STATUS_NEW_PATH + '/' + status, NewsService.getRequestOptionsWithPage(page, size))
+    findAllReviewedAndRelevant(page: string, size: string): Observable<News[]> {
+        return this.http.get(SUBSET_REVIEWED_RELEVANT_PATH, NewsService.getRequestOptionsWithPage(page, size))
             .map((response: Response) => {
                 return response.json().content;
             })
             .catch((error: any) => Observable.throw(error));
     }
 
-    //TODO: move such methods to another new class
+    /**
+     * Retrieves specified subset of data in manageable form
+     * @param page - the page of data to retrieve
+     * @param size - the size of the page
+     * @param status - determines what type of articles to request
+     */
+    findAllReviewed(page: string, size: string, status: String): Observable<News[]> {
+        return this.http.get(SUBSET_STATUS_NEWS_PATH + '/' + status, NewsService.getRequestOptionsWithPage(page, size))
+            .map((response: Response) => {
+                return response.json().content;
+            })
+            .catch((error: any) => Observable.throw(error));
+    }
+
     /**
      * Search params to request just a chunk of data
      * @param page - the page of data to retrieve

@@ -2,56 +2,60 @@
     <div class='icon-container'>
         <md-icon color='accent' class='lock'>face</md-icon>
     </div>
-    <md-card-subtitle>News Portal</md-card-subtitle>
-    <md-card-title>Registration Form</md-card-title>
-    <md-error class="mat-error" *ngIf='errorMessage'>{{errorMessage}}</md-error>
+    <md-card-subtitle>{{'News_Portal' | translate}}</md-card-subtitle>
+    <md-card-title>{{'Registration_Form' | translate}}</md-card-title>
+    <md-error class="mat-error" *ngIf='errorMessage'>{{errorMessage | translate}}</md-error>
     <md-card-content>
         <form *ngIf='!submitted' [formGroup]='signupFormControl' (ngSubmit)='register()' #signupForm='ngForm'>
             <md-form-field>
-                <input mdInput formControlName='validName' type='text' placeholder='Login' required
+                <input mdInput formControlName='validName' type='text' placeholder="{{'Login' | translate}}" required
                        [(ngModel)]='newUser.username' name='newUser.username'>
                 <md-error *ngIf='signupFormControl.controls["validName"].errors?.required'>
-                    Login is required
+                    {{'Login_is_required' | translate}}
                 </md-error>
                 <md-error *ngIf='signupFormControl.controls["validName"].errors?.minlength'>
-                    Length must be at least 3 symbols
+                    {{'Min_Length' | translate}}
                 </md-error>
             </md-form-field>
             <md-form-field>
-                <input mdInput formControlName='validPassword' type='password' placeholder='Password' required
+                <input mdInput formControlName='validPassword' type='password' placeholder="{{'Password' | translate}}"
+                       required
                        [(ngModel)]='newUser.password' name='newUser.password'>
                 <md-error *ngIf='signupFormControl.controls["validPassword"].errors?.required'>
-                    Password is required
+                    {{'Password_is_required' | translate}}
                 </md-error>
                 <md-error *ngIf='signupFormControl.controls["validPassword"].errors?.minlength'>
-                    Length must be at least 3 symbols
+                    {{'Min_Length' | translate}}
                 </md-error>
             </md-form-field>
             <md-form-field>
-                <input mdInput formControlName='validFirstName' type='text' placeholder='First name'
+                <input mdInput formControlName='validFirstName' type='text' placeholder="{{'First_name' | translate}}"
                        [(ngModel)]='newUser.firstName'
                        name='newUser.firstName'>
                 <md-error *ngIf='signupFormControl.controls["validFirstName"].errors?.minlength'>
-                    Length must be at least 3 symbols
+                    {{'Min_Length' | translate}}
                 </md-error>
             </md-form-field>
             <md-form-field>
-                <input mdInput formControlName='validLastName' type='text' placeholder='Last name'
+                <input mdInput formControlName='validLastName' type='text' placeholder="{{'Last_name' | translate}}"
                        [(ngModel)]='newUser.lastName'
                        name='newUser.lastName'>
                 <md-error *ngIf='signupFormControl.controls["validLastName"].errors?.minlength'>
-                    Length must be at least 3 symbols
+                    {{'Min_Length' | translate}}
                 </md-error>
             </md-form-field>
             <md-form-field>
-                <input mdInput formControlName='validEmail' type='email' placeholder='Email' [(ngModel)]='newUser.email'
+                <input mdInput formControlName='validEmail' type='email' placeholder="{{'Email' | translate}}"
+                       [(ngModel)]='newUser.email'
                        name='newUser.email'>
                 <md-error *ngIf='signupFormControl.controls["validEmail"].errors?.pattern'>
-                    Invalid email address
+                    {{'Invalid_email_address' | translate}}
                 </md-error>
             </md-form-field>
             <md-card-actions>
-                <button md-raised-button color='primary' type='submit' [disabled]='!signupForm.form.valid'>Sign Up</button>
+                <button md-raised-button color='primary' type='submit' [disabled]='!signupForm.form.valid'>
+                    {{'Sign_Up' | translate}}
+                </button>
             </md-card-actions>
         </form>
         <md-spinner *ngIf='submitted' mode='indeterminate'></md-spinner>

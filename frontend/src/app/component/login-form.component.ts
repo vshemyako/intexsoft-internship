@@ -53,7 +53,7 @@ export class LoginFormComponent implements OnInit {
                 },
                 error => {
                     this.submitted = false;
-                    this.errorMessage = 'Incorrect username or password';
+                    this.errorMessage = 'Incorrect_Username_Password';
                 });
     }
 }

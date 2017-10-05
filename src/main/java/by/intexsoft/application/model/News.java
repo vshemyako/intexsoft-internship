@@ -39,7 +39,6 @@ public class News extends AbstractEntity {
     @JoinColumn(name = "status_id")
     public Status status;
 
-    //TODO: don't forget that LAZY - is the default option
     @ManyToMany(fetch = EAGER)
     @JoinTable(
             name = "news_categories",

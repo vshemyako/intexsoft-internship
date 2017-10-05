@@ -120,7 +120,6 @@ export class UserDetailComponent implements OnInit {
     /**
      * Changes boolean roles array to correctly display them on UI
      */
-    //TODO refactor this method
     private syncRolesArray(): void {
         for (let role of this.currentUser.authorities) {
             if (role.authority === 'ROLE_ADMIN') {

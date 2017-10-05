@@ -2,35 +2,38 @@
     <div class='icon-container'>
         <md-icon color='accent' class='lock'>lock</md-icon>
     </div>
-    <md-card-subtitle>News Portal</md-card-subtitle>
-    <md-card-title>Login Form</md-card-title>
-    <md-error class="mat-error" *ngIf='errorMessage'>{{errorMessage}}</md-error>
+    <md-card-subtitle>{{'News_Portal' | translate}}</md-card-subtitle>
+    <md-card-title>{{'Login_Form' | translate}}</md-card-title>
+    <md-error class="mat-error" *ngIf='errorMessage'>{{errorMessage | translate}}</md-error>
     <md-card-content>
         <form *ngIf='!submitted' [formGroup]='loginFormControl' (ngSubmit)='login()' #loginForm='ngForm'>
             <md-form-field>
-                <input mdInput formControlName='validName' type='text' placeholder='Login' required
+                <input mdInput formControlName='validName' type='text' placeholder="{{'Login' | translate}}" required
                        [(ngModel)]='username' name='username'>
                 <md-error *ngIf='loginFormControl.controls["validName"].errors?.required'>
-                    Login is required
+                    {{'Login_is_required' | translate}}
                 </md-error>
                 <md-error *ngIf='loginFormControl.controls["validName"].errors?.minlength'>
-                    Length must be at least 3 symbols
+                    {{'Min_Length' | translate}}
                 </md-error>
             </md-form-field>
             <md-form-field>
-                <input mdInput formControlName='validPassword' type='password' placeholder='Password' required
+                <input mdInput formControlName='validPassword' type='password' placeholder="{{'Password' | translate}}"
+                       required
                        [(ngModel)]='password'
                        name='password'>
                 <md-error *ngIf='loginFormControl.controls["validPassword"].errors?.required'>
-                    Password is required
+                    {{'Password_is_required' | translate}}
                 </md-error>
                 <md-error *ngIf='loginFormControl.controls["validPassword"].errors?.minlength'>
-                    Length must be at least 3 symbols
+                    {{'Min_Length' | translate}}
                 </md-error>
             </md-form-field>
             <md-card-actions>
-                <button md-raised-button color='primary' type='submit' [disabled]='!loginForm.form.valid'>Log In</button>
-                <button md-raised-button color='accent' routerLink='/signup'>Sign Up</button>
+                <button md-raised-button color='primary' type='submit' [disabled]='!loginForm.form.valid'>
+                    {{'Log_In' | translate}}
+                </button>
+                <button md-raised-button color='accent' routerLink='/signup'>{{'Sign_Up' | translate}}</button>
             </md-card-actions>
         </form>
         <md-spinner *ngIf='submitted' mode='indeterminate'></md-spinner>
