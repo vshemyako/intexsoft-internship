@@ -143,7 +143,7 @@ export class ArticleRevisionComponent {
     private getDisplayed(): void {
         this.pageNumber = 0;
         this.methodNumber = 2;
-        this.getAllReviewed("reviewed");
+        this.getAllReviewed("approved");
     }
 
     /**
@@ -176,7 +176,7 @@ export class ArticleRevisionComponent {
                 this.getAllReviewed("created");
                 break;
             case 2:
-                this.getAllReviewed("reviewed");
+                this.getAllReviewed("approved");
                 break;
         }
     }

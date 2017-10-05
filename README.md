@@ -1,22 +1,20 @@
-Due to internship assignments project theme has been changed to NewsPortal. Code changes will follow along soon.
+### Intexsoft 2017 Bootcamp
+## News Portal Application
 
-Project will be build upon following technologies:
--- Java SE8
--- Spring Framework
--- Hibernate
--- JPA
--- PostgreSQL
--- jUnit
--- Angular 4 
+#### Back-end Technologies:
+* DataBase - PostgreSQL
+* DataBase Migrations - FlyWay
+* Persistence Layer - Spring Data, Hibernate
+* Security - JWT, Spring Security
+* JavaSE8
+* Build Tool - Gradle
 
-At the moment basic Angular Material incorporation into application is being developed. - Done
-
-All efforts are directed into Angular Guards incorporation into the application. - Done
-
-At present I'm trying to implement pagination reguests and handle them with RestControllers. - Done
-
-Logging framework is being tuned. Desired functionality - write log files into Tomcat's directory. - Done
-
-News portal doesn't have full functional news page. Being developed at the moment... - Done
-
-The next goal is to add functionality to workspace component - the heart of the application
+#### Front-end Technologies:
+* Angular 4
+* CSS flex-box
+* Angular Material
+* i18n - ngx-Translate
+ 
+#### Tests
+* JUnit + Mockito
+* Protractor + Jasmine

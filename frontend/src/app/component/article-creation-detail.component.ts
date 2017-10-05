@@ -134,6 +134,8 @@ export class ArticleCreationDetailComponent implements OnInit {
     private updateStatus(): void {
         if (this.status) {
             this.article.status = new Status(13, 'approved');
+        } else {
+          this.article.status = new Status(12, 'created');
         }
     }
 
